@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
 
-const uri = `mongodb+srv://${process.env.USERNAME}:${process.env.PASSWORD}@cluster0-acerom.ypzqx.mongodb.net/be-movies-database`;
+const uri = `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASS}@cluster0-acerom.ypzqx.mongodb.net/be-movies-database`;
 
 mongoose
   .connect(uri, {
