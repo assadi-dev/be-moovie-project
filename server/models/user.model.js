@@ -1,7 +1,6 @@
 const mongoose = require("mongoose");
 const uniqueValidator = require("mongoose-unique-validator");
-const bcrypt = require("bcrypt");
-const { validate } = require("./post.model");
+const { isEmail } = require("validator");
 
 const userSchema = mongoose.Schema(
   {
@@ -12,6 +11,7 @@ const userSchema = mongoose.Schema(
       maxLenght: 55,
       unique: true,
       trim: true,
+      required: true,
     },
     email: {
       type: String,
@@ -20,12 +20,14 @@ const userSchema = mongoose.Schema(
       unique: true,
       lowercase: true,
       trim: true,
+      required: true,
     },
     password: {
       type: String,
       required: true,
       max: 1024,
       minlength: 6,
+      required: true,
     },
     picture: {
       type: String,
