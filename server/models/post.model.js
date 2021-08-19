@@ -10,12 +10,9 @@ const PostSchema = mongoose.Schema(
       type: String,
       trim: true,
     },
-    url: {
-      type: String,
-    },
     media: {
       picture: { type: [{ name: String, path: String }] },
-      music: { type: [{ name: String, path: String }] },
+      audio: { type: [{ name: String, path: String }] },
       video: { type: [{ name: String, path: String }] },
     },
     likers: {
@@ -27,10 +24,9 @@ const PostSchema = mongoose.Schema(
           author: String,
           pseudo: String,
           text: String,
-          createdAt: Date,
+          createdAt: Date.now(),
         },
       ],
-      required: true,
     },
   },
   {
