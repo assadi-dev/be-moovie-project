@@ -1,19 +1,10 @@
 const bcrypt = require("bcrypt");
-const jwt = require("jsonwebtoken");
-const crypto = require("crypto");
 const UserModel = require("../models/user.model");
-const refreshTokenModel = require("../models/refreshToken.model");
-const dayjs = require("dayjs");
-
-const accessToken = (id) => {
-  return jwt.sign({ id: id }, process.env.APP_SECRET, {
-    expiresIn: 60 * 60,
-  });
-};
-
-const refreshTokenGenerate = () => {
-  return crypto.randomBytes(45).toString("hex");
-};
+const {
+  refreshTokenGenerate,
+  accessToken,
+  setRefreshToken,
+} = require("../services/auth.services");
 
 exports.signin = (req, res) => {
   const { pseudo, password, email } = req.body;
@@ -52,10 +43,11 @@ exports.signup = (req, res) => {
           }
           const token = accessToken(user._id);
           const refreshToken = refreshTokenGenerate();
-          res.cookie("refreshToken", refreshToken, {
+          /*  res.cookie("refreshToken", refreshToken, {
             httpOnly: true,
             maxAge: 7 * 24 * 60 * 60 * 1000,
-          });
+          }); */
+          setRefreshToken(refreshToken, user._id);
           res.status(200).json({ token: token, refreshToken: refreshToken });
         })
         .catch((error) => {
