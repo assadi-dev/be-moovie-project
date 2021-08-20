@@ -27,23 +27,6 @@ exports.addMovieFavorie = (req, res) => {
   });
 };
 
-exports.addSerieFavorie = (req, res) => {
-  const { id } = req.params;
-  const token = req.headers.authorization.split(" ")[1];
-  const userId = userServices.getUserId(token);
-
-  userModel.findOne({ _id: userId }).then((user) => {
-    userModel
-      .findByIdAndUpdate(
-        { _id: user._id },
-        { series: { favoris: [...user.series.favoris, id] } }
-      )
-      .then(() => {
-        res.status(200).json({ message: " this serie has added to favoris" });
-      });
-  });
-};
-
 exports.removeMovieFavorie = (req, res) => {
   const { id } = req.params;
   const token = req.headers.authorization.split(" ")[1];
@@ -60,6 +43,62 @@ exports.removeMovieFavorie = (req, res) => {
         .findByIdAndUpdate(
           { _id: user._id },
           { movies: { favoris: favorieRemoved } }
+        )
+        .then(() => {
+          res
+            .status(200)
+            .json({ message: "this serie has removed to favoris" });
+        });
+    } catch (error) {
+      res.status(400).json({ error });
+    }
+  });
+};
+
+//Series actions
+
+exports.addSerieFavorie = (req, res) => {
+  const { id } = req.params;
+  const token = req.headers.authorization.split(" ")[1];
+  const userId = userServices.getUserId(token);
+
+  userModel.findOne({ _id: userId }).then((user) => {
+    const verif = user.series.favoris.find((serie) => serie == id);
+
+    try {
+      if (verif == id) {
+        throw "serie already in favorie !";
+      }
+      userModel
+        .findByIdAndUpdate(
+          { _id: user._id },
+          { series: { favoris: [...user.series.favoris, id] } }
+        )
+        .then(() => {
+          res.status(200).json({ message: "this serie has added to favoris" });
+        });
+    } catch (error) {
+      res.status(400).json({ error });
+    }
+  });
+};
+
+exports.removeSerieFavorie = (req, res) => {
+  const { id } = req.params;
+  const token = req.headers.authorization.split(" ")[1];
+  const userId = userServices.getUserId(token);
+
+  userModel.findOne({ _id: userId }).then((user) => {
+    const verif = user.series.favoris.find((serie) => serie == id);
+    try {
+      if (verif != id) {
+        throw "movie not found !";
+      }
+      const favorieRemoved = user.series.favoris.filter((serie) => serie != id);
+      userModel
+        .findByIdAndUpdate(
+          { _id: user._id },
+          { series: { favoris: favorieRemoved } }
         )
         .then(() => {
           res
