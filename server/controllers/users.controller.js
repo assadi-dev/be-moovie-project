@@ -1,3 +1,7 @@
+const ent = require("ent");
+
+//ent.decode(var)
+
 exports.getAllUser = (req, res) => {
   res.status(200).json({ message: "alluser" });
 };

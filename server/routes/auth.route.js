@@ -6,7 +6,7 @@ const auth = require("../middlewares/auth.middleware");
 
 router.post("/sigin", authController.signin);
 router.post("/login", authController.signup);
-router.post("/refreshToken", auth, tokenController.newToken);
+router.post("/refreshToken", tokenController.newToken);
 router.post("/revokeToken", auth, tokenController.revokeToken);
 
 module.exports = router;
