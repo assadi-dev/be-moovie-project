@@ -29,7 +29,12 @@ const userSchema = mongoose.Schema(
       minlength: 6,
       required: true,
     },
-    picture: {
+    birthday: {
+      type: String,
+      trim: true,
+      required: true,
+    },
+    avatar: {
       type: String,
       default: "../uploads/avatar/random-user.png",
     },

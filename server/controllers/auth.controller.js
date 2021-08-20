@@ -1,5 +1,6 @@
 const bcrypt = require("bcrypt");
 const UserModel = require("../models/user.model");
+const ent = require("ent");
 const {
   refreshTokenGenerate,
   accessToken,
@@ -7,13 +8,22 @@ const {
 } = require("../services/auth.services");
 
 exports.signin = (req, res) => {
-  const { pseudo, password, email } = req.body;
+  const { pseudo, password, email, birthday } = req.body;
+  let pseudoEncoded = ent.encode(pseudo);
+  let passwordEncoded = ent.encode(password);
+  let emailEncoded = ent.encode(email);
+  let birthdayEncoded = ent.encode(birthday);
 
   bcrypt
-    .hash(password, 16)
+    .hash(passwordEncoded, 16)
     .then((hash) => {
       let password = hash;
-      const user = new UserModel({ pseudo, password, email });
+      const user = new UserModel({
+        pseudo: pseudoEncoded,
+        password: password,
+        email: emailEncoded,
+        birthday: birthdayEncoded,
+      });
       user
         .save()
         .then((data) => {
@@ -30,13 +40,17 @@ exports.signin = (req, res) => {
 
 exports.signup = (req, res) => {
   const { email, password } = req.body;
-  UserModel.findOne({ email: email })
+
+  let emailEncoded = ent.encode(email);
+  let passwordEncoded = ent.encode(password);
+
+  UserModel.findOne({ email: emailEncoded })
     .then((user) => {
       if (!user) {
         return res.status(401).json({ error: "Utilisateur non trouvé !" });
       }
       bcrypt
-        .compare(password, user.password)
+        .compare(passwordEncoded, user.password)
         .then((valid) => {
           if (!valid) {
             return res.status(401).json({ error: "Mot de passe incorrect !" });
