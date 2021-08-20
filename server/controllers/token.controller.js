@@ -5,7 +5,7 @@ const {
   setRefreshToken,
 } = require("../services/auth.services");
 
-exports.newToken = async (req, res) => {
+exports.newToken = async (req, res, next) => {
   const { userId } = req.body;
   await refreshTokenModel
     .findOne({ userId: userId })
@@ -16,6 +16,7 @@ exports.newToken = async (req, res) => {
       res.status(200).json({ token: token, refreshToken: refreshToken });
     })
     .catch((error) => res.status(500).json({ error }));
+  next();
 };
 
 exports.revokeToken = async (req, res, next) => {

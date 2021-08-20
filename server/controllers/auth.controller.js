@@ -17,7 +17,7 @@ exports.signin = (req, res) => {
       user
         .save()
         .then((data) => {
-          res.status(201).json({ data: data, message: "Utilisiteur créé !" });
+          res.status(201).json({ data: data, message: "Utilisateur créé !" });
         })
         .catch((error) => {
           res.status(400).json({ error });
