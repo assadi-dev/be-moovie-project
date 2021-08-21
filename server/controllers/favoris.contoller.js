@@ -12,7 +12,7 @@ exports.addMovieFavorie = (req, res) => {
   const token = req.headers.authorization.split(" ")[1];
   const userId = userServices.getUserId(token);
 
-  userModel.findOne({ _id: userId }).then((user) => {
+  userModel.findOne({ _id: userId }).then(async (user) => {
     /**
      *@type {string}
      *@constant  verif contient l'id trouvé dans le tableau movies
@@ -23,14 +23,17 @@ exports.addMovieFavorie = (req, res) => {
       if (verif == id) {
         throw "movie already in favorie !";
       }
-      userModel
-        .findByIdAndUpdate(
-          { _id: user._id },
-          { movies: { favoris: [...user.movies.favoris, id] } }
-        )
-        .then(() => {
+      await userModel.findOneAndUpdate(
+        userId,
+        { movies: { favoris: [...user.movies.favoris, id] } },
+        { new: true },
+        (err, doc) => {
+          if (err) {
+            throw err;
+          }
           res.status(200).json({ message: "this movie has aded to favoris" });
-        });
+        }
+      );
     } catch (error) {
       res.status(400).json({ error });
     }
@@ -47,7 +50,7 @@ exports.removeMovieFavorie = (req, res) => {
   const token = req.headers.authorization.split(" ")[1];
   const userId = userServices.getUserId(token);
 
-  userModel.findOne({ _id: userId }).then((user) => {
+  userModel.findOne({ _id: userId }).then(async (user) => {
     /**
      *@type {string}
      *@constant  verif contient l'id trouvé dans le tableau movies
@@ -58,16 +61,21 @@ exports.removeMovieFavorie = (req, res) => {
         throw "movie not found !";
       }
       const favorieRemoved = user.movies.favoris.filter((movie) => movie != id);
-      userModel
-        .findByIdAndUpdate(
-          { _id: user._id },
-          { movies: { favoris: favorieRemoved } }
-        )
-        .then(() => {
+      await userModel.findOneAndUpdate(
+        userId,
+        {
+          movies: { favoris: favorieRemoved },
+        },
+        { new: true },
+        (err, doc) => {
+          if (err) {
+            throw err;
+          }
           res
             .status(200)
-            .json({ message: "this serie has removed to favoris" });
-        });
+            .json({ message: "this movie has removed to favoris" });
+        }
+      );
     } catch (error) {
       res.status(400).json({ error });
     }
@@ -86,7 +94,7 @@ exports.addSerieFavorie = (req, res) => {
   const token = req.headers.authorization.split(" ")[1];
   const userId = userServices.getUserId(token);
 
-  userModel.findOne({ _id: userId }).then((user) => {
+  userModel.findOne({ _id: userId }).then(async (user) => {
     /**
      *@type {string}
      *@constant  verif contient l'id trouvé dans le tableau series
@@ -97,14 +105,17 @@ exports.addSerieFavorie = (req, res) => {
       if (verif == id) {
         throw "serie already in favorie !";
       }
-      userModel
-        .findByIdAndUpdate(
-          { _id: user._id },
-          { series: { favoris: [...user.series.favoris, id] } }
-        )
-        .then(() => {
+      await userModel.findOneAndUpdate(
+        userId,
+        { series: { favoris: [...user.series.favoris, id] } },
+        { new: true },
+        (err, doc) => {
+          if (err) {
+            throw err;
+          }
           res.status(200).json({ message: "this serie has added to favoris" });
-        });
+        }
+      );
     } catch (error) {
       res.status(400).json({ error });
     }
@@ -122,7 +133,7 @@ exports.removeSerieFavorie = (req, res) => {
   const token = req.headers.authorization.split(" ")[1];
   const userId = userServices.getUserId(token);
 
-  userModel.findOne({ _id: userId }).then((user) => {
+  userModel.findOne({ _id: userId }).then(async (user) => {
     /**
      *@type {string}
      *@constant  verif contient l'id trouvé dans le tableau series
@@ -130,19 +141,22 @@ exports.removeSerieFavorie = (req, res) => {
     const verif = user.series.favoris.find((serie) => serie == id);
     try {
       if (verif != id) {
-        throw "movie not found !";
+        throw "serie not found !";
       }
       const favorieRemoved = user.series.favoris.filter((serie) => serie != id);
-      userModel
-        .findByIdAndUpdate(
-          { _id: user._id },
-          { series: { favoris: favorieRemoved } }
-        )
-        .then(() => {
+      await userModel.findOneAndUpdate(
+        { _id: user._id },
+        { series: { favoris: favorieRemoved } },
+        { new: true },
+        (err, doc) => {
+          if (err) {
+            throw err;
+          }
           res
             .status(200)
             .json({ message: "this serie has removed to favoris" });
-        });
+        }
+      );
     } catch (error) {
       res.status(400).json({ error });
     }

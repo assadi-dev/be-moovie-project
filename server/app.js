@@ -6,6 +6,9 @@ const moviesRoutes = require("./routes/movies.route");
 const seriesRoutes = require("./routes/series.route");
 const postLikeRoutes = require("./routes/postLike.route");
 var helmet = require("helmet");
+const mongoose = require("mongoose");
+
+mongoose.set("useFindAndModify", false);
 
 //security
 app.use(helmet());

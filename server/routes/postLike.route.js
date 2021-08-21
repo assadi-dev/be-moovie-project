@@ -3,7 +3,7 @@ const router = express.Router();
 const postLikeController = require("../controllers/postLike.controller");
 const auth = require("../middlewares/auth.middleware");
 
-router.patch("/add", auth);
-//router.patch("/remove", auth, UserController.getOneUser);
+router.patch("/add/:id", auth, postLikeController.AddPostLikes);
+router.patch("/remove/:id", auth, postLikeController.removePostLikes);
 
 module.exports = router;
