@@ -5,9 +5,11 @@ const userRoute = require("./routes/users.route");
 const moviesRoutes = require("./routes/movies.route");
 const seriesRoutes = require("./routes/series.route");
 const postLikeRoutes = require("./routes/postLike.route");
+const postRoutes = require("./routes/post.routes");
 var helmet = require("helmet");
-var utc = require("dayjs/plugin/utc");
-var timezone = require("dayjs/plugin/timezone");
+const dayjs = require("dayjs");
+const utc = require("dayjs/plugin/utc");
+const timezone = require("dayjs/plugin/timezone");
 
 //Time Zone
 dayjs.extend(utc);
@@ -26,5 +28,6 @@ app.use("/api/user", userRoute);
 app.use("/api/user/movies", moviesRoutes);
 app.use("/api/user/series", seriesRoutes);
 app.use("/api/user/postLike", postLikeRoutes);
+app.use("/api/user/post", postRoutes);
 
 module.exports = app;

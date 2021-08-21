@@ -9,11 +9,12 @@ const PostSchema = mongoose.Schema(
     message: {
       type: String,
       trim: true,
+      required: true,
     },
     media: {
-      picture: { type: [{ name: String, path: String }] },
-      audio: { type: [{ name: String, path: String }] },
-      video: { type: [{ name: String, path: String }] },
+      picture: { type: [{ fileName: String, path: String }] },
+      audio: { type: [{ fileName: String, path: String }] },
+      video: { type: [{ fileName: String, path: String }] },
     },
     likers: {
       type: [String],
@@ -24,7 +25,7 @@ const PostSchema = mongoose.Schema(
           author: String,
           pseudo: String,
           text: String,
-          createdAt: Date.now(),
+          createdAt: Date,
         },
       ],
     },

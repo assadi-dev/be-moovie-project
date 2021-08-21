@@ -31,7 +31,7 @@ exports.addMovieFavorie = (req, res) => {
           if (err) {
             throw err;
           }
-          res.status(200).json({ message: "this movie has aded to favoris" });
+          res.status(200).json(doc);
         }
       );
     } catch (error) {
@@ -71,9 +71,7 @@ exports.removeMovieFavorie = (req, res) => {
           if (err) {
             throw err;
           }
-          res
-            .status(200)
-            .json({ message: "this movie has removed to favoris" });
+          res.status(200).json(doc);
         }
       );
     } catch (error) {
@@ -112,7 +110,7 @@ exports.addSerieFavorie = (req, res) => {
           if (err) {
             throw err;
           }
-          res.status(200).json({ message: "this serie has added to favoris" });
+          res.status(200).json(doc);
         }
       );
     } catch (error) {
@@ -151,9 +149,7 @@ exports.removeSerieFavorie = (req, res) => {
           if (err) {
             throw err;
           }
-          res
-            .status(200)
-            .json({ message: "this serie has removed to favoris" });
+          res.status(200).json(doc);
         }
       );
     } catch (error) {

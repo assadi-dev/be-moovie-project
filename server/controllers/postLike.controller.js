@@ -1,5 +1,7 @@
+const postModel = require("../models/post.model");
 const userModel = require("../models/user.model");
 const userServices = require("../services/user.services");
+const ObjectID = require("mongoose").Types.ObjectId;
 
 /**
  * @param {string} req contient l'id du Post à traiter
@@ -14,6 +16,12 @@ exports.AddPostLikes = (req, res) => {
   const token = req.headers.authorization.split(" ")[1];
   const userId = userServices.getUserId(token);
 
+  /**
+   *@constant ObjectId verifie la presence de l'id du post reçus en parametre
+   */
+  if (!ObjectID.isValid(id))
+    return res.status(404).json({ message: `ID : ${id} est inrouvable` });
+
   userModel.findOne({ _id: userId }).then(async (user) => {
     /**
      *@type {string}
@@ -25,6 +33,14 @@ exports.AddPostLikes = (req, res) => {
       if (verif == id) {
         throw "Post already liked";
       }
+      await postModel.findByIdAndUpdate(
+        id,
+        { $addToSet: { likers: userId } },
+        { new: true },
+        (err, doc) => {
+          if (err) return res.status(404).json(err);
+        }
+      );
       await userModel.findByIdAndUpdate(
         userId,
         { $addToSet: { postLikes: id } },
@@ -33,7 +49,7 @@ exports.AddPostLikes = (req, res) => {
           if (err) {
             throw err;
           }
-          res.status(200).json({ message: "You liked this post" });
+          res.status(200).json(doc);
         }
       );
     } catch (error) {
@@ -54,6 +70,13 @@ exports.removePostLikes = (req, res) => {
   const { id } = req.params;
   const token = req.headers.authorization.split(" ")[1];
   const userId = userServices.getUserId(token);
+
+  /**
+   *@constant ObjectId verifie la presence de l'id du post reçus en parametre
+   */
+  if (!ObjectID.isValid(id))
+    return res.status(404).json({ message: `ID : ${id} est inrouvable` });
+
   userModel.findOne({ _id: userId }).then(async (user) => {
     /**
      *@type {string}
@@ -67,6 +90,15 @@ exports.removePostLikes = (req, res) => {
         throw "Post not found !";
       }
 
+      await postModel.findByIdAndUpdate(
+        id,
+        { $pull: { likers: userId } },
+        { new: true },
+        (err, doc) => {
+          if (err) return res.status(404).json(err);
+        }
+      );
+
       await userModel.findByIdAndUpdate(
         userId,
         {
@@ -77,7 +109,7 @@ exports.removePostLikes = (req, res) => {
           if (err) {
             throw err;
           }
-          res.status(200).json({ message: "this post has removed" });
+          res.status(200).json(doc);
         }
       );
     } catch (error) {

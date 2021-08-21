@@ -1,10 +1,10 @@
 const postModel = require("../models/post.model");
 const ent = require("ent");
 
-exports.createPost = async (req, res) => {
-    const {}
-    const newPost = new postModel({
-      
+exports.createPost = (req, res) => {
+  const newPost = new postModel({
+    author: req.body.author,
+    message: req.body.message,
   });
   try {
     newPost
@@ -13,7 +13,7 @@ exports.createPost = async (req, res) => {
         res.status(201).json(post);
       })
       .catch((error) => {
-        throw error;
+        res.status(500).json(error);
       });
   } catch (error) {
     res.status(500).json(error);
