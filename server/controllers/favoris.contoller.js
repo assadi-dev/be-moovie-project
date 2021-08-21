@@ -23,7 +23,7 @@ exports.addMovieFavorie = (req, res) => {
       if (verif == id) {
         throw "movie already in favorie !";
       }
-      await userModel.findOneAndUpdate(
+      await userModel.findByIdAndUpdate(
         userId,
         { movies: { favoris: [...user.movies.favoris, id] } },
         { new: true },
@@ -61,7 +61,7 @@ exports.removeMovieFavorie = (req, res) => {
         throw "movie not found !";
       }
       const favorieRemoved = user.movies.favoris.filter((movie) => movie != id);
-      await userModel.findOneAndUpdate(
+      await userModel.findByIdAndUpdate(
         userId,
         {
           movies: { favoris: favorieRemoved },
@@ -104,7 +104,7 @@ exports.addSerieFavorie = (req, res) => {
       if (verif == id) {
         throw "serie already in favorie !";
       }
-      await userModel.findOneAndUpdate(
+      await userModel.findByIdAndUpdate(
         userId,
         { series: { favoris: [...user.series.favoris, id] } },
         { new: true },
@@ -143,7 +143,7 @@ exports.removeSerieFavorie = (req, res) => {
         throw "serie not found !";
       }
       const favorieRemoved = user.series.favoris.filter((serie) => serie != id);
-      await userModel.findOneAndUpdate(
+      await userModel.findByIdAndUpdate(
         { _id: user._id },
         { series: { favoris: favorieRemoved } },
         { new: true },

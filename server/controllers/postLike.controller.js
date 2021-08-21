@@ -25,7 +25,7 @@ exports.AddPostLikes = (req, res) => {
       if (verif == id) {
         throw "Post already liked";
       }
-      await userModel.findOneAndUpdate(
+      await userModel.findByIdAndUpdate(
         userId,
         { $addToSet: { postLikes: id } },
         { new: true },
@@ -67,7 +67,7 @@ exports.removePostLikes = (req, res) => {
         throw "Post not found !";
       }
 
-      await userModel.findOneAndUpdate(
+      await userModel.findByIdAndUpdate(
         userId,
         {
           $pull: { postLikes: id },
