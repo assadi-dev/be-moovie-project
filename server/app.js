@@ -28,6 +28,6 @@ app.use("/api/user", userRoute);
 app.use("/api/user/movies", moviesRoutes);
 app.use("/api/user/series", seriesRoutes);
 app.use("/api/user/postLike", postLikeRoutes);
-app.use("/api/user/post", postRoutes);
+app.use("/api/post", postRoutes);
 
 module.exports = app;
