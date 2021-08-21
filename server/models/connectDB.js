@@ -9,3 +9,7 @@ mongoose
   })
   .then(() => console.log("Connexion à MongoDB réussie !"))
   .catch(() => console.log("Connexion à MongoDB échouée !"));
+
+//setting Mongoose
+mongoose.set("useFindAndModify", false);
+mongoose.set("useCreateIndex", true);

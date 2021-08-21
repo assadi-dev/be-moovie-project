@@ -85,7 +85,6 @@ exports.removeMovieFavorie = (req, res) => {
 //Series actions
 
 /**
- *
  * @param {string} req contient l'id du film à traiter
  * @return {object}  Ajoute le film dans le tableau favoris du champ series
  */
