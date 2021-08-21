@@ -8,26 +8,24 @@ const {
 } = require("../services/auth.services");
 
 exports.signin = (req, res) => {
-  const { pseudo, password, email, birthday } = req.body;
-  let pseudoEncoded = ent.encode(pseudo);
-  let passwordEncoded = ent.encode(password);
-  let emailEncoded = ent.encode(email);
-  let birthdayEncoded = ent.encode(birthday);
+  const pseudo = ent.encode(req.body.pseudo);
+  const password = ent.encode(req.body.password);
+  const email = ent.encode(req.body.email);
+  const birthday = ent.encode(req.body.birthday);
 
   bcrypt
-    .hash(passwordEncoded, 16)
+    .hash(password, 16)
     .then((hash) => {
-      let password = hash;
       const user = new UserModel({
-        pseudo: pseudoEncoded,
-        password: password,
-        email: emailEncoded,
-        birthday: birthdayEncoded,
+        pseudo: pseudo,
+        password: hash,
+        email: email,
+        birthday: birthday,
       });
       user
         .save()
         .then((data) => {
-          res.status(201).json({ data: data, message: "Utilisateur créé !" });
+          res.status(201).json(data);
         })
         .catch((error) => {
           res.status(400).json({ error });
@@ -39,18 +37,16 @@ exports.signin = (req, res) => {
 };
 
 exports.signup = (req, res) => {
-  const { email, password } = req.body;
+  const email = ent.encode(req.body.email);
+  const password = ent.encode(req.body.password);
 
-  let emailEncoded = ent.encode(email);
-  let passwordEncoded = ent.encode(password);
-
-  UserModel.findOne({ email: emailEncoded })
+  UserModel.findOne({ email: email })
     .then((user) => {
       if (!user) {
         return res.status(401).json({ error: "Utilisateur non trouvé !" });
       }
       bcrypt
-        .compare(passwordEncoded, user.password)
+        .compare(password, user.password)
         .then((valid) => {
           if (!valid) {
             return res.status(401).json({ error: "Mot de passe incorrect !" });

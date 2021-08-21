@@ -6,6 +6,13 @@ const moviesRoutes = require("./routes/movies.route");
 const seriesRoutes = require("./routes/series.route");
 const postLikeRoutes = require("./routes/postLike.route");
 var helmet = require("helmet");
+var utc = require("dayjs/plugin/utc");
+var timezone = require("dayjs/plugin/timezone");
+
+//Time Zone
+dayjs.extend(utc);
+dayjs.extend(timezone);
+dayjs.tz.setDefault("Europe/Paris");
 
 //security
 app.use(helmet());
