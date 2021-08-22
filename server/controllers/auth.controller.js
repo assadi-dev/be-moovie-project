@@ -13,6 +13,7 @@ exports.signin = (req, res) => {
   const confirmPassword = ent.encode(req.body.confirmPassword);
   const email = ent.encode(req.body.email);
   const birthday = ent.encode(req.body.birthday);
+  const presentation = ent.encode(req.body.presentation);
 
   try {
     if (password !== confirmPassword) {
@@ -26,6 +27,7 @@ exports.signin = (req, res) => {
           password: hash,
           email: email,
           birthday: birthday,
+          presentation: presentation,
         });
         user
           .save()
