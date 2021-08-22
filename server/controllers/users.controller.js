@@ -1,6 +1,8 @@
 const ent = require("ent");
 const userModel = require("../models/user.model");
 const bcrypt = require("bcrypt");
+const ObjectID = require("mongoose").Types.ObjectId;
+const userServices = require("../services/user.services");
 
 //ent.decode(var)
 
@@ -72,5 +74,76 @@ exports.editPassUser = (req, res) => {
     });
   } catch (error) {
     res.status(400).json(error);
+  }
+};
+
+exports.userFollow = async (req, res) => {
+  const { id } = req.params;
+  const token = req.headers.authorization.split(" ")[1];
+  const userId = userServices.getUserId(token);
+  console.log(id);
+
+  try {
+    if (userId == id) {
+      throw "vous pouvez pas suivre vous meme";
+    }
+    await userModel.findByIdAndUpdate(
+      id,
+      {
+        $addToSet: { followers: userId },
+      },
+      { new: true },
+      (err, doc) => {
+        if (err) throw err;
+      }
+    );
+    await userModel.findByIdAndUpdate(
+      userId,
+      {
+        $addToSet: { following: id },
+      },
+      { new: true },
+      (err, doc) => {
+        if (err) throw err;
+        res.status(200).json(doc);
+      }
+    );
+  } catch (error) {
+    res.status(500).json(error);
+  }
+};
+
+exports.userUnFollow = async (req, res) => {
+  const { id } = req.params;
+  const token = req.headers.authorization.split(" ")[1];
+  const userId = userServices.getUserId(token);
+
+  try {
+    if (userId == id) {
+      throw "vous pouvez pas suivre vous meme";
+    }
+    await userModel.findByIdAndUpdate(
+      id,
+      {
+        $pull: { followers: userId },
+      },
+      { new: true },
+      (err, doc) => {
+        if (err) throw err;
+      }
+    );
+    await userModel.findByIdAndUpdate(
+      userId,
+      {
+        $pull: { following: id },
+      },
+      { new: true },
+      (err, doc) => {
+        if (err) throw err;
+        res.status(200).json(doc);
+      }
+    );
+  } catch (error) {
+    res.status(500).json(error);
   }
 };
