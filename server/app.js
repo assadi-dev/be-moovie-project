@@ -6,6 +6,7 @@ const moviesRoutes = require("./routes/movies.route");
 const seriesRoutes = require("./routes/series.route");
 const postLikeRoutes = require("./routes/postLike.route");
 const postRoutes = require("./routes/post.routes");
+const postCommentRoutes = require("./routes/postComent.route");
 var helmet = require("helmet");
 
 //security
@@ -21,5 +22,6 @@ app.use("/api/user/movies", moviesRoutes);
 app.use("/api/user/series", seriesRoutes);
 app.use("/api/user/postLike", postLikeRoutes);
 app.use("/api/post", postRoutes);
+app.use("/api/post/comment", postCommentRoutes);
 
 module.exports = app;

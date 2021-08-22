@@ -8,8 +8,5 @@ router.get("/:id", auth, postController.readOnePost);
 router.post("/add", auth, postController.createPost);
 router.put("/edit/:id", auth, postController.editPost);
 router.delete("/delete/:id", auth, postController.deletPost);
-router.patch("/comment/add", auth, postController.createPost);
-//router.patch("/comment/edit", auth, postController.createPost);
-//router.patch("/comment/delete", auth, postController.createPost);
 
 module.exports = router;
