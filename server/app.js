@@ -7,14 +7,6 @@ const seriesRoutes = require("./routes/series.route");
 const postLikeRoutes = require("./routes/postLike.route");
 const postRoutes = require("./routes/post.routes");
 var helmet = require("helmet");
-const dayjs = require("dayjs");
-const utc = require("dayjs/plugin/utc");
-const timezone = require("dayjs/plugin/timezone");
-
-//Time Zone
-dayjs.extend(utc);
-dayjs.extend(timezone);
-dayjs.tz.setDefault("Europe/Paris");
 
 //security
 app.use(helmet());
