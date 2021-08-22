@@ -50,9 +50,22 @@ exports.readOnePost = async (req, res, next) => {
 
 exports.editPost = (req, res) => {
   const { id } = req.params;
+  const message = ent.encode(req.body.message);
   if (!ObjectID.isValid(id)) {
     return res.status(404).json({ message: `ID : ${id} est inrouvable` });
   }
+
+  try {
+    postModel.findByIdAndUpdate(
+      id,
+      { message: message },
+      { new: true },
+      (err, doc) => {
+        if (err) throw err;
+        res.status(200).json(doc);
+      }
+    );
+  } catch (error) {}
 };
 
 exports.deletPost = async (req, res) => {
