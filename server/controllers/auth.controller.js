@@ -10,30 +10,38 @@ const {
 exports.signin = (req, res) => {
   const pseudo = ent.encode(req.body.pseudo);
   const password = ent.encode(req.body.password);
+  const confirmPassword = ent.encode(req.body.confirmPassword);
   const email = ent.encode(req.body.email);
   const birthday = ent.encode(req.body.birthday);
 
-  bcrypt
-    .hash(password, 16)
-    .then((hash) => {
-      const user = new UserModel({
-        pseudo: pseudo,
-        password: hash,
-        email: email,
-        birthday: birthday,
-      });
-      user
-        .save()
-        .then((data) => {
-          res.status(201).json(data);
-        })
-        .catch((error) => {
-          res.status(400).json({ error });
+  try {
+    if (password !== confirmPassword) {
+      throw "Les mot de passe ne se correspondent pas";
+    }
+    bcrypt
+      .hash(password, 16)
+      .then((hash) => {
+        const user = new UserModel({
+          pseudo: pseudo,
+          password: hash,
+          email: email,
+          birthday: birthday,
         });
-    })
-    .catch((error) => {
-      res.status(500).json({ error });
-    });
+        user
+          .save()
+          .then((data) => {
+            res.status(201).json(data);
+          })
+          .catch((error) => {
+            res.status(400).json(error);
+          });
+      })
+      .catch((error) => {
+        res.status(500).json(error);
+      });
+  } catch (error) {
+    res.status(500).json(error);
+  }
 };
 
 exports.signup = (req, res) => {
