@@ -1,10 +1,12 @@
-import React, { useReducer } from "react";
 import jwtDecode from "jwt-decode";
+import Cookies from "js-cookie";
 
-let token = localStorage.getItem("currentUser")
-  ? JSON.parse(localStorage.getItem("currentUser")).token
+const StorageKey = "@MyAppOAuthKey";
+
+const token = Cookies.get(StorageKey)
+  ? JSON.parse(Cookies.get(StorageKey)).token
   : "";
-let userId = token ? jwtDecode(token).userId : "";
+const userId = token ? jwtDecode(token).userId : "";
 
 export const initialState = {
   userId: "" || userId,

@@ -1,6 +1,6 @@
-import react, { useState } from "react";
+import { useState } from "react";
 import { loginUser } from "../utils/context/AuthAction";
-import { useAuthState, useAuthDispatch } from "../utils/context/AuthContext";
+import { useAuthDispatch } from "../utils/context/AuthContext";
 
 const Login = (props) => {
   const [state, setState] = useState({ username: "", password: "" });

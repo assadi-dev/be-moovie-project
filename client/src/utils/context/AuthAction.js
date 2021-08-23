@@ -1,11 +1,9 @@
 import axios from "axios";
-import Cookies from "js-cookie";
+import { setCookiesAuth, removeCookiesAuth } from "../../services/Auth.sevices";
 
 const ROOT_URL = "http://127.0.0.1:6500/api/auth/login";
 
-const StorageKey = "@MyAppOAuthKey";
-
-export async function loginUser(dispatch, loginPayload) {
+export const loginUser = async (dispatch, loginPayload) => {
   try {
     dispatch({ type: "REQUEST_LOGIN" });
     let response = await axios.post(ROOT_URL, loginPayload, {
@@ -15,7 +13,7 @@ export async function loginUser(dispatch, loginPayload) {
 
     if (data.token) {
       dispatch({ type: "LOGIN_SUCCESS", payload: data });
-      localStorage.setItem("currentUser", JSON.stringify(data));
+      setCookiesAuth(JSON.stringify(data));
       return data;
     }
 
@@ -24,10 +22,9 @@ export async function loginUser(dispatch, loginPayload) {
   } catch (error) {
     dispatch({ type: "LOGIN_ERROR", error: error.response.data });
   }
-}
+};
 
-export async function logout(dispatch) {
+export const logout = async (dispatch) => {
   dispatch({ type: "LOGOUT" });
-  localStorage.removeItem("currentUser");
-  localStorage.removeItem("token");
-}
+  await removeCookiesAuth();
+};

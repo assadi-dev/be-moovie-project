@@ -1,8 +1,8 @@
-import react from "react";
 import { logout } from "../utils/context/AuthAction";
 import { useAuthDispatch, useAuthState } from "../utils/context/AuthContext";
 
 const Home = (props) => {
+  console.log(useAuthState().user);
   const dispatch = useAuthDispatch(); // read dispatch method from context
 
   const handleLogout = () => {

@@ -1,4 +1,3 @@
-import react from "react";
 import { BrowserRouter as Router, Switch } from "react-router-dom";
 import AppRoutes from "./components/Auth/AppRoutes";
 import routes from "./config/routes";
