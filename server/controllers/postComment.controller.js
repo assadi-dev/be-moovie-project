@@ -9,9 +9,11 @@ var timezone = require("dayjs/plugin/timezone"); // dependent on utc plugin
 dayjs.extend(utc);
 dayjs.extend(timezone);
 
-exports.addComment = async (req, res) => {
+exports.addComment = (req, res) => {
   const { id } = req.params;
-  const author = req.body.author;
+  const token = req.headers.authorization.split(" ")[1];
+  const userId = userServices.getUserId(token);
+  const author = userId;
   const pseudo = ent.encode(req.body.pseudo);
   const text = ent.encode(req.body.text);
   const createdAt = dayjs();
@@ -21,7 +23,7 @@ exports.addComment = async (req, res) => {
       throw "Id Invalid";
     }
 
-    await postModel.findByIdAndUpdate(
+    postModel.findByIdAndUpdate(
       id,
       {
         $push: {
@@ -47,9 +49,58 @@ exports.addComment = async (req, res) => {
 };
 
 exports.editComment = (req, res) => {
-  res.send("Edit comment");
+  const { id } = req.params;
+  const idComment = req.body.idComment;
+  const text = ent.encode(req.body.text);
+
+  try {
+    if (!isValidObjectId(id)) {
+      throw "ID invalid";
+    }
+
+    postModel.findById(id, (err, docs) => {
+      if (err) throw "Erreur" + err;
+      const theComment = docs.comments.find((comment) =>
+        comment._id.equals(idComment)
+      );
+
+      if (!theComment) throw "Comment no found !";
+      theComment.text = text;
+      return docs.save((err) => {
+        if (err) throw "Erreur : " + err;
+        res.status(200).json(docs);
+      });
+    });
+  } catch (error) {
+    res.status(500).json(error);
+  }
 };
 
 exports.removeComment = (req, res) => {
-  res.send("Remove comment");
+  const { id } = req.params;
+  const idComment = req.body.idComment;
+
+  try {
+    if (!isValidObjectId(id)) {
+      throw "ID invalid";
+    }
+
+    postModel.findOneAndUpdate(
+      id,
+      {
+        $pull: {
+          comments: {
+            _id: idComment,
+          },
+        },
+      },
+      { new: true },
+      (err, docs) => {
+        if (err) throw "Erreur :" + err;
+        res.status(200).json(docs);
+      }
+    );
+  } catch (error) {
+    res.status(500).json(error);
+  }
 };
