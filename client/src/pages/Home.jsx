@@ -2,7 +2,7 @@ import { logout } from "../utils/context/AuthAction";
 import { useAuthDispatch, useAuthState } from "../utils/context/AuthContext";
 
 const Home = (props) => {
-  console.log(useAuthState().user);
+  const userData = useAuthState();
   const dispatch = useAuthDispatch(); // read dispatch method from context
 
   const handleLogout = () => {
@@ -13,6 +13,11 @@ const Home = (props) => {
   return (
     <div>
       <h1>Home Page</h1>
+      <br />
+      <p>Hello {userData.userId}</p>
+      <p>My Token : {userData.token}</p>
+      <p></p>
+      <br />
       <button onClick={handleLogout}>Deconexion</button>
     </div>
   );
