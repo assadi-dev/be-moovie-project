@@ -53,13 +53,13 @@ exports.signup = (req, res) => {
   UserModel.findOne({ email: email })
     .then((user) => {
       if (!user) {
-        return res.status(401).json({ error: "Utilisateur non trouvé !" });
+        return res.status(404).json("Utilisateur non trouvé !");
       }
       bcrypt
         .compare(password, user.password)
         .then((valid) => {
           if (!valid) {
-            return res.status(401).json({ error: "Mot de passe incorrect !" });
+            return res.status(404).json("Mot de passe incorrect !");
           }
           const token = accessToken(user._id);
           const refreshToken = refreshTokenGenerate();
