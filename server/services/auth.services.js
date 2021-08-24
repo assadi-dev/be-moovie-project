@@ -28,10 +28,10 @@ exports.setRefreshToken = async (refresh_token, userId) => {
           expireIn: dayjs().add(7, "day"),
         }
       )
-      .then(() => {
-        console.log("token refresh updated");
-      })
-      .catch((error) => console.log(error));
+      .then()
+      .catch((error) => {
+        result.status(500).json(error);
+      });
 
     return;
   }

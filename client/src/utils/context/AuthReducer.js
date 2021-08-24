@@ -1,7 +1,10 @@
 import jwtDecode from "jwt-decode";
 import Cookies from "js-cookie";
+import { checkToken } from "../../services/Auth.sevices";
 
 const StorageKey = "@MyAppOAuthKey";
+
+checkToken();
 
 const token = Cookies.get(StorageKey)
   ? JSON.parse(Cookies.get(StorageKey)).token

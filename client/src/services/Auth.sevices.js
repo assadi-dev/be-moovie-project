@@ -1,5 +1,6 @@
 import jwtDecode from "jwt-decode";
 import Cookies from "js-cookie";
+import { api } from "../components/Api";
 
 const StorageKey = "@MyAppOAuthKey";
 
@@ -7,25 +8,8 @@ export const setCookiesAuth = async (authState) => {
   return await Cookies.set(StorageKey, authState, {
     expires: 7,
     secure: true,
-    sameSite: "none",
+    sameSite: "Lax",
   });
-};
-
-export const getCookiesAuth = async () => {
-  let value = await Cookies.get(StorageKey);
-  let authState = null;
-  if (value) {
-    authState = JSON.parse(value);
-  }
-
-  if (authState) {
-    if (checkIfTokenExpired(authState)) {
-      return refreshAuthAsync(authState);
-    } else {
-      return authState;
-    }
-  }
-  return null;
 };
 
 export const removeCookiesAuth = async () => {
@@ -33,11 +17,7 @@ export const removeCookiesAuth = async () => {
     let value = Cookies.get(StorageKey);
     let authState = JSON.parse(value);
 
-    //console.log(authState);
-    /* await AppAuth.revokeAsync(config, {
-          token: authState.accessToken,
-          isClientIdProvided: true,
-        });*/
+    api.post("/auth/revokeToken", { refresh_token: authState.refreshToken });
 
     await Cookies.remove(StorageKey);
     return authState;
@@ -46,22 +26,26 @@ export const removeCookiesAuth = async () => {
   }
 };
 
-function checkIfTokenExpired({ token }) {
+const checkIfTokenExpired = ({ token }) => {
   let decodeToken = jwtDecode(token);
   let accessTokenExpirationDate = decodeToken.exp;
 
   return new Date(accessTokenExpirationDate * 1000) < new Date();
-}
+};
 
-async function refreshAuthAsync({ refreshToken }) {
-  /*api.post("token/refresh", {
-      data: { refresh_token: refreshToken },*/
-  console.log("refresh");
-}
+const refreshAuthAsync = async ({ refreshToken }) => {
+  const result = await api.post("/auth/refreshToken", {
+    refresh_token: refreshToken,
+  });
+  console.log("token refresh");
+  setCookiesAuth(JSON.stringify(result.data));
+  return result.data;
+};
 
-export async function getCachedAuthAsync() {
-  let value = await localStorage.getItem(StorageKey);
-  let authState = JSON.parse(value);
+export const checkToken = () => {
+  let authState = Cookies.get(StorageKey)
+    ? JSON.parse(Cookies.get(StorageKey))
+    : "";
 
   if (authState) {
     if (checkIfTokenExpired(authState)) {
@@ -72,4 +56,4 @@ export async function getCachedAuthAsync() {
   }
 
   return null;
-}
+};

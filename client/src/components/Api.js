@@ -2,8 +2,9 @@ import axios from "axios";
 import Cookies from "js-cookie";
 
 const StorageKey = "@MyAppOAuthKey";
-const auth = Cookies.get(StorageKey);
-const token = JSON.parse(auth).token;
+
+const auth = Cookies.get(StorageKey) ? Cookies.get(StorageKey) : "";
+const token = auth !== "" ? JSON.parse(auth).token : "";
 
 console.log(process.env.REACT_APP__URL);
 

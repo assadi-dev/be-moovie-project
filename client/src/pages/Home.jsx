@@ -1,6 +1,5 @@
 import { logout } from "../utils/context/AuthAction";
 import { useAuthDispatch, useAuthState } from "../utils/context/AuthContext";
-import { api } from "../components/Api";
 
 const Home = (props) => {
   const userData = useAuthState();
