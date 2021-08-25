@@ -1,0 +1,61 @@
+.sectionContent {
+    width: 100%;
+    min-height: 400px;
+    justify-content: center;
+    position: relative;
+    z-index: 10;
+    margin-top: -3rem;
+    background: rgba(0, 0, 0, 0.5);
+    background: linear-gradient(to bottom, rgba(0, 0, 0, 0) 5%, rgba(0, 0, 0, 1) 11%, rgb(0, 0, 0) 100%);
+    padding-top: 3.5rem;
+    color: white;
+    display: grid;
+    grid-auto-columns: 1fr 1fr;
+    grid-template-columns: 1fr 3fr 1fr;
+
+
+}
+
+.leftCol,
+.rightCol,
+.mainCol {
+    padding: 1rem 2.2rem;
+    justify-content: center;
+}
+
+.pictureContent {
+    width: 200px;
+    height: 280px;
+    overflow: hidden;
+    margin-left: auto;
+    margin-right: auto;
+
+}
+
+.pictureContent img {
+    width: 100%;
+    height: 100%;
+    border-radius: 5px;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    -ms-border-radius: 5px;
+    -o-border-radius: 5px;
+    transition: all ease 0.3s;
+    -webkit-transition: all ease 0.3s;
+    -moz-transition: all ease 0.3s;
+    -ms-transition: all ease 0.3s;
+    -o-transition: all ease 0.3s;
+}
+
+.pictureContent:hover img {
+    transform: scale(1.2);
+    -webkit-transform: scale(1.2);
+    -moz-transform: scale(1.2);
+    -ms-transform: scale(1.2);
+    -o-transform: scale(1.2);
+}
+
+.mainCol {
+    display: flex;
+    flex-direction: column
+}

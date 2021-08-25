@@ -11,12 +11,11 @@
     padding: 15;
     z-index: 1;
     color: white;
-    -webkit-box-shadow: inset 1px -10px 11px 7px rgba(0, 0, 0, 0.64);
-    box-shadow: inset 1px -10px 11px 7px rgba(0, 0, 0, 0.64);
+    box-shadow: inset 1px -25px 11px 7px rgba(0, 0, 0, 0.5);
+    -webkit-box-shadow: inset 1px -25px 11px 7px rgba(0, 0, 0, 0.8);
+
 
 }
-
-
 
 .headerPresentation img {
     height: 100%;
@@ -39,13 +38,14 @@
 .container {
     position: absolute;
     top: 0;
-    left: 0;
+    left: 2.5%;
     height: 100%;
     width: 100%;
     z-index: 3;
     display: flex;
     padding: 1.5rem;
     align-items: center;
+
 
 }
 
@@ -66,4 +66,18 @@
 
 .titleMovie {
     font-size: 2rem;
+    text-shadow: #e0e0e0 1px 1px 0,
+        2px 2px 2px rgba(0, 0, 0, 1);
+}
+
+.tagLine,
+.genre {
+    color: rgb(221, 221, 231);
+    font-size: 1.3rem;
+
+}
+
+.tagLine {
+    font-weight: 200;
+    font-style: italic;
 }
