@@ -1,11 +1,12 @@
 import { useState } from "react";
+import { useHistory } from "react-router-dom";
 import { loginUser } from "../utils/context/AuthAction";
 import { useAuthDispatch } from "../utils/context/AuthContext";
 
-const Login = (props) => {
+const Login = () => {
   const [state, setState] = useState({ username: "", password: "" });
   const dispatch = useAuthDispatch(); //get the dispatch method from the useDispatch custom hook
-
+  const history = useHistory();
   const handelChangeValue = (e) => {
     let name = e.target.name;
     let value = e.target.value;
@@ -22,7 +23,7 @@ const Login = (props) => {
     try {
       let response = await loginUser(dispatch, payload);
       if (!response) return;
-      props.history.push("/");
+      history.push("/");
     } catch (error) {
       console.log(error);
     }

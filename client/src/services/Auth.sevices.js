@@ -14,13 +14,17 @@ export const setCookiesAuth = async (authState) => {
 
 export const removeCookiesAuth = async () => {
   try {
-    let value = Cookies.get(StorageKey);
-    let authState = JSON.parse(value);
+    if (Cookies.get(StorageKey)) {
+      let value = Cookies.get(StorageKey);
+      let authState = JSON.parse(value);
 
-    api.post("/auth/revokeToken", { refresh_token: authState.refreshToken });
+      await api.post("/auth/revokeToken", {
+        refresh_token: authState.refreshToken,
+      });
 
-    await Cookies.remove(StorageKey);
-    return authState;
+      await Cookies.remove(StorageKey);
+      return authState;
+    }
   } catch (error) {
     alert(`Failed to revoke token: ${error}`);
   }

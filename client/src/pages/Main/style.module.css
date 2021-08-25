@@ -1,0 +1,38 @@
+#header {
+    height: 400px;
+    background-attachment: fixed;
+}
+
+.TrendMovieCaroussel {
+    height: 100%;
+}
+
+.movieSection {
+    max-width: 1600px;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 0.8rem;
+    margin-top: 1.2rem;
+    margin-bottom: 1.2rem;
+}
+
+.headerSection {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+
+}
+
+.headerSectionTitle {
+    vertical-align: middle;
+    margin-bottom: 0;
+    margin-right: 0.5rem;
+    margin-left: 0;
+
+}
+
+.separator {
+    width: 88%;
+    height: 1.5px;
+}

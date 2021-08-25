@@ -1,4 +1,4 @@
-import Home from "../pages/Home";
+import Main from "../pages/Main";
 import Login from "../pages/Login";
 import PageNotFound from "../pages/PageNotFound";
 
@@ -10,9 +10,10 @@ const routes = [
   },
   {
     path: "/",
-    component: Home,
+    component: Main,
     isPrivate: true,
   },
+
   {
     path: "/*",
     component: PageNotFound,
