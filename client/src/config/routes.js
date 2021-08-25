@@ -1,6 +1,7 @@
 import Main from "../pages/Main";
 import Login from "../pages/Login";
 import PageNotFound from "../pages/PageNotFound";
+import Movie from "../pages/Movie";
 
 const routes = [
   {
@@ -13,9 +14,13 @@ const routes = [
     component: Main,
     isPrivate: true,
   },
-
   {
-    path: "/*",
+    path: "/movie/:id",
+    component: Movie,
+    isPrivate: true,
+  },
+  {
+    path: "*",
     component: PageNotFound,
     isPrivate: true,
   },

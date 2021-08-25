@@ -1,0 +1,69 @@
+.headerPresentation {
+    height: 550px;
+    position: relative;
+    background-attachment: fixed;
+    width: 100%;
+    background-color: rgba(0, 0, 0, 1);
+    background-image: url("https://image.tmdb.org/t/p/w1920_and_h800_multi_faces/j28p5VwI5ieZnNwfeuZ5Ve3mPsn.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: left top;
+    padding: 15;
+    z-index: 1;
+    color: white;
+    -webkit-box-shadow: inset 1px -10px 11px 7px rgba(0, 0, 0, 0.64);
+    box-shadow: inset 1px -10px 11px 7px rgba(0, 0, 0, 0.64);
+
+}
+
+
+
+.headerPresentation img {
+    height: 100%;
+    width: 100%;
+    margin-top: 0;
+
+}
+
+.overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 2;
+
+}
+
+.container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    z-index: 3;
+    display: flex;
+    padding: 1.5rem;
+    align-items: center;
+
+}
+
+
+
+.container p,
+.container span,
+.container h5,
+.container button {
+    margin-top: 0.8rem;
+    margin-bottom: 0.8rem;
+
+}
+
+.container button:first-child {
+    margin-right: 0.8rem;
+}
+
+.titleMovie {
+    font-size: 2rem;
+}

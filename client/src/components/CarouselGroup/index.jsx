@@ -1,6 +1,8 @@
 import React, { useEffect } from "react";
 import Flickity from "flickity";
 import "./styleCarousel.css";
+import { Link } from "react-router-dom";
+import { generate_slug } from "../../services/Movies.services";
 
 const movies = [
   { id: 1, title: "film1" },
@@ -37,9 +39,11 @@ const CarousselGroup = () => {
   return (
     <div className="main-carousel">
       {movies.map((movie, index) => (
-        <div key={index} className="carousel-cell">
-          <div className="coverContainer"></div>
-        </div>
+        <Link to={`/movie/${generate_slug(movie.id, movie.title)}`}>
+          <div key={index} className="carousel-cell">
+            <div className="coverContainer"></div>
+          </div>
+        </Link>
       ))}
     </div>
   );
