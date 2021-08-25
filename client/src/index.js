@@ -9,6 +9,7 @@ import { composeWithDevTools } from "redux-devtools-extension";
 import thunk from "redux-thunk";
 import RootReducer from "./redux/RootReducers";
 import "./assets/styles/scss/style.css";
+import "./assets/styles/css/flickty.css";
 
 const store = createStore(
   RootReducer,

@@ -19,6 +19,11 @@ const Main = (props) => {
   const dispatch = useAuthDispatch();
   let { path, url } = useRouteMatch();
 
+  const sectionList = [
+    { name: "Films Populaires", data: [] },
+    { name: "Films à venir", data: [] },
+  ];
+
   const handleLogout = () => {
     logout(dispatch);
     // props.history.push("/login");
@@ -43,15 +48,17 @@ const Main = (props) => {
         </MDBCarousel>
       </header>
       <main id={styles.main}>
-        <section className={styles.movieSection}>
-          <div className={styles.headerSection}>
-            <h5 className={styles.headerSectionTitle}>Films Populaires</h5>{" "}
-            <hr className={styles.separator} />
-          </div>
-          <div>
-            <CarousselGroup />
-          </div>
-        </section>
+        {sectionList.map((section, index) => (
+          <section key={index} className={styles.movieSection}>
+            <div className={styles.headerSection}>
+              <h5 className={styles.headerSectionTitle}>{section.name}</h5>
+              <hr className={styles.separator} />
+            </div>
+            <div>
+              <CarousselGroup />
+            </div>
+          </section>
+        ))}
       </main>
     </>
   );
