@@ -19,7 +19,7 @@ const MovieTrendingPresentation = ({ itemId, classname }) => {
         src="https://mdbcdn.b-cdn.net/img/new/slides/041.jpg"
         alt="..."
       />
-      <MDBContainer>
+      <MDBContainer st>
         <div className={styles.presentation}>
           <h5 className={styles.titleMovie}>Title</h5>
           <p>

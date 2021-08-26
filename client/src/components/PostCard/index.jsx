@@ -48,7 +48,7 @@ const PostCard = () => {
           </div>
           <div className={styles.postCardBottom}>
             <div className={styles.actionPostbtn}>
-              <a href="#!" className="text-dark">
+              <a href="#!">
                 <MDBIcon far icon="thumbs-up" size="lg" />
                 <MDBBadge color="danger" notification pill>
                   35
@@ -56,7 +56,7 @@ const PostCard = () => {
               </a>
             </div>
             <div className={styles.actionPostbtn}>
-              <a href="#!" className="text-dark">
+              <a href="#!">
                 <MDBIcon far icon="comment-alt" size="lg" />
               </a>
             </div>

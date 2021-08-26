@@ -25,6 +25,7 @@ export default function App() {
       <MDBTabs className="mb-3">
         <MDBTabsItem>
           <MDBTabsLink
+            color="dark"
             onClick={() => handleBasicClick("tab1")}
             active={basicActive === "tab1"}
           >
@@ -33,6 +34,7 @@ export default function App() {
         </MDBTabsItem>
         <MDBTabsItem>
           <MDBTabsLink
+            color="dark"
             onClick={() => handleBasicClick("tab2")}
             active={basicActive === "tab2"}
           >
@@ -41,6 +43,7 @@ export default function App() {
         </MDBTabsItem>
         <MDBTabsItem>
           <MDBTabsLink
+            color="dark"
             onClick={() => handleBasicClick("tab3")}
             active={basicActive === "tab3"}
           >

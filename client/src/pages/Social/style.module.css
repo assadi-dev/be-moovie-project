@@ -9,6 +9,9 @@
     justify-content: center;
     margin-left: auto;
     margin-right: auto;
+    border-top-left-radius: 14px;
+    border-top-right-radius: 14px;
+    background-color: #424242;
 
 }
 
@@ -17,7 +20,7 @@
 .mainSocialCol {
 
     padding: 12px;
-    background-color: grey;
+
     display: flex;
     flex-direction: column;
 
@@ -80,7 +83,18 @@
 }
 
 .avatarCol {
-    width: 25%;
+    width: 20%;
+}
+
+.avatarCol img {
+    width: 80px;
+    height: 80px;
+    object-fit: cover;
+    border-radius: 14px;
+    -webkit-border-radius: 14px;
+    -moz-border-radius: 14px;
+    -ms-border-radius: 14px;
+    -o-border-radius: 14px;
 }
 
 .rowBtn {

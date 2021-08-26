@@ -4,7 +4,7 @@
 }
 
 .postHeader {
-    padding: 10px;
+    padding: 25px 5px 5px;
     max-height: 3rem;
     width: 100%;
     display: flex;
@@ -13,24 +13,24 @@
 }
 
 .avatarPost {
-    max-width: 65px;
-    max-height: 65px;
+    width: 60px;
     text-align: center;
     position: relative;
     overflow-x: hidden;
-    border-radius: 25%;
-    -webkit-border-radius: 25%;
-    -moz-border-radius: 25%;
-    -ms-border-radius: 25%;
-    -o-border-radius: 25%;
+
+
 }
 
 
 .avatarImg {
-    width: 100%;
-    height: 100%;
+    width: 55px;
+    height: 55px;
     vertical-align: middle;
-
+    border-radius: 14px;
+    -webkit-border-radius: 14px;
+    -moz-border-radius: 14px;
+    -ms-border-radius: 14px;
+    -o-border-radius: 14px;
 }
 
 .titlePost p,
@@ -65,7 +65,7 @@
 
 .commentSend {
 
-    background-color: rgba(0, 0, 0, 0.8);
+    background-color: #202020;
     color: white;
     padding: 12px;
     border-radius: 10px;
@@ -134,15 +134,20 @@
 .commentContainer {
     margin-top: 1rem;
     margin-bottom: 1rem;
-
     display: flex;
     width: 100%;
-    background-color: rgba(255, 255, 255, 0.9);
+    background-color: #424242;
+    padding: 8px;
+    border-radius: 14px;
+    -webkit-border-radius: 14px;
+    -moz-border-radius: 14px;
+    -ms-border-radius: 14px;
+    -o-border-radius: 14px;
 }
 
 .commentText {
-    border: 1px solid rgba(0, 0, 0, 0.5);
-    padding: 5px 8px;
+
+    padding: 2px 8px;
     border-radius: 5px;
     -webkit-border-radius: 5px;
     -moz-border-radius: 5px;
@@ -165,7 +170,7 @@
 .dateCommenter {
     font-style: italic;
     font-weight: 100;
-    color: rgba(0, 0, 0, 0.5);
+    color: rgba(255, 255, 255, 0.6);
 }
 
 .pseudoCommenter {
