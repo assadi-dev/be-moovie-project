@@ -1,5 +1,6 @@
 .postMediaContent {
     max-height: 100%;
+
 }
 
 .postHeader {
@@ -40,4 +41,18 @@
 
 .titlePost {
     margin-left: 1rem;
+}
+
+
+
+/*** Post Bottom **/
+.postCardBottom {
+    margin-top: 1.5rem;
+    display: flex;
+}
+
+.actionPostbtn {
+    margin-left: 1rem;
+    margin-right: 1rem;
+
 }

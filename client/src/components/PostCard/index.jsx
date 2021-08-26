@@ -9,9 +9,12 @@ import {
   MDBCardSubTitle,
   MDBCardHeader,
   MDBRow,
-  MDBCol,
+  MDBCardLink,
+  MDBIcon,
+  MDBBadge,
 } from "mdb-react-ui-kit";
 import styles from "./style.module.css";
+import { Link } from "react-router-dom";
 
 const PostCard = () => {
   return (
@@ -42,6 +45,21 @@ const PostCard = () => {
               src="https://mdbcdn.b-cdn.net/img/new/standard/city/041.jpg"
               alt="post_picture"
             />
+          </div>
+          <div classNames={styles.postCardBottom}>
+            <div className={styles.actionPostbtn}>
+              <a href="#!" className="text-dark">
+                <MDBIcon far icon="thumbs-up" size="lg" />
+                <MDBBadge color="danger" notification pill>
+                  35
+                </MDBBadge>
+              </a>
+            </div>
+            <div className={styles.actionPostbtn}>
+              <a href="#!" className="text-dark">
+                <MDBIcon far icon="comment-alt" size="lg" />
+              </a>
+            </div>
           </div>
         </MDBCardBody>
       </MDBCard>
