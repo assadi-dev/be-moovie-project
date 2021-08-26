@@ -1,0 +1,43 @@
+.postMediaContent {
+    max-height: 100%;
+}
+
+.postHeader {
+    padding: 10px;
+    max-height: 3rem;
+    width: 100%;
+    display: flex;
+    align-items: center;
+
+}
+
+.avatarPost {
+    max-width: 65px;
+    max-height: 65px;
+    text-align: center;
+    position: relative;
+    overflow-x: hidden;
+    border-radius: 25%;
+    -webkit-border-radius: 25%;
+    -moz-border-radius: 25%;
+    -ms-border-radius: 25%;
+    -o-border-radius: 25%;
+}
+
+
+.avatarImg {
+    width: 100%;
+    height: 100%;
+    vertical-align: middle;
+
+}
+
+.titlePost p,
+.titlePost h5 {
+    margin-top: 0;
+    margin-bottom: 0;
+}
+
+.titlePost {
+    margin-left: 1rem;
+}

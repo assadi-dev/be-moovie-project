@@ -1,11 +1,15 @@
 .socialContainer {
+    max-width: 1600px;
     position: relative;
     display: grid;
-    grid-template-columns: 1fr 3fr 1fr;
-    gap: 0 10px;
+    grid-template-columns: 1fr 2fr 1fr;
+    gap: 0 25px;
     min-height: 100vh;
     margin-top: 4%;
     justify-content: center;
+    margin-left: auto;
+    margin-right: auto;
+
 }
 
 .leftSocialCol,
@@ -15,13 +19,17 @@
     padding: 12px;
     background-color: grey;
     display: flex;
-    justify-content: center;
+    flex-direction: column;
+
     height: 100%;
 
 
 }
 
-.mainSocialCol {}
+.mainSocialCol {
+    padding-left: 2.5rem;
+    padding-right: 2.5rem;
+}
 
 .rightSocialCol {}
 
@@ -32,4 +40,64 @@
     width: 100%;
     overflow-x: hidden;
     height: 450px;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+
+}
+
+.bloc {
+    border: solid 1px black;
+    width: 100%;
+    overflow-x: hidden;
+    height: 300px;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+}
+
+.blocAffiche {
+    border: solid 1px black;
+    width: 100%;
+    overflow-x: hidden;
+    height: 250px;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+}
+
+/**Post Input**/
+.media {
+    display: flex;
+    margin-top: 0.5rem;
+    margin-bottom: 0.5rem;
+}
+
+.rowPostInput {
+    display: flex;
+    justify-content: center;
+}
+
+.inputCol {
+    width: 100%;
+}
+
+.avatarCol {
+    width: 25%;
+}
+
+.rowBtn {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.rowBtn button {
+    margin-right: 0.5rem;
+}
+
+/** Post Lists **/
+.postList {
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 1.5rem;
 }
