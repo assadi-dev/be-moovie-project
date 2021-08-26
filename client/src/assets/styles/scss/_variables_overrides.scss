@@ -1,0 +1,21 @@
+
+//colors
+$primary : rgba(255,255,255,1);
+
+
+
+//Navs Colors
+
+$nav-tabs-link-border-width: 0 0 2px 0 ;
+$nav-tabs-link-font-weight: 500 ;
+$nav-tabs-link-font-size: 12px ;
+$nav-tabs-link-color: rgba(255,255,255,1);
+$nav-tabs-link-padding-top: 17px ;
+$nav-tabs-link-padding-bottom: 16px ;
+$nav-tabs-link-padding-x: 29px ;
+$nav-tabs-link-hover-background-color: rgba(0,0,0,1);
+$nav-pills-link-background-color: $nav-tabs-link-hover-background-color;
+$nav-pills-link-color: $nav-tabs-link-color;
+
+$nav-pills-link-active-bg : $nav-pills-link-background-color;
+$nav-tabs-link-active-bg:$nav-pills-link-background-color;

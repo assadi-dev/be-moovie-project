@@ -27,6 +27,10 @@ const HeaderMedia = () => {
                 {" "}
                 <MDBIcon className="me-2" far icon="heart" />
                 Ajouter à mes favoris
+              </MDBBtn>{" "}
+              <MDBBtn outline color="white">
+                <MDBIcon className="me-2" fas icon="play" />
+                Voir la bande annonce
               </MDBBtn>
             </div>
           </div>

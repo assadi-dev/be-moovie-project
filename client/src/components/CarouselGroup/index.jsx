@@ -39,8 +39,8 @@ const CarousselGroup = () => {
   return (
     <div className="main-carousel">
       {movies.map((movie, index) => (
-        <Link to={`/movie/${generate_slug(movie.id, movie.title)}`}>
-          <div key={index} className="carousel-cell">
+        <Link key={index} to={`/movie/${generate_slug(movie.id, movie.title)}`}>
+          <div className="carousel-cell">
             <div className="coverContainer"></div>
           </div>
         </Link>
