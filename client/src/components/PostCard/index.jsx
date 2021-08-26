@@ -46,7 +46,7 @@ const PostCard = () => {
               alt="post_picture"
             />
           </div>
-          <div classNames={styles.postCardBottom}>
+          <div className={styles.postCardBottom}>
             <div className={styles.actionPostbtn}>
               <a href="#!" className="text-dark">
                 <MDBIcon far icon="thumbs-up" size="lg" />

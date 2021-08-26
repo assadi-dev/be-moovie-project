@@ -1,6 +1,6 @@
 .postMediaContent {
     max-height: 100%;
-
+    display: none;
 }
 
 .postHeader {
