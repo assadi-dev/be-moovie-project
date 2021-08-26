@@ -14,7 +14,7 @@ import {
   MDBBadge,
 } from "mdb-react-ui-kit";
 import styles from "./style.module.css";
-import { Link } from "react-router-dom";
+import Comments from "./Comments";
 
 const PostCard = () => {
   return (
@@ -61,6 +61,23 @@ const PostCard = () => {
               </a>
             </div>
           </div>
+          <div className={styles.sendCommentZone}>
+            <form>
+              <div className={styles.commentSend}>
+                <input
+                  type="text"
+                  name="text"
+                  placeholder="Laisser un commentaire"
+                />
+                <button className={styles.commentBtn}>
+                  <MDBIcon far icon="paper-plane" size="lg" />
+                </button>
+              </div>
+            </form>
+          </div>
+          <Comments />
+          <Comments />
+          <Comments />
         </MDBCardBody>
       </MDBCard>
     </div>
