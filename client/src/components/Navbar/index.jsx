@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import {
   MDBContainer,
   MDBIcon,
@@ -14,15 +14,47 @@ const Navbar = () => {
   const userData = useAuthState();
   const dispatch = useAuthDispatch();
   const location = useHistory();
+  const [state, setState] = useState({
+    navbarScroll: false,
+    dropdownMenu: false,
+    toogleMenu: false,
+  });
 
   const handleLogout = () => {
     logout(dispatch);
     location.push("/login");
   };
 
+  //NavBar scroll
+  const handleScroll = () => {
+    if (window.scrollY > 20) {
+      setState({
+        ...state,
+        navbarScroll: true,
+      });
+    } else {
+      setState({
+        ...state,
+        navbarScroll: false,
+      });
+    }
+  };
+
+  useEffect(() => {
+    window.addEventListener("scroll", handleScroll);
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
+
   return (
     <>
-      <MDBNavbar fixed="top" light bgColor="transparent">
+      <MDBNavbar
+        className={styles.navBg}
+        fixed="top"
+        light
+        bgColor={state.navbarScroll ? "dark" : "transparent"}
+      >
         <MDBContainer fluid>
           <div className={styles.navRow}>
             <div className={styles.navColCenter}>
@@ -64,7 +96,7 @@ const Navbar = () => {
                   <NavLink
                     activeClassName="active"
                     className={styles.navColLinkItem}
-                    to="/profile"
+                    to="/profil"
                   >
                     Mon Profil
                   </NavLink>

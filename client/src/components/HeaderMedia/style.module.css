@@ -4,7 +4,7 @@
     background-attachment: fixed;
     width: 100%;
     background-color: rgba(0, 0, 0, 1);
-    background-image: url("https://image.tmdb.org/t/p/w1920_and_h800_multi_faces/j28p5VwI5ieZnNwfeuZ5Ve3mPsn.jpg");
+    background-image: linear-gradient(rgba(0, 0, 0, 0.4), #262626), url("https://image.tmdb.org/t/p/w1920_and_h800_multi_faces/j28p5VwI5ieZnNwfeuZ5Ve3mPsn.jpg");
     background-repeat: no-repeat;
     background-size: cover;
     background-position: left top;
@@ -24,16 +24,6 @@
 
 }
 
-.overlay {
-    position: absolute;
-    top: 0;
-    left: 0;
-    height: 100%;
-    width: 100%;
-    background: rgba(0, 0, 0, 0.5);
-    z-index: 2;
-
-}
 
 .container {
     position: absolute;

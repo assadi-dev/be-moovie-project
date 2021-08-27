@@ -3,6 +3,7 @@ import Login from "../pages/Login";
 import PageNotFound from "../pages/PageNotFound";
 import Movie from "../pages/Movie";
 import Social from "../pages/Social";
+import Profil from "../pages/Profil";
 
 const routes = [
   {
@@ -23,6 +24,11 @@ const routes = [
   {
     path: "/social",
     component: Social,
+    isPrivate: true,
+  },
+  {
+    path: "/profil",
+    component: Profil,
     isPrivate: true,
   },
   {
