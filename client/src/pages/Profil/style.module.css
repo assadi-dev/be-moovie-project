@@ -1,0 +1,128 @@
+.mainContainer {
+    width: 100%;
+    height: 100vh;
+    overflow: hidden;
+
+}
+
+.mainProfil {
+    max-width: 1400px;
+    height: 80vh;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 0 12px 0 0;
+    overflow-x: hidden;
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: 12px;
+    position: relative;
+    margin-top: 5%;
+    border-radius: 14px;
+    -webkit-border-radius: 14px;
+    -moz-border-radius: 14px;
+    -ms-border-radius: 14px;
+    -o-border-radius: 14px;
+    background-color: #424242;
+}
+
+.leftSide {
+    position: relative;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.3);
+    border-top-left-radius: 14px;
+    border-bottom-left-radius: 14px;
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+    justify-content: center;
+
+}
+
+
+.avatarSection {
+    padding: 15px;
+    align-self: top;
+    position: relative;
+    width: 100%;
+    text-align: center;
+
+}
+
+.avatarSection img {
+    width: 180px;
+    height: 180px;
+    border-radius: 14px;
+    -webkit-border-radius: 14px;
+    -moz-border-radius: 14px;
+    -ms-border-radius: 14px;
+    -o-border-radius: 14px;
+
+}
+
+.pseudo {
+    margin-top: 2rem;
+    margin-bottom: 0.3rem;
+    font-size: 2.2rem;
+    font-weight: 200;
+}
+
+.sinceDate {
+    font-weight: 100;
+    color: rgba(255, 255, 255, 0.5);
+    margin-bottom: 2rem;
+    font-style: italic;
+}
+
+.statSection {
+    padding: 10px;
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    width: 100%;
+
+}
+
+.followStats {
+    display: flex;
+    justify-content: space-around;
+    width: 100%;
+
+}
+
+.followItem {
+    text-align: center;
+    width: 25%;
+}
+
+.followItem p {
+    margin-bottom: 0;
+    font-size: 2rem;
+    font-weight: bold;
+    color: #F93154;
+}
+
+.leftSectionBottom {
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+    padding-top: 22px;
+    padding-bottom: 22px;
+    text-align: center;
+}
+
+.leftSectionBottom span {
+    transition: all ease-in 0.3s;
+    -webkit-transition: all ease-in 0.3s;
+    -moz-transition: all ease-in 0.3s;
+    -ms-transition: all ease-in 0.3s;
+    -o-transition: all ease-in 0.3s;
+    color: #F93154;
+    font-weight: 200;
+    cursor: pointer;
+}
+
+.leftSectionBottom span:hover {
+
+    font-size: 1.1rem;
+}
