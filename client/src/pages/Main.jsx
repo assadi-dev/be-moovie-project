@@ -1,4 +1,4 @@
-import { Switch, Route, useRouteMatch, Link } from "react-router-dom";
+import { useContext, useEffect } from "react";
 import {
   MDBCarousel,
   MDBCarouselInner,

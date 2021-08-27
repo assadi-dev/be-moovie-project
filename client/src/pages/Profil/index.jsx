@@ -9,9 +9,13 @@ import {
   MDBTabsPane,
 } from "mdb-react-ui-kit";
 import EditProfile from "./EditProfile";
+import { useSelector, useDispatch } from "react-redux";
+import { getFullDate } from "../../services/times.services";
 
 const Profil = () => {
   const [fillActive, setFillActive] = useState("tab1");
+  const dispatch = useDispatch();
+  const userData = useSelector((state) => state.UserReducers);
 
   const handleFillClick = (value) => {
     if (value === fillActive) {
@@ -20,6 +24,9 @@ const Profil = () => {
 
     setFillActive(value);
   };
+
+  const { pseudo, birthday, email, presentation, followers, following } =
+    userData;
 
   return (
     <main className={styles.mainContainer}>
@@ -33,12 +40,12 @@ const Profil = () => {
                 srcset=""
               />
 
-              <h5 className={styles.pseudo}>mate@21</h5>
+              <h5 className={styles.pseudo}>{userData.pseudo}</h5>
               <p className={styles.userPresentation}>
-                "Les gentils gagne toujours peux importe d'ou il vient"
+                {userData.presentation && userData.presentation}
               </p>
               <span className={styles.sinceDate}>
-                Membre de puis le 22 avril 2021
+                {`Membre depuis le ${getFullDate(userData.createdAt)}`}
               </span>
             </div>
             <div className={styles.statSection}>
@@ -48,11 +55,11 @@ const Profil = () => {
                   <span>Publications</span>
                 </div>
                 <div className={styles.followItem}>
-                  <p>30</p>
+                  <p>{userData.following.length}</p>
                   <span>Siuvis</span>
                 </div>
                 <div className={styles.followItem}>
-                  <p>30</p>
+                  <p>{userData.followers.length}</p>
                   <span>Vous suivent</span>
                 </div>
               </div>

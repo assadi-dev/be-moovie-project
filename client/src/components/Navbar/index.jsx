@@ -9,9 +9,12 @@ import styles from "./style.module.css";
 import { Link, NavLink, useHistory } from "react-router-dom";
 import { useAuthDispatch, useAuthState } from "../../utils/context/AuthContext";
 import { logout } from "../../utils/context/AuthAction";
+import { useDispatch, useSelector } from "react-redux";
+import { get_user } from "../../redux/actions/user.action";
 
 const Navbar = () => {
-  const userData = useAuthState();
+  const userId = useAuthState().userId;
+
   const dispatch = useAuthDispatch();
   const location = useHistory();
   const [state, setState] = useState({
@@ -40,12 +43,16 @@ const Navbar = () => {
     }
   };
 
+  const dispatchRed = useDispatch();
+  const selector = useSelector((state) => state.UserReducers);
+
   useEffect(() => {
+    dispatchRed(get_user(userId));
     window.addEventListener("scroll", handleScroll);
     return () => {
       window.removeEventListener("scroll", handleScroll);
     };
-  }, []);
+  }, [userId, dispatchRed, dispatch]);
 
   return (
     <>
@@ -115,7 +122,7 @@ const Navbar = () => {
 
             <div className={styles.navColRight}>
               <Link>
-                <span>mate@21</span>
+                <span>{!selector.isLoading && selector.pseudo}</span>
                 <img
                   className={styles.navAvatar}
                   src="https://imgresizer.eurosport.com/unsafe/1200x0/filters:format(webp):focal(1421x431:1423x429)/origin-imgresizer.eurosport.com/2020/12/22/2959891-60753748-2560-1440.jpg"
