@@ -99,6 +99,25 @@
     width: 100%;
 }
 
+.postInputCreate {
+    background-color: #202020;
+    border-radius: 10px;
+    -webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+    -ms-border-radius: 10px;
+    -o-border-radius: 10px;
+}
+
+.postInputCreate textarea {
+    outline: #fff;
+    width: 100%;
+    background-color: transparent;
+    color: #fff;
+    border: none;
+    resize: none;
+}
+
+
 .avatarCol {
     width: 20%;
 }

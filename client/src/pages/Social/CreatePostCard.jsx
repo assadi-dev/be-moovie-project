@@ -16,7 +16,7 @@ const CreatePostCard = () => {
   return (
     <div>
       <MDBCard>
-        <form action="">
+        <form>
           <MDBCardBody>
             <div className={styles.post}>
               <div className={styles.rowPostInput}>
@@ -27,13 +27,12 @@ const CreatePostCard = () => {
                   />
                 </div>
                 <div className={styles.inputCol}>
-                  <div className="form-group">
-                    <input
-                      type="text"
-                      className="form-control"
+                  <div className={styles.postInputCreate}>
+                    <textarea
                       placeholder="Quoi de neuf ?"
                       style={{ padding: "10px" }}
-                    />
+                      rows="1"
+                    ></textarea>
                   </div>
                   <div className={styles.media}>
                     <MediaInputBtn

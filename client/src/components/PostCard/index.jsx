@@ -64,11 +64,12 @@ const PostCard = () => {
           <div className={styles.sendCommentZone}>
             <form>
               <div className={styles.commentSend}>
-                <input
-                  type="text"
+                <textarea
+                  id="text"
                   name="text"
                   placeholder="Laisser un commentaire"
-                />
+                  rows="1"
+                ></textarea>
                 <button className={styles.commentBtn}>
                   <MDBIcon far icon="paper-plane" size="lg" />
                 </button>

@@ -76,11 +76,16 @@
     display: flex;
 }
 
-.commentSend input {
+.commentSend textarea {
     width: 100%;
     color: white;
     background-color: transparent;
     border: none;
+}
+
+.commentSend textarea {
+    resize: none;
+    outline: none;
 }
 
 .commentBtn {
