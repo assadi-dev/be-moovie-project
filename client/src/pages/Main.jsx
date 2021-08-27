@@ -1,5 +1,3 @@
-import { logout } from "../utils/context/AuthAction";
-import { useAuthDispatch, useAuthState } from "../utils/context/AuthContext";
 import { Switch, Route, useRouteMatch, Link } from "react-router-dom";
 import {
   MDBCarousel,
@@ -14,20 +12,11 @@ import styles from "./Main/style.module.css";
 import MovieTrendingPresentation from "../components/MovieTrendingPresentation";
 import CarousselGroup from "../components/CarouselGroup";
 
-const Main = (props) => {
-  const userData = useAuthState();
-  const dispatch = useAuthDispatch();
-  let { path, url } = useRouteMatch();
-
+const Main = () => {
   const sectionList = [
     { name: "Films Populaires", data: [] },
     { name: "Films à venir", data: [] },
   ];
-
-  const handleLogout = () => {
-    logout(dispatch);
-    // props.history.push("/login");
-  };
 
   return (
     <>
@@ -43,7 +32,6 @@ const Main = (props) => {
             <MDBCarouselItem itemId={2}>
               <MovieTrendingPresentation />
             </MDBCarouselItem>
-            <MDBBtn onClick={handleLogout}>Deconexion</MDBBtn>
           </MDBCarouselInner>
         </MDBCarousel>
       </header>

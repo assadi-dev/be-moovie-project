@@ -34,22 +34,39 @@
     padding-right: 2.5rem;
 }
 
-.rightSocialCol {}
+.rightSocialCol {
+    overflow: hidden;
+
+    position: relative;
+}
 
 .leftSocialCol {}
 
 .following {
-    border: solid 1px black;
+
     width: 100%;
     overflow-x: hidden;
-    height: 450px;
+    max-height: 350px;
     margin-top: 1rem;
     margin-bottom: 1rem;
 
 }
 
+.suggestion {
+
+    width: 100%;
+    overflow-x: hidden;
+    max-height: 650px;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+
+}
+
+
+
+
 .bloc {
-    border: solid 1px black;
+
     width: 100%;
     overflow-x: hidden;
     height: 300px;
@@ -58,7 +75,7 @@
 }
 
 .blocAffiche {
-    border: solid 1px black;
+
     width: 100%;
     overflow-x: hidden;
     height: 250px;

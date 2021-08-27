@@ -1,7 +1,10 @@
 import React from "react";
 import PostCard from "../../components/PostCard";
+import Contact from "./Contact";
 import CreatePostCard from "./CreatePostCard";
+import MovieNow from "./MovieNow";
 import styles from "./style.module.css";
+import TrendPost from "./TrendPost";
 
 const Social = () => {
   return (
@@ -9,7 +12,7 @@ const Social = () => {
       {/**Left Colonne */}
       <div className={styles.leftSocialCol}>
         <div className={styles.blocAffiche}>
-          <h5>film à l'affiche</h5>
+          <MovieNow />
         </div>
         <div className={styles.bloc}>
           <ul>
@@ -19,7 +22,7 @@ const Social = () => {
           </ul>
         </div>
       </div>
-      {/**liddle Colonne */}
+      {/**Middle Colonne */}
       <div className={styles.mainSocialCol}>
         <div className={styles.PostContainer}>
           <CreatePostCard />
@@ -30,13 +33,9 @@ const Social = () => {
       </div>
       {/**Right Colonne */}
       <div className={styles.rightSocialCol}>
-        <div className={styles.following}>
-          <h5>Publications suivis</h5>
-        </div>
-        <div className={styles.following}>
-          <h5>Suggestions</h5>
-          <input type="text" placeholder="contact" />
-        </div>
+        <TrendPost />
+
+        <Contact />
       </div>
     </main>
   );
