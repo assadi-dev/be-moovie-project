@@ -11,12 +11,22 @@ import {
 import styles from "./Main/style.module.css";
 import MovieTrendingPresentation from "../components/MovieTrendingPresentation";
 import CarousselGroup from "../components/CarouselGroup";
+import { useDispatch } from "react-redux";
+import { get_user } from "../redux/actions/user.action";
+import { useAuthState } from "../utils/context/AuthContext";
 
 const Main = () => {
   const sectionList = [
     { name: "Films Populaires", data: [] },
     { name: "Films à venir", data: [] },
   ];
+
+  const userId = useAuthState().userId;
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(get_user(userId));
+  }, [userId, dispatch]);
 
   return (
     <>

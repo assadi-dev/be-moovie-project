@@ -151,3 +151,14 @@
     align-items: center;
     margin-top: 1.5rem;
 }
+
+
+/**Preview Create Post **/
+
+.preViwContainer {
+    margin-bottom: 0.8rem;
+}
+
+.preViwContainer img {
+    max-width: 100%;
+}

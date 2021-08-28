@@ -1,6 +1,6 @@
 import React from "react";
 
-const MediaInputBtn = ({ name, icon, style, className, accept }) => {
+const MediaInputBtn = ({ name, icon, style, className, accept, onChange }) => {
   return (
     <label htmlFor={name} style={style} className={className}>
       {" "}
@@ -11,6 +11,7 @@ const MediaInputBtn = ({ name, icon, style, className, accept }) => {
         name={name}
         id={name}
         accept={accept}
+        onChange={onChange}
       />
     </label>
   );

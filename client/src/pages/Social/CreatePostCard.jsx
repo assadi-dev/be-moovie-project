@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import {
   MDBCard,
   MDBCardBody,
@@ -11,8 +11,38 @@ import {
 } from "mdb-react-ui-kit";
 import styles from "./style.module.css";
 import MediaInputBtn from "../../components/mediaIconInput";
+import PreviewPost from "./PreviewPost";
 
-const CreatePostCard = () => {
+const CreatePostCard = ({ userData }) => {
+  const [postValue, setPostValue] = useState({
+    author: "",
+    message: "",
+    pseudo: "",
+    file: "",
+  });
+
+  useEffect(() => {
+    const iniUser = () => {
+      setPostValue({ ...postValue, pseudo: userData.pseudo });
+    };
+    iniUser();
+  }, [postValue.message]);
+
+  const handleChangeValue = (e) => {
+    let name = e.target.name;
+    let value = e.target.value;
+    setPostValue({ ...postValue, [name]: value });
+  };
+
+  const preViewFile = (e) => {
+    let file = URL.createObjectURL(e.target.files[0]);
+    setPostValue({ ...postValue, file: file });
+  };
+
+  const resetPost = () => {
+    setPostValue({ ...postValue, message: "", file: "" });
+  };
+
   return (
     <div>
       <MDBCard>
@@ -32,22 +62,28 @@ const CreatePostCard = () => {
                       placeholder="Quoi de neuf ?"
                       style={{ padding: "10px" }}
                       rows="1"
+                      onChange={handleChangeValue}
+                      name="message"
                     ></textarea>
                   </div>
                   <div className={styles.media}>
                     <MediaInputBtn
-                      name="image"
+                      name="file"
                       icon={<MDBIcon far icon="image" size="2x" />}
                       accept={".jpg,.jpeg,.png,.gif"}
+                      onChange={preViewFile}
                     />
                   </div>
                 </div>
               </div>
             </div>
           </MDBCardBody>
+          {postValue.file && <PreviewPost file={postValue.file} />}
           <MDBCardFooter>
             <div className={styles.rowBtn}>
-              <MDBBtn color="danger">Annuler la publication</MDBBtn>
+              <MDBBtn type="button" color="danger" onClick={resetPost}>
+                Annuler la publication
+              </MDBBtn>
               <MDBBtn color="info">Publier</MDBBtn>
             </div>
           </MDBCardFooter>
