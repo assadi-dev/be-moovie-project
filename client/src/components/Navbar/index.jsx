@@ -121,7 +121,7 @@ const Navbar = () => {
             </div>
 
             <div className={styles.navColRight}>
-              <Link>
+              <Link to="/profil">
                 <span>{!selector.isLoading && selector.pseudo}</span>
                 <img
                   className={styles.navAvatar}

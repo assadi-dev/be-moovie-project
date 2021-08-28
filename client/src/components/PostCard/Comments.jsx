@@ -1,6 +1,7 @@
 import React from "react";
 import styles from "./style.module.css";
 import { getFullDate, getTimeMin } from "../../services/times.services";
+import { decode } from "ent";
 
 const Comments = ({ data }) => {
   return (
@@ -15,14 +16,16 @@ const Comments = ({ data }) => {
           </div>
           <div className={styles.commentText}>
             <div className={styles.commentTitle}>
-              <span className={styles.pseudoCommenter}>{data.pseudo}</span>
+              <span className={styles.pseudoCommenter}>
+                {decode(data.pseudo)}
+              </span>
               <span className={styles.dateCommenter}>
                 {`${getFullDate(data.createdAt)} à ${getTimeMin(
                   data.createdAt
                 )}`}
               </span>
             </div>
-            <p>{data.text}</p>
+            <p>{decode(data.text)}</p>
           </div>
         </div>
       </div>

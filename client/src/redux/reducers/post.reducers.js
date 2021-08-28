@@ -1,3 +1,5 @@
+import { CREATE_POST } from "../actions/post.action";
+
 const initialState = {
   id: "",
   author: "",
@@ -11,7 +13,7 @@ const initialState = {
 
 const PostReducers = (state = initialState, action) => {
   switch (action.type) {
-    case "value":
+    case CREATE_POST:
       return {
         isLoading: false,
         id: action.payload.id,

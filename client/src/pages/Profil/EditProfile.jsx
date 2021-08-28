@@ -16,12 +16,13 @@ import {
 } from "../../redux/actions/user.action";
 import { useAuthState } from "../../utils/context/AuthContext";
 import { passworMatches, validatePassword } from "../../services/Auth.sevices";
+import { decode } from "ent";
 
 const EditProfile = ({ data }) => {
   const [state, setState] = useState({
-    pseudo: data.pseudo,
-    email: data.email,
-    presentation: data.presentation,
+    pseudo: decode(data.pseudo),
+    email: decode(data.email),
+    presentation: decode(data.presentation),
   });
 
   const [changePass, setChangePass] = useState({

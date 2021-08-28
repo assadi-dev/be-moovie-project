@@ -12,21 +12,29 @@ import {
 import styles from "./style.module.css";
 import MediaInputBtn from "../../components/mediaIconInput";
 import PreviewPost from "./PreviewPost";
+import { useDispatch } from "react-redux";
+import { create_post } from "../../redux/actions/post.action";
 
 const CreatePostCard = ({ userData }) => {
   const [postValue, setPostValue] = useState({
     author: "",
     message: "",
     pseudo: "",
-    file: "",
+    image: "",
   });
+
+  const dispatch = useDispatch();
 
   useEffect(() => {
     const iniUser = () => {
-      setPostValue({ ...postValue, pseudo: userData.pseudo });
+      setPostValue({
+        ...postValue,
+        pseudo: userData.pseudo,
+        author: userData.pseudo,
+      });
     };
     iniUser();
-  }, [postValue.message]);
+  }, [postValue.message, postValue.image, dispatch]);
 
   const handleChangeValue = (e) => {
     let name = e.target.name;
@@ -34,19 +42,38 @@ const CreatePostCard = ({ userData }) => {
     setPostValue({ ...postValue, [name]: value });
   };
 
-  const preViewFile = (e) => {
+  //Previsualisation des fichiers
+  const preViewImage = (e) => {
     let file = URL.createObjectURL(e.target.files[0]);
-    setPostValue({ ...postValue, file: file });
+    setPostValue({
+      ...postValue,
+      image: file,
+    });
   };
 
   const resetPost = () => {
-    setPostValue({ ...postValue, message: "", file: "" });
+    setPostValue({ ...postValue, message: "", image: "" });
+  };
+
+  const handleSubmitPost = (e) => {
+    e.preventDefault();
+    let data = {
+      author: postValue.author,
+      pseudo: postValue.pseudo,
+      message: postValue.message,
+    };
+
+    if (postValue.message === "") {
+      return false;
+    }
+
+    dispatch(create_post(data));
   };
 
   return (
     <div>
       <MDBCard>
-        <form>
+        <form onSubmit={handleSubmitPost}>
           <MDBCardBody>
             <div className={styles.post}>
               <div className={styles.rowPostInput}>
@@ -64,27 +91,30 @@ const CreatePostCard = ({ userData }) => {
                       rows="1"
                       onChange={handleChangeValue}
                       name="message"
+                      required
                     ></textarea>
                   </div>
                   <div className={styles.media}>
                     <MediaInputBtn
-                      name="file"
+                      name="image"
                       icon={<MDBIcon far icon="image" size="2x" />}
                       accept={".jpg,.jpeg,.png,.gif"}
-                      onChange={preViewFile}
+                      onChange={preViewImage}
                     />
                   </div>
                 </div>
               </div>
             </div>
           </MDBCardBody>
-          {postValue.file && <PreviewPost file={postValue.file} />}
+          {postValue.image && <PreviewPost file={postValue.image} />}
           <MDBCardFooter>
             <div className={styles.rowBtn}>
               <MDBBtn type="button" color="danger" onClick={resetPost}>
                 Annuler la publication
               </MDBBtn>
-              <MDBBtn color="info">Publier</MDBBtn>
+              <MDBBtn type="submit" color="info">
+                Publier
+              </MDBBtn>
             </div>
           </MDBCardFooter>
         </form>

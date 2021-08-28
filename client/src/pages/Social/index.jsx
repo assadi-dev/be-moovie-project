@@ -15,7 +15,7 @@ const Social = () => {
 
   useEffect(() => {
     dispatch(get_all_post());
-  }, [dispatch]);
+  }, [dispatch, posts]);
 
   return (
     <main className={styles.socialContainer}>
@@ -37,8 +37,8 @@ const Social = () => {
         <div className={styles.PostContainer}>
           <CreatePostCard userData={user} />
           <div className={styles.postList}>
-            {posts.map((post) => (
-              <PostCard key={post.id} data={post} />
+            {posts.map((post, index) => (
+              <PostCard key={index} data={post} />
             ))}
           </div>
         </div>

@@ -11,6 +11,7 @@ import {
 import EditProfile from "./EditProfile";
 import { useSelector, useDispatch } from "react-redux";
 import { getFullDate } from "../../services/times.services";
+import { decode } from "ent";
 
 const Profil = () => {
   const [fillActive, setFillActive] = useState("tab1");
@@ -37,10 +38,12 @@ const Profil = () => {
                 srcset=""
               />
 
-              <h5 className={styles.pseudo}>{userData.pseudo}</h5>
-              <p className={styles.userPresentation}>
-                {userData.presentation && userData.presentation}
-              </p>
+              <h5 className={styles.pseudo}>{decode(userData.pseudo)}</h5>
+              {userData.presentation && (
+                <p className={styles.userPresentation}>
+                  {decode(userData.presentation)}
+                </p>
+              )}
 
               <p className={styles.birthDate}>
                 {`${getFullDate(userData.birthday)}`}

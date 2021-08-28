@@ -17,6 +17,7 @@ import styles from "./style.module.css";
 import Comments from "./Comments";
 import { useDispatch, useSelector } from "react-redux";
 import { getFullDateWeek, getTimeMin } from "../../services/times.services";
+import { decode } from "ent";
 
 const PostCard = ({ data }) => {
   const dispatch = useDispatch();
@@ -34,7 +35,7 @@ const PostCard = ({ data }) => {
             />
           </div>
           <div className={styles.titlePost}>
-            <h5>{data.author}</h5>
+            <h5>{decode(data.author)}</h5>
             <p className="text-muted">
               {`${getFullDateWeek(data.createdAt)} à ${getTimeMin(
                 data.createdAt
@@ -44,19 +45,18 @@ const PostCard = ({ data }) => {
         </div>
       </MDBCardHeader>
       <MDBCardBody>
-        <MDBCardText>{data.message}</MDBCardText>
-        <div className={styles.postMediaContent}>
-          <MDBCardImage
-            src="https://mdbcdn.b-cdn.net/img/new/standard/city/041.jpg"
-            alt="post_picture"
-          />
-        </div>
+        <MDBCardText>{decode(data.message)}</MDBCardText>
+        {data.media.picture.length > 0 && (
+          <div className={styles.postMediaContent}>
+            <MDBCardImage src={data.media.picture} alt="post_picture" />
+          </div>
+        )}
         <div className={styles.postCardBottom}>
           <div className={styles.actionPostbtn}>
             <a href="#!">
               <MDBIcon far icon="thumbs-up" size="lg" />
               <MDBBadge color="danger" notification pill>
-                35
+                {data.likers.length > 0 && data.likers.length}
               </MDBBadge>
             </a>
           </div>
@@ -81,8 +81,8 @@ const PostCard = ({ data }) => {
             </div>
           </form>
         </div>
-        {comments.map((comment) => (
-          <Comments key={comment.id} data={comment} />
+        {comments.map((comment, index) => (
+          <Comments key={index} data={comment} />
         ))}
       </MDBCardBody>
     </MDBCard>
