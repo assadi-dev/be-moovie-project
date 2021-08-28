@@ -118,7 +118,7 @@
 
 .avatarComment {
     height: 100%;
-    width: 120px;
+    width: 80px;
     align-self: flex-start;
     overflow: hidden;
     padding-top: 5px;
@@ -152,12 +152,13 @@
 
 .commentText {
 
-    padding: 2px 8px;
+    padding: 5px 2px;
     border-radius: 5px;
     -webkit-border-radius: 5px;
     -moz-border-radius: 5px;
     -ms-border-radius: 5px;
     -o-border-radius: 5px;
+    width: 100%;
 }
 
 .commentContainer p {
@@ -170,15 +171,19 @@
     display: flex;
     justify-content: space-between;
     margin-bottom: 0.4rem;
+    width: 100%;
 }
 
 .dateCommenter {
     font-style: italic;
     font-weight: 100;
     color: rgba(255, 255, 255, 0.6);
+    align-self: flex-end;
+
 }
 
 .pseudoCommenter {
     font-weight: bold;
+
 
 }

@@ -1,7 +1,8 @@
 import React from "react";
 import styles from "./style.module.css";
+import { getFullDate, getTimeMin } from "../../services/times.services";
 
-const Comments = () => {
+const Comments = ({ data }) => {
   return (
     <>
       <div className={styles.showCommentZone}>
@@ -14,16 +15,14 @@ const Comments = () => {
           </div>
           <div className={styles.commentText}>
             <div className={styles.commentTitle}>
-              <span className={styles.pseudoCommenter}>AZert93</span>{" "}
+              <span className={styles.pseudoCommenter}>{data.pseudo}</span>
               <span className={styles.dateCommenter}>
-                26 avril 2021 à 18:00
+                {`${getFullDate(data.createdAt)} à ${getTimeMin(
+                  data.createdAt
+                )}`}
               </span>
             </div>
-            <p>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Amet
-              vitae dignissimos quo perferendis suscipit numquam nostrum
-              eligendi beatae molestiae in.
-            </p>
+            <p>{data.text}</p>
           </div>
         </div>
       </div>

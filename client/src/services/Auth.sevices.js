@@ -61,3 +61,48 @@ export const checkToken = () => {
 
   return null;
 };
+
+//Check password
+
+/**
+ *
+ * @param {string} value Mot de passe
+ * @returns {string}
+ * Verification des caracteres valide du mot de passe
+ *
+ */
+export const validatePassword = (value) => {
+  var p = value,
+    errors = "";
+  if (p.length < 6) {
+    errors = "Votre mot de passe doit contenir au moins 6 caractere";
+  }
+  if (p.search(/[a-z]/) < 0) {
+    errors = "Votre mot de passe doit contenir des lettres.";
+  }
+  if (p.search(/[A-Z]/) < 0) {
+    errors = "Votre mot de passe doit contenir au moins 1 lettre en majuscule.";
+  }
+  if (p.search(/[0-9]/) < 0) {
+    errors = "Votre mot de passe doit contenir au moins 1 valeur numerique.";
+  }
+  if (errors.length > 0) {
+    return errors;
+  }
+  return "ok";
+};
+
+/**
+ *
+ * @param {string} value Mot de passe
+ * @returns {string}
+ *Comparaison des mot de passe
+ *
+ */
+export const passworMatches = (value, confirm) => {
+  if (value === confirm) {
+    return "ok";
+  } else {
+    return "Les mot de passe ne correspondent pas.";
+  }
+};

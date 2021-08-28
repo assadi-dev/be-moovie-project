@@ -25,9 +25,6 @@ const Profil = () => {
     setFillActive(value);
   };
 
-  const { pseudo, birthday, email, presentation, followers, following } =
-    userData;
-
   return (
     <main className={styles.mainContainer}>
       <div className={styles.mainProfil}>
@@ -43,6 +40,10 @@ const Profil = () => {
               <h5 className={styles.pseudo}>{userData.pseudo}</h5>
               <p className={styles.userPresentation}>
                 {userData.presentation && userData.presentation}
+              </p>
+
+              <p className={styles.birthDate}>
+                {`${getFullDate(userData.birthday)}`}
               </p>
               <span className={styles.sinceDate}>
                 {`Membre depuis le ${getFullDate(userData.createdAt)}`}
@@ -115,7 +116,7 @@ const Profil = () => {
               )}
               {fillActive === "tab2" && (
                 <div className={styles.tabPane}>
-                  <EditProfile />
+                  <EditProfile data={userData} />
                 </div>
               )}
             </MDBTabsContent>

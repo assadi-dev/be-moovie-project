@@ -72,7 +72,7 @@ export const getDateNumeric = (date) => {
  * Retourne la date au format Lundi 23 avril 2021
  */
 export const getFullDateWeek = (date) => {
-  let day = dayjs(date);
+  let day = dayjs(date).day();
   let d = dayjs(date).date();
   let m = dayjs(date).month();
   let y = dayjs(date).year();

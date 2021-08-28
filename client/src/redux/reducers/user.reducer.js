@@ -1,4 +1,8 @@
-import { GET_DATA_USER } from "../actions/user.action";
+import {
+  EDIT_USER_DATA,
+  EDIT_USER_PASSWORD,
+  GET_DATA_USER,
+} from "../actions/user.action";
 
 const initialState = {
   avatar: "",
@@ -29,6 +33,26 @@ const UserReducers = (state = initialState, action) => {
         birthday: action.payload.birthday,
         following: action.payload.following,
         followers: action.payload.followers,
+      };
+      break;
+    case EDIT_USER_DATA:
+      return {
+        ...state,
+        isLoading: false,
+        pseudo: action.payload.pseudo,
+        avatar: action.payload.avatar,
+        email: action.payload.email,
+        presentation: action.payload.presentation,
+      };
+      break;
+    case EDIT_USER_PASSWORD:
+      return {
+        ...state,
+        isLoading: false,
+        pseudo: action.payload.pseudo,
+        avatar: action.payload.avatar,
+        email: action.payload.email,
+        presentation: action.payload.presentation,
       };
       break;
 

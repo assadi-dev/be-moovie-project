@@ -1,10 +1,13 @@
 import React from "react";
 import { Redirect, Route } from "react-router-dom";
+import { checkToken } from "../../services/Auth.sevices";
 
 import { useAuthState } from "../../utils/context/AuthContext";
 
 const AppRoutes = ({ component: Component, path, isPrivate, ...rest }) => {
   const userDetails = useAuthState();
+
+  checkToken();
 
   return (
     <Route

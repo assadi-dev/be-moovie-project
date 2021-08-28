@@ -1,11 +1,14 @@
+import { GET_ALL_POST } from "../actions/post.action";
+
 const initialState = {
   collections: [],
-  isLoading: false,
+  isLoading: true,
 };
 
 const AllPostReducers = (state = initialState, action) => {
   switch (action.type) {
-    case "value":
+    case GET_ALL_POST:
+      return { ...state, isLoading: false, collections: action.payload };
       break;
 
     default:
