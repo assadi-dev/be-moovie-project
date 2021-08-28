@@ -4,6 +4,11 @@ export const READ_POST = "READ_POST";
 export const CREATE_POST = "CREATE_POST";
 export const EDIT_POST = "EDIT_POST";
 export const DELETE_POST = "DELETE_POST";
+export const ADD_COMMENT = "ADD_COMMENT";
+export const EDIT_COMMENT = "EDIT_COMMENT";
+export const DELETE_COMMENT = "DELETE_COMMENT";
+
+/**Action Post ***/
 
 export const get_all_post = () => {
   return async (dispatch) => {
@@ -54,4 +59,25 @@ export const create_post = (data) => {
       console.log(error);
     }
   };
+};
+/**Action Comments */
+export const add_comment = (id, data) => {
+  return async (dispatch) => {
+    try {
+      await api
+        .patch(`/comment/add/${id}`, data)
+        .then((res) => {
+          dispatch({ type: ADD_COMMENT, payload: res.data });
+        })
+        .then((error) => {
+          throw error;
+        });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+};
+
+export const delete_comment = (id) => {
+  return async (dispatch) => {};
 };

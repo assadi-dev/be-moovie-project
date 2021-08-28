@@ -1,4 +1,11 @@
-import { CREATE_POST } from "../actions/post.action";
+import {
+  ADD_COMMENT,
+  CREATE_POST,
+  DELETE_COMMENT,
+  DELETE_POST,
+  EDIT_COMMENT,
+  EDIT_POST,
+} from "../actions/post.action";
 
 const initialState = {
   id: "",
@@ -23,6 +30,22 @@ const PostReducers = (state = initialState, action) => {
         comments: action.payload.comments,
         createdAt: action.payload.createdAt,
       };
+      break;
+    case EDIT_POST:
+      return { ...state, isLoading: true };
+      break;
+    case DELETE_POST:
+      return { ...state, isLoading: true };
+      break;
+
+    case ADD_COMMENT:
+      return { ...state, isLoading: true };
+      break;
+    case EDIT_COMMENT:
+      return { ...state, isLoading: true };
+      break;
+    case DELETE_COMMENT:
+      return { ...state, isLoading: true };
       break;
 
     default:
