@@ -5,6 +5,7 @@ import {
 } from "../actions/user.action";
 
 const initialState = {
+  id:""
   avatar: "",
   pseudo: "",
   email: "",
@@ -25,6 +26,7 @@ const UserReducers = (state = initialState, action) => {
       return {
         ...state,
         isLoading: false,
+        id:action.payload.id,
         pseudo: action.payload.pseudo,
         avatar: action.payload.avatar,
         email: action.payload.email,

@@ -10,12 +10,13 @@ import TrendPost from "./TrendPost";
 
 const Social = () => {
   const dispatch = useDispatch();
-  const posts = useSelector((state) => state.AllPostReducers.collections);
+  const posts = useSelector((state) => state.PostReducers.collections);
+  const loading = useSelector((state) => state.PostReducers.isLoading);
   const user = useSelector((state) => state.UserReducers);
 
   useEffect(() => {
     dispatch(get_all_post());
-  }, [dispatch, posts]);
+  }, [dispatch, loading]);
 
   return (
     <main className={styles.socialContainer}>
@@ -38,7 +39,7 @@ const Social = () => {
           <CreatePostCard userData={user} />
           <div className={styles.postList}>
             {posts.map((post, index) => (
-              <PostCard key={index} data={post} />
+              <PostCard key={index} user={user} data={post} />
             ))}
           </div>
         </div>

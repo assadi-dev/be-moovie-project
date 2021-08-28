@@ -15,13 +15,29 @@ import {
 } from "mdb-react-ui-kit";
 import styles from "./style.module.css";
 import Comments from "./Comments";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { getFullDateWeek, getTimeMin } from "../../services/times.services";
 import { decode } from "ent";
 
-const PostCard = ({ data }) => {
+const PostCard = ({ data, user }) => {
   const dispatch = useDispatch();
   const comments = data.comments;
+
+  const [commentVatue, setCommentValue] = useState({
+    author: "",
+    pseudo: "",
+    text: "",
+  });
+
+  useEffect(() => {
+    setCommentValue({ ...commentVatue, author: data.id, pseudo: data.pseudo });
+  }, [commentValue.text]);
+
+  const handleChangeValue = (e) => {
+    let name = e.target.name;
+    let value = e.target.value;
+    setCommentValue({ ...commentVatue, [name]: value });
+  };
 
   return (
     <MDBCard className="w-100 my-2">
@@ -74,7 +90,10 @@ const PostCard = ({ data }) => {
                 name="text"
                 placeholder="Laisser un commentaire"
                 rows="1"
-              ></textarea>
+                onChange={handleChangeValue}
+              >
+                {commentVatue.text}
+              </textarea>
               <button className={styles.commentBtn}>
                 <MDBIcon far icon="paper-plane" size="lg" />
               </button>

@@ -66,7 +66,7 @@ const CreatePostCard = ({ userData }) => {
     if (postValue.message === "") {
       return false;
     }
-
+    setPostValue({ ...postValue, message: "", image: "" });
     dispatch(create_post(data));
   };
 
@@ -91,6 +91,7 @@ const CreatePostCard = ({ userData }) => {
                       rows="1"
                       onChange={handleChangeValue}
                       name="message"
+                      value={postValue.message}
                       required
                     ></textarea>
                   </div>
