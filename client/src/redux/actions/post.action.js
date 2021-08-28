@@ -65,7 +65,7 @@ export const add_comment = (id, data) => {
   return async (dispatch) => {
     try {
       await api
-        .patch(`/comment/add/${id}`, data)
+        .patch(`/post/comment/add/${id}`, data)
         .then((res) => {
           dispatch({ type: ADD_COMMENT, payload: res.data });
         })

@@ -30,7 +30,7 @@ const CreatePostCard = ({ userData }) => {
       setPostValue({
         ...postValue,
         pseudo: userData.pseudo,
-        author: userData.pseudo,
+        author: userData.id,
       });
     };
     iniUser();

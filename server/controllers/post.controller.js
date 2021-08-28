@@ -6,6 +6,7 @@ const postServices = require("../services/post.services");
 exports.createPost = (req, res) => {
   const newPost = new postModel({
     author: ent.encode(req.body.author),
+    pseudo: ent.encode(req.body.pseudo),
     message: ent.encode(req.body.message),
   });
   try {

@@ -12,9 +12,7 @@ import { useDispatch } from "react-redux";
 import {
   changePassword,
   edit_user_data,
-  get_user,
 } from "../../redux/actions/user.action";
-import { useAuthState } from "../../utils/context/AuthContext";
 import { passworMatches, validatePassword } from "../../services/Auth.sevices";
 import { decode } from "ent";
 
@@ -31,7 +29,7 @@ const EditProfile = ({ data }) => {
     error: "",
   });
 
-  const id = useAuthState().userId;
+  const id = data.id;
 
   const dispatch = useDispatch();
 

@@ -38,9 +38,10 @@ const Social = () => {
         <div className={styles.PostContainer}>
           <CreatePostCard userData={user} />
           <div className={styles.postList}>
-            {posts.map((post, index) => (
-              <PostCard key={index} user={user} data={post} />
-            ))}
+            {posts &&
+              posts.map((post, index) => (
+                <PostCard key={index} user={user} data={post} />
+              ))}
           </div>
         </div>
       </div>
