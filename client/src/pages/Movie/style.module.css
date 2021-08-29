@@ -4,9 +4,9 @@
     justify-content: center;
     position: relative;
     z-index: 10;
-    margin-top: -3rem;
+    /* margin-top: -3rem;*/
     border: hidden;
-    background: linear-gradient(to top, #262626 50%, #323232 100%);
+    background: linear-gradient(to top, transparent 10%, #262626 50%, #323232 100%);
     padding-top: 3.5rem;
     color: white;
     display: grid;

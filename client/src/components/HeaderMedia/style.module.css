@@ -72,3 +72,14 @@
     font-weight: 200;
     font-style: italic;
 }
+
+.banner__fadeBottom {
+    height: 7.4rem;
+    position: absolute;
+    width: 100%;
+    background: linear-gradient(180deg,
+            transparent,
+            rgba(26, 26, 26, .61),
+            rgb(26, 26, 26));
+    bottom: 0;
+}

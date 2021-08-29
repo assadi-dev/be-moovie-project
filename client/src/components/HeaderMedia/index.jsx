@@ -7,7 +7,6 @@ const HeaderMedia = () => {
   return (
     <>
       <header className={classNames(styles.headerPresentation, styles.header)}>
-        <div className={styles.overlay}> </div>
         <div className={styles.container}>
           <div style={styles.info}>
             <h5 className={styles.titleMovie}>Free Guy</h5>
@@ -35,6 +34,8 @@ const HeaderMedia = () => {
             </div>
           </div>
         </div>
+
+        <div className={styles.banner__fadeBottom}> </div>
       </header>
     </>
   );
