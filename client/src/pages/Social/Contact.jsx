@@ -7,6 +7,7 @@ import {
   MDBBtn,
 } from "mdb-react-ui-kit";
 import styles from "./style.module.css";
+import CardContact from "../../components/ContactCard";
 
 const Contact = () => {
   return (
@@ -21,23 +22,14 @@ const Contact = () => {
               placeholder="Rechercher une personne"
             />
           </div>
-          <MDBCardText>
-            Some quick example text to build on the card title and make up the
-            bulk of the card's content.
-          </MDBCardText>
-          <MDBCardText>
-            Some quick example text to build on the card title and make up the
-            bulk of the card's content.
-          </MDBCardText>
-          <MDBCardText>
-            Some quick example text to build on the card title and make up the
-            bulk of the card's content.
-          </MDBCardText>
-          <MDBCardText>
-            Some quick example text to build on the card title and make up the
-            bulk of the card's content.
-          </MDBCardText>
-          <MDBBtn>Button</MDBBtn>
+          <div>
+            <CardContact />
+            <CardContact />
+            <CardContact />
+            <CardContact />
+            <CardContact />
+            <CardContact />
+          </div>
         </MDBCardBody>
       </MDBCard>
     </>

@@ -6,6 +6,8 @@ import {
   EDIT_COMMENT,
   EDIT_POST,
   GET_ALL_POST,
+  LIKE_POST,
+  UNLIKE_POST,
 } from "../actions/post.action";
 
 const initialState = {
@@ -39,6 +41,12 @@ const PostReducers = (state = initialState, action) => {
       return { ...state, isLoading: true };
       break;
 
+    case LIKE_POST:
+      return { ...state, isLoading: true };
+      break;
+    case UNLIKE_POST:
+      return { ...state, isLoading: true };
+      break;
     default:
       return state;
       break;

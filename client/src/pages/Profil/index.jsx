@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import styles from "./style.module.css";
 import {
   MDBIcon,
@@ -17,6 +17,8 @@ const Profil = () => {
   const [fillActive, setFillActive] = useState("tab1");
   const dispatch = useDispatch();
   const userData = useSelector((state) => state.UserReducers);
+
+  useEffect(() => {}, [userData.isLoading]);
 
   const handleFillClick = (value) => {
     if (value === fillActive) {

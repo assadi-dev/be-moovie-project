@@ -2,6 +2,7 @@ import { api } from "../../components/Api";
 export const GET_DATA_USER = "GET_DATA_USER";
 export const EDIT_USER_DATA = "EDIT_USER_DATA";
 export const EDIT_USER_PASSWORD = "EDIT_USER_PASSWORD";
+export const CLEAR_USER = "CLEAR_USER";
 
 export const get_user = (id) => {
   return async (dispatch) => {
@@ -46,5 +47,13 @@ export const changePassword = (id, data) => {
     } catch (error) {
       console.log(error);
     }
+  };
+};
+
+export const clear_user = () => {
+  return async (dispatch) => {
+    try {
+      dispatch({ type: CLEAR_USER });
+    } catch (error) {}
   };
 };

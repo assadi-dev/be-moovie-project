@@ -18,7 +18,13 @@ import Comments from "./Comments";
 import { useDispatch } from "react-redux";
 import { getFullDateWeek, getTimeMin } from "../../services/times.services";
 import { decode } from "ent";
-import { add_comment } from "../../redux/actions/post.action";
+import {
+  add_comment,
+  like_post,
+  unlike_post,
+} from "../../redux/actions/post.action";
+import classNames from "classnames";
+import { isLiked } from "../../services/Posts.services";
 
 const PostCard = ({ data, user }) => {
   const dispatch = useDispatch();
@@ -31,6 +37,8 @@ const PostCard = ({ data, user }) => {
     text: "",
   });
 
+  const [toggLeBtn, setToogleBtn] = useState({ like: false, comment: false });
+
   useEffect(() => {
     setCommentValue({
       ...commentValue,
@@ -38,7 +46,7 @@ const PostCard = ({ data, user }) => {
       author: user.id,
       pseudo: user.pseudo,
     });
-  }, [commentValue.text, dispatch]);
+  }, [commentValue.text, dispatch, toggLeBtn.like]);
 
   const handleChangeValue = (e) => {
     let name = e.target.name;
@@ -55,6 +63,14 @@ const PostCard = ({ data, user }) => {
     };
     dispatch(add_comment(data._id, commentData));
     setCommentValue({ ...commentValue, postId: "", text: "" });
+  };
+
+  const handleLikebtn = () => {
+    if (isLiked(user.postLikes, data._id)) {
+      dispatch(unlike_post(data._id));
+    } else {
+      dispatch(like_post(data._id));
+    }
   };
 
   return (
@@ -87,16 +103,25 @@ const PostCard = ({ data, user }) => {
         )}
         <div className={styles.postCardBottom}>
           <div className={styles.actionPostbtn}>
-            <a href="#!">
-              <MDBIcon far icon="thumbs-up" size="lg" />
+            <a
+              className={classNames(styles.actionBtn, styles.likesBtn)}
+              href="#!"
+              onClick={handleLikebtn}
+            >
+              {isLiked(user.postLikes, data._id) ? (
+                <MDBIcon fas icon="heart" />
+              ) : (
+                <MDBIcon far icon="heart" />
+              )}
+
               <MDBBadge color="danger" notification pill>
                 {data.likers.length > 0 && data.likers.length}
               </MDBBadge>
             </a>
           </div>
           <div className={styles.actionPostbtn}>
-            <a href="#!">
-              <MDBIcon far icon="comment-alt" size="lg" />
+            <a href className={classNames(styles.actionBtn, styles.likesBtn)}>
+              <MDBIcon far icon="comment-alt" />{" "}
             </a>
           </div>
         </div>

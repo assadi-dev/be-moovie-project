@@ -10,11 +10,12 @@ import { Link, NavLink, useHistory } from "react-router-dom";
 import { useAuthDispatch, useAuthState } from "../../utils/context/AuthContext";
 import { logout } from "../../utils/context/AuthAction";
 import { useDispatch, useSelector } from "react-redux";
-import { get_user } from "../../redux/actions/user.action";
+import { clear_user, get_user } from "../../redux/actions/user.action";
 
 const Navbar = () => {
   const userId = useAuthState().userId;
-
+  const dispatchRed = useDispatch();
+  const selector = useSelector((state) => state.UserReducers);
   const dispatch = useAuthDispatch();
   const location = useHistory();
   const [state, setState] = useState({
@@ -24,7 +25,9 @@ const Navbar = () => {
   });
 
   const handleLogout = () => {
+    dispatchRed(clear_user());
     logout(dispatch);
+
     location.push("/login");
   };
 
@@ -43,16 +46,13 @@ const Navbar = () => {
     }
   };
 
-  const dispatchRed = useDispatch();
-  const selector = useSelector((state) => state.UserReducers);
-
   useEffect(() => {
     dispatchRed(get_user(userId));
     window.addEventListener("scroll", handleScroll);
     return () => {
       window.removeEventListener("scroll", handleScroll);
     };
-  }, [userId, dispatchRed, dispatch]);
+  }, [userId, dispatchRed, dispatch, selector.isLoading]);
 
   return (
     <>
