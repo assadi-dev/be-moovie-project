@@ -6,33 +6,19 @@ import {
   MDBCardText,
 } from "mdb-react-ui-kit";
 import styles from "./style.module.css";
+import PostTrendingCard from "../../components/TrendingCardPost";
 
 const TrendPost = () => {
   return (
     <>
       <MDBCard className={styles.following}>
         <MDBCardBody>
-          <MDBCardTitle>Tendence</MDBCardTitle>
-          <MDBCardText>
-            Some quick example text to build on the card title and make up the
-            bulk of the card's content.
-          </MDBCardText>
-          <MDBCardText>
-            Some quick example text to build on the card title and make up the
-            bulk of the card's content.
-          </MDBCardText>
-          <MDBCardText>
-            Some quick example text to build on the card title and make up the
-            bulk of the card's content.
-          </MDBCardText>
-          <MDBCardText>
-            Some quick example text to build on the card title and make up the
-            bulk of the card's content.
-          </MDBCardText>
-          <MDBCardText>
-            Some quick example text to build on the card title and make up the
-            bulk of the card's content.
-          </MDBCardText>
+          <MDBCardTitle>Les + aimes</MDBCardTitle>
+          <div className={styles.trendContainer}>
+            <PostTrendingCard />
+            <PostTrendingCard />
+            <PostTrendingCard />
+          </div>
         </MDBCardBody>
       </MDBCard>
     </>

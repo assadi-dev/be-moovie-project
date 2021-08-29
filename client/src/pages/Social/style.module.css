@@ -2,7 +2,7 @@
     max-width: 1600px;
     position: relative;
     display: grid;
-    grid-template-columns: 1fr 2fr 1fr;
+    grid-template-columns: 1fr 2fr 1.5fr;
     gap: 0 25px;
     min-height: 100vh;
     margin-top: 4%;
@@ -18,12 +18,9 @@
 .leftSocialCol,
 .rightSocialCol,
 .mainSocialCol {
-
     padding: 12px;
-
     display: flex;
     flex-direction: column;
-
     height: 100%;
 
 
@@ -162,4 +159,10 @@
 
 .preViwContainer img {
     max-width: 100%;
+}
+
+/**Trend post ou les + aimés **/
+
+.trendContainer {
+    margin-top: 1rem;
 }
