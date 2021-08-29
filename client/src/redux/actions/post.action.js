@@ -7,6 +7,8 @@ export const DELETE_POST = "DELETE_POST";
 export const ADD_COMMENT = "ADD_COMMENT";
 export const EDIT_COMMENT = "EDIT_COMMENT";
 export const DELETE_COMMENT = "DELETE_COMMENT";
+export const LIKE_POST = "LIKE_POST";
+export const UNLIKE_POST = "UNLIKE_POST";
 
 /**Action Post ***/
 
@@ -78,6 +80,74 @@ export const add_comment = (id, data) => {
   };
 };
 
+/**
+ *
+ * @param {any} id id du post
+ * @returns {string}
+ */
+export const edit_comment = (id, data) => {
+  return async (dispatch) => {
+    try {
+      await api
+        .patch(`/post/comment/edot/${id}`, data)
+        .then((res) => {
+          dispatch({ type: EDIT_COMMENT, payload: res.data });
+        })
+        .then((error) => {
+          throw error;
+        });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+};
+
 export const delete_comment = (id) => {
   return async (dispatch) => {};
+};
+
+/**Action Like & Unlike Post **/
+
+/**
+ *
+ * @param {any} id id du post
+ * @returns
+ */
+export const like_post = (id) => {
+  return async (dispatch) => {
+    try {
+      await api
+        .patch(`/user/postLike/add/${id}`)
+        .then((res) => {
+          dispatch({ type: LIKE_POST, payload: res.data });
+        })
+        .catch((err) => {
+          throw err;
+        });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+};
+
+/**
+ *
+ * @param {any} id id du post
+ * @returns
+ */
+export const unlike_post = (id) => {
+  return async (dispatch) => {
+    try {
+      await api
+        .patch(`/user/postLike/remove/${id}`)
+        .then((res) => {
+          dispatch({ type: UNLIKE_POST, payload: res.data });
+        })
+        .catch((err) => {
+          throw err;
+        });
+    } catch (error) {
+      console.log(error);
+    }
+  };
 };
