@@ -18,7 +18,7 @@ const Social = () => {
   useEffect(() => {
     dispatch(get_all_post());
     dispatch(get_all_users());
-  }, [dispatch, loading, user.isLoading]);
+  }, [dispatch]);
 
   return (
     <main className={styles.socialContainer}>
@@ -51,7 +51,7 @@ const Social = () => {
       <div className={styles.rightSocialCol}>
         <TrendPost />
 
-        <Contact />
+        {posts && <Contact />}
       </div>
     </main>
   );

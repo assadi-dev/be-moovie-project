@@ -4,6 +4,8 @@ import {
   EDIT_USER_DATA,
   EDIT_USER_PASSWORD,
   GET_DATA_USER,
+  FOLLOW_USER,
+  UNFOLLOW_USER,
 } from "../actions/user.action";
 
 const initialState = {
@@ -75,6 +77,21 @@ const UserReducers = (state = initialState, action) => {
         postLikes: action.payload.postLikes,
         isLoading: true,
       };
+    case FOLLOW_USER:
+      return {
+        ...state,
+        following: action.payload.following,
+        isLoading: true,
+      };
+      break;
+    case UNFOLLOW_USER:
+      return {
+        ...state,
+        following: action.payload.following,
+
+        isLoading: true,
+      };
+      break;
     case CLEAR_USER:
       return {
         id: "",
@@ -91,6 +108,7 @@ const UserReducers = (state = initialState, action) => {
         birthday: "",
         isLoading: true,
       };
+      break;
 
     default:
       return state;

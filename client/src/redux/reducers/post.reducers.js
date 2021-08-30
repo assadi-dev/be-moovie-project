@@ -9,6 +9,7 @@ import {
   LIKE_POST,
   UNLIKE_POST,
 } from "../actions/post.action";
+import { FOLLOW_USER, UNFOLLOW_USER } from "../actions/user.action";
 
 const initialState = {
   collections: [],
@@ -47,6 +48,7 @@ const PostReducers = (state = initialState, action) => {
     case UNLIKE_POST:
       return { ...state, isLoading: true };
       break;
+
     default:
       return state;
       break;

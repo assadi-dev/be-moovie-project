@@ -10,7 +10,7 @@ const CardContact = ({ data }) => {
   const userData = useSelector((state) => state.UserReducers);
   const [followBtn, setFollowBtn] = useState(false);
 
-  useEffect(() => {}, [userData.loading]);
+  useEffect(() => {}, [dispatch]);
 
   const handleFollow = () => {
     if (isFollow(userData.following, data._id)) {

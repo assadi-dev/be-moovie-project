@@ -15,11 +15,12 @@ import {
 } from "mdb-react-ui-kit";
 import styles from "./style.module.css";
 import Comments from "./Comments";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { getFullDateWeek, getTimeMin } from "../../services/times.services";
 import { decode } from "ent";
 import {
   add_comment,
+  get_all_post,
   like_post,
   unlike_post,
 } from "../../redux/actions/post.action";
@@ -28,6 +29,8 @@ import { isLiked } from "../../services/Posts.services";
 
 const PostCard = ({ data, user }) => {
   const dispatch = useDispatch();
+  const loadingPost = useSelector((state) => state.PostReducers.isLoading);
+  const posts = useSelector((state) => state.PostReducers.collections);
   const comments = data.comments;
 
   const [commentValue, setCommentValue] = useState({
@@ -38,8 +41,16 @@ const PostCard = ({ data, user }) => {
   });
 
   const [toggLeBtn, setToogleBtn] = useState({ like: false, comment: false });
+  const [totalikers, setTotalikers] = useState(0);
+  const getTotaLikes = () => {
+    const datalike = posts.filter((post) => post._id === data._id)[0].likers;
+    setTotalikers(datalike);
+  };
 
   useEffect(() => {
+    dispatch(get_all_post());
+    getTotaLikes();
+
     setCommentValue({
       ...commentValue,
       postId: data._id,
@@ -68,8 +79,12 @@ const PostCard = ({ data, user }) => {
   const handleLikebtn = () => {
     if (isLiked(user.postLikes, data._id)) {
       dispatch(unlike_post(data._id));
+      let remove = totalikers.filter((likers) => !likers.includes(user.id));
+      setTotalikers(remove);
     } else {
       dispatch(like_post(data._id));
+      let add = [...totalikers, user.id];
+      setTotalikers(add);
     }
   };
 
@@ -115,7 +130,7 @@ const PostCard = ({ data, user }) => {
               )}
 
               <MDBBadge color="danger" notification pill>
-                {data.likers.length > 0 && data.likers.length}
+                {totalikers.length > 0 && totalikers.length}
               </MDBBadge>
             </a>
           </div>
