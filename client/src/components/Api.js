@@ -11,7 +11,7 @@ console.log(process.env.REACT_APP__URL);
 export const api = axios.create({
   baseURL: "http://localhost:6500/api",
   headers: {
-    "Content-Type": "application/json",
+    "Content-Type": "multipart/form-data",
     Authorization: `Bearer ${token}`,
   },
 });

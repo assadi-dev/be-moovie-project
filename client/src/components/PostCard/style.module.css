@@ -3,6 +3,10 @@
 
 }
 
+.postMediaContent img {
+    width: 100%;
+}
+
 .postHeader {
     padding: 25px 5px 5px;
     max-height: 3rem;

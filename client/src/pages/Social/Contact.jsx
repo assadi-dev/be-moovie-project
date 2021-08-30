@@ -21,7 +21,7 @@ const Contact = () => {
   useEffect(() => {
     let getunFollowList = getUserUnFollow(usersId, users.collections);
     setUserUnfollow(getunFollowList);
-  }, [dispatch, userUnfollow, usersId]);
+  }, [dispatch]);
 
   const handleSearchContact = (e) => {
     let value = e.target.value;

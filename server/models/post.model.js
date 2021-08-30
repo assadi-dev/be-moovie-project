@@ -16,9 +16,7 @@ const PostSchema = mongoose.Schema(
       required: true,
     },
     media: {
-      picture: { type: [{ fileName: String, path: String }] },
-      audio: { type: [{ fileName: String, path: String }] },
-      video: { type: [{ fileName: String, path: String }] },
+      type: [{ fileName: String, path: String }],
     },
     likers: {
       type: [String],

@@ -1,14 +1,31 @@
 const postModel = require("../models/post.model");
 const ent = require("ent");
 const ObjectID = require("mongoose").Types.ObjectId;
-const postServices = require("../services/post.services");
 
 exports.createPost = (req, res) => {
-  const newPost = new postModel({
-    author: ent.encode(req.body.author),
-    pseudo: ent.encode(req.body.pseudo),
-    message: ent.encode(req.body.message),
-  });
+  let pathFile = "";
+  let nameFile = "";
+  const thingObject = req.body;
+  let data = {
+    author: ent.encode(thingObject.author),
+    pseudo: ent.encode(thingObject.pseudo),
+    message: ent.encode(thingObject.message),
+  };
+
+  if (req.file) {
+    pathFile = `../uploads/${req.body.author}/${req.file.filename}`;
+    nameFile = req.file.filename;
+    data = {
+      ...data,
+      media: {
+        fileName: nameFile,
+        path: pathFile,
+      },
+    };
+  }
+
+  const newPost = new postModel(data);
+
   try {
     newPost
       .save()

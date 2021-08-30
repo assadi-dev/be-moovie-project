@@ -34,9 +34,9 @@ const PostCard = ({ data, user }) => {
   const comments = data.comments;
 
   const [commentValue, setCommentValue] = useState({
-    author: "",
-    pseudo: "",
-    postId: "",
+    postId: data._id,
+    author: user.id,
+    pseudo: user.pseudo,
     text: "",
   });
 
@@ -57,7 +57,7 @@ const PostCard = ({ data, user }) => {
       author: user.id,
       pseudo: user.pseudo,
     });
-  }, [commentValue.text, dispatch, toggLeBtn.like]);
+  }, [dispatch, toggLeBtn.like]);
 
   const handleChangeValue = (e) => {
     let name = e.target.name;
@@ -67,12 +67,13 @@ const PostCard = ({ data, user }) => {
 
   const handleSubmitComment = (e) => {
     e.preventDefault();
-    let commentData = {
-      author: commentValue.author,
-      pseudo: commentValue.pseudo,
-      text: commentValue.text,
-    };
-    dispatch(add_comment(data._id, commentData));
+    let data = new FormData();
+
+    data.set("author", commentValue.author);
+    data.set("pseudo", commentValue.pseudo);
+    data.set("text", commentValue.text);
+
+    dispatch(add_comment(data._id, data));
     setCommentValue({ ...commentValue, postId: "", text: "" });
   };
 
@@ -111,11 +112,22 @@ const PostCard = ({ data, user }) => {
       </MDBCardHeader>
       <MDBCardBody>
         <MDBCardText>{decode(data.message)}</MDBCardText>
-        {data.media.picture.length > 0 && (
+        {
           <div className={styles.postMediaContent}>
-            <MDBCardImage src={data.media.picture} alt="post_picture" />
+            {data.media
+              ? data.media.map(
+                  (media, index) =>
+                    media.path !== "" && (
+                      <MDBCardImage
+                        key={index}
+                        src={media.path}
+                        alt={`${data.pseudo}_post_image`}
+                      />
+                    )
+                )
+              : ""}
           </div>
-        )}
+        }
         <div className={styles.postCardBottom}>
           <div className={styles.actionPostbtn}>
             <a

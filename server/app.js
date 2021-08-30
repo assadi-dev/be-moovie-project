@@ -38,11 +38,12 @@ app.use("/api/user/postLike", postLikeRoutes);
 app.use("/api/post", postRoutes);
 app.use("/api/post/comment", postCommentRoutes);
 
-//static page
+//static Folder
 app.use(express.static("client/build"));
-app.use(express.static("server/uploads"));
-app.get("/*", (_, res) => {
+app.use("/public", express.static(path.join(__dirname, "/client/public")));
+app.use("/uploads", express.static(path.join(__dirname, "/uploads")));
+/*app.get("/*", (_, res) => {
   res.sendFile(path.join(__dirname, "./client/build/index.html"));
-});
+});*/
 
 module.exports = app;

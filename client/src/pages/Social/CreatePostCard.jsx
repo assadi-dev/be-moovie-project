@@ -13,15 +13,16 @@ import styles from "./style.module.css";
 import MediaInputBtn from "../../components/mediaIconInput";
 import PreviewPost from "./PreviewPost";
 import { useDispatch } from "react-redux";
-import { create_post } from "../../redux/actions/post.action";
+import { create_post, get_all_post } from "../../redux/actions/post.action";
 
 const CreatePostCard = ({ userData }) => {
   const [postValue, setPostValue] = useState({
     author: "",
     message: "",
     pseudo: "",
-    image: "",
+    picture: "",
   });
+  const [preViewFile, setpreViewFile] = useState("");
 
   const dispatch = useDispatch();
 
@@ -44,8 +45,8 @@ const CreatePostCard = ({ userData }) => {
   /**
    * @return {boolean}  verifie la presence d'un contenue
    */
-  const isCreate = ({ message, image }) => {
-    if (message || image) {
+  const isCreate = ({ message, picture }) => {
+    if (message || picture) {
       return true;
     } else {
       return false;
@@ -57,27 +58,30 @@ const CreatePostCard = ({ userData }) => {
     let file = URL.createObjectURL(e.target.files[0]);
     setPostValue({
       ...postValue,
-      image: file,
+      picture: e.target.files[0],
     });
+    setpreViewFile(file);
   };
 
   const resetPost = () => {
-    setPostValue({ ...postValue, message: "", image: "" });
+    setPostValue({ ...postValue, message: "", picture: "" });
+    setpreViewFile("");
   };
 
   const handleSubmitPost = (e) => {
     e.preventDefault();
-    let data = {
-      author: postValue.author,
-      pseudo: postValue.pseudo,
-      message: postValue.message,
-    };
+    let data = new FormData();
+    data.append("author", postValue.author);
+    data.append("pseudo", postValue.pseudo);
+    data.append("message", postValue.message);
+    data.append("picture", postValue.picture);
 
     if (postValue.message === "") {
       return false;
     }
-    setPostValue({ ...postValue, message: "", image: "" });
+    setPostValue({ ...postValue, message: "", picture: "" });
     dispatch(create_post(data));
+    dispatch(get_all_post());
   };
 
   return (
@@ -107,7 +111,7 @@ const CreatePostCard = ({ userData }) => {
                   </div>
                   <div className={styles.media}>
                     <MediaInputBtn
-                      name="image"
+                      name="picture"
                       icon={<MDBIcon far icon="image" size="2x" />}
                       accept={".jpg,.jpeg,.png,.gif"}
                       onChange={preViewImage}
@@ -117,7 +121,7 @@ const CreatePostCard = ({ userData }) => {
               </div>
             </div>
           </MDBCardBody>
-          {postValue.image && <PreviewPost file={postValue.image} />}
+          {preViewFile && <PreviewPost file={preViewFile} />}
           <MDBCardFooter>
             <div className={styles.rowBtn}>
               {isCreate(postValue) && (
