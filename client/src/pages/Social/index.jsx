@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import PostCard from "../../components/PostCard";
 import { get_all_post } from "../../redux/actions/post.action";
+import { get_all_users } from "../../redux/actions/user.action";
 import Contact from "./Contact";
 import CreatePostCard from "./CreatePostCard";
 import MovieNow from "./MovieNow";
@@ -16,6 +17,7 @@ const Social = () => {
 
   useEffect(() => {
     dispatch(get_all_post());
+    dispatch(get_all_users());
   }, [dispatch, loading, user.isLoading]);
 
   return (

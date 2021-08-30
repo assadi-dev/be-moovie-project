@@ -1,7 +1,10 @@
-import React from "react";
+import { decode } from "ent";
+import React, { useEffect, useState } from "react";
 import styles from "./style.module.css";
 
-const PostTrendingCard = () => {
+const PostTrendingCard = ({ data }) => {
+  useEffect(() => {}, []);
+
   return (
     <div className={styles.trendingCardContainer}>
       <div className={styles.leftCol}>
@@ -11,12 +14,7 @@ const PostTrendingCard = () => {
         />
       </div>
       <div className={styles.rightCol}>
-        <p className={styles.postMessage}>
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Expedita
-          mollitia quo, pariatur velit eum aspernatur dicta perferendis
-          provident cupiditate eligendi ratione exercitationem id natus autem
-          ullam voluptates illum doloremque harum?
-        </p>
+        <p className={styles.postMessage}>{decode(data.message)}</p>
       </div>
     </div>
   );

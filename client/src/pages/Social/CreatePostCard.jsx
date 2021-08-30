@@ -41,6 +41,16 @@ const CreatePostCard = ({ userData }) => {
     let value = e.target.value;
     setPostValue({ ...postValue, [name]: value });
   };
+  /**
+   * @return {boolean}  verifie la presence d'un contenue
+   */
+  const isCreate = ({ message, image }) => {
+    if (message || image) {
+      return true;
+    } else {
+      return false;
+    }
+  };
 
   //Previsualisation des fichiers
   const preViewImage = (e) => {
@@ -110,9 +120,11 @@ const CreatePostCard = ({ userData }) => {
           {postValue.image && <PreviewPost file={postValue.image} />}
           <MDBCardFooter>
             <div className={styles.rowBtn}>
-              <MDBBtn type="button" color="danger" onClick={resetPost}>
-                Annuler la publication
-              </MDBBtn>
+              {isCreate(postValue) && (
+                <MDBBtn type="button" color="danger" onClick={resetPost}>
+                  Annuler la publication
+                </MDBBtn>
+              )}
               <MDBBtn type="submit" color="info">
                 Publier
               </MDBBtn>

@@ -12,13 +12,14 @@ import EditProfile from "./EditProfile";
 import { useSelector, useDispatch } from "react-redux";
 import { getFullDate } from "../../services/times.services";
 import { decode } from "ent";
+import { get_user } from "../../redux/actions/user.action";
 
 const Profil = () => {
   const [fillActive, setFillActive] = useState("tab1");
   const dispatch = useDispatch();
   const userData = useSelector((state) => state.UserReducers);
 
-  useEffect(() => {}, [userData.isLoading]);
+  useEffect(() => {}, [userData.isLoading, dispatch]);
 
   const handleFillClick = (value) => {
     if (value === fillActive) {
@@ -37,7 +38,6 @@ const Profil = () => {
               <img
                 src="https://imgresizer.eurosport.com/unsafe/1200x0/filters:format(webp):focal(1421x431:1423x429)/origin-imgresizer.eurosport.com/2020/12/22/2959891-60753748-2560-1440.jpg"
                 alt="user_avatar"
-                srcset=""
               />
 
               <h5 className={styles.pseudo}>{decode(userData.pseudo)}</h5>
@@ -62,7 +62,7 @@ const Profil = () => {
                 </div>
                 <div className={styles.followItem}>
                   <p>{userData.following.length}</p>
-                  <span>Siuvis</span>
+                  <span>Suivis</span>
                 </div>
                 <div className={styles.followItem}>
                   <p>{userData.followers.length}</p>

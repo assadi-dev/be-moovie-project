@@ -12,7 +12,7 @@ import styles from "./Main/style.module.css";
 import MovieTrendingPresentation from "../components/MovieTrendingPresentation";
 import CarousselGroup from "../components/CarouselGroup";
 import { useDispatch } from "react-redux";
-import { get_user } from "../redux/actions/user.action";
+import { get_all_users, get_user } from "../redux/actions/user.action";
 import { useAuthState } from "../utils/context/AuthContext";
 
 const Main = () => {
@@ -26,6 +26,7 @@ const Main = () => {
 
   useEffect(() => {
     dispatch(get_user(userId));
+    //dispatch(get_all_users());
   }, [userId, dispatch]);
 
   return (

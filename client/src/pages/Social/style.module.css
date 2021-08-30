@@ -37,6 +37,13 @@
     position: relative;
 }
 
+/*** Search Contact ***/
+.searchContactInput {
+    margin-top: 1.5rem;
+    margin-bottom: 1.2rem;
+}
+
+
 .leftSocialCol {}
 
 .following {

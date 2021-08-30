@@ -1,8 +1,28 @@
 import { api } from "../../components/Api";
+export const GET_ALL_USERS = "GET_ALL_USERS";
 export const GET_DATA_USER = "GET_DATA_USER";
 export const EDIT_USER_DATA = "EDIT_USER_DATA";
 export const EDIT_USER_PASSWORD = "EDIT_USER_PASSWORD";
 export const CLEAR_USER = "CLEAR_USER";
+export const FOLLOW_USER = "FOLLOW_USER ";
+export const UNFOLLOW_USER = "UNFOLLOW_USER ";
+
+export const get_all_users = () => {
+  return async (dispatch) => {
+    try {
+      await api
+        .get("/user")
+        .then((res) => {
+          dispatch({ type: GET_ALL_USERS, payload: res.data });
+        })
+        .catch((err) => {
+          throw err;
+        });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+};
 
 export const get_user = (id) => {
   return async (dispatch) => {
@@ -55,5 +75,49 @@ export const clear_user = () => {
     try {
       dispatch({ type: CLEAR_USER });
     } catch (error) {}
+  };
+};
+
+/** Follow- Unfollow **/
+
+/**
+ *
+ * @param {string} id L' ID de l'utilisateur à suivre
+ */
+export const follow_user = (id) => {
+  return async (dispatch) => {
+    try {
+      await api
+        .patch(`/user/follow/${id}`)
+        .then((res) => {
+          dispatch({ type: FOLLOW_USER, payload: res.data });
+        })
+        .catch((err) => {
+          throw err;
+        });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+};
+
+/**
+ *
+ * @param {string} id L' ID de l'utilisateur à retiré de la listes des suivis
+ */
+export const unfollow_user = (id) => {
+  return async (dispatch) => {
+    try {
+      await api
+        .patch(`/user/unfollow/${id}`)
+        .then((res) => {
+          dispatch({ type: UNFOLLOW_USER, payload: res.data });
+        })
+        .catch((err) => {
+          throw err;
+        });
+    } catch (error) {
+      console.log(error);
+    }
   };
 };

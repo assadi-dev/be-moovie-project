@@ -1,7 +1,27 @@
-import React from "react";
+import decode from "ent/decode";
+import React, { useEffect, useState } from "react";
+import { follow_user, unfollow_user } from "../../redux/actions/user.action";
 import styles from "./style.module.css";
+import { useDispatch, useSelector } from "react-redux";
+import { isFollow } from "../../services/Posts.services";
 
-const CardContact = () => {
+const CardContact = ({ data }) => {
+  const dispatch = useDispatch();
+  const userData = useSelector((state) => state.UserReducers);
+  const [followBtn, setFollowBtn] = useState(false);
+
+  useEffect(() => {}, [userData.loading]);
+
+  const handleFollow = () => {
+    if (isFollow(userData.following, data._id)) {
+      setFollowBtn(false);
+      dispatch(unfollow_user(data._id));
+    } else {
+      setFollowBtn(true);
+      dispatch(follow_user(data._id));
+    }
+  };
+
   return (
     <div className={styles.contactCardContainer}>
       <div className={styles.left}>
@@ -9,15 +29,18 @@ const CardContact = () => {
           src="https://www.footpack.fr/wp-content/uploads/2018/04/Nike-Mercurial-R9-Mbappe%CC%81-Dembe%CC%81le%CC%81-6-335x601.jpg"
           alt="contact_avatar"
         />
-        <p className={styles.pseudo}>
-          Lorem ipsum dolor, sit amet consectetur adipisicing elit. Alias
-          impedit exercitationem ad a modi laudantium sit. Quidem, recusandae
-          in. Dolore voluptas atque qui molestias ratione aspernatur, quidem
-          itaque voluptatem modi?
-        </p>
+        <p className={styles.pseudo}>{decode(data.pseudo)}</p>
       </div>
       <div className={styles.bottom}>
-        <span className={styles.unfollowBtn}>Suivre </span>
+        {followBtn ? (
+          <span className={styles.followBtn} onClick={handleFollow}>
+            Abonné
+          </span>
+        ) : (
+          <span className={styles.unfollowBtn} onClick={handleFollow}>
+            Suivre
+          </span>
+        )}
       </div>
     </div>
   );
