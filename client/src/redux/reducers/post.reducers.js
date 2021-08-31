@@ -9,7 +9,6 @@ import {
   LIKE_POST,
   UNLIKE_POST,
 } from "../actions/post.action";
-import { FOLLOW_USER, UNFOLLOW_USER } from "../actions/user.action";
 
 const initialState = {
   collections: [],
@@ -20,52 +19,57 @@ const initialState = {
 const PostReducers = (state = initialState, action) => {
   switch (action.type) {
     case GET_ALL_POST:
-      return { ...state, collections: action.payload, isLoading: false };
+      return { ...state, collections: action.payload };
       break;
     case CREATE_POST:
-      return { ...state, isLoading: true };
+      return { ...state };
       break;
     case EDIT_POST:
-      return { ...state, current: action.payload, isLoading: true };
+      return { ...state, current: action.payload };
       break;
     case DELETE_POST:
-      return { ...state, isLoading: true };
+      return { ...state };
       break;
 
     case ADD_COMMENT:
-      return { ...state, isLoading: true };
+      return { ...state };
       break;
     case EDIT_COMMENT:
-      return { ...state, current: action.payload, isLoading: true };
+      return { ...state, current: action.payload };
       break;
     case DELETE_COMMENT:
-      return { ...state, isLoading: true };
       break;
 
     case LIKE_POST:
-      state.collections.map((post) => {
-        if (post._id === action.payload.postId) {
-          return {
-            ...post,
-            likers: [action.payload.userId, ...post.likers],
-          };
-        }
-        return post;
-      });
-      return { ...state, isLoading: true };
+      return {
+        ...state,
+        collections: state.collections.map((post) => {
+          if (post._id === action.payload.postId) {
+            return {
+              ...post,
+              likers: [action.payload.userId, ...post.likers],
+            };
+          }
+          return post;
+        }),
+      };
+
       break;
     case UNLIKE_POST:
-      state.collections.map((post) => {
-        if (post._id == action.payload.postId) {
-          return {
-            ...post,
-            likers: post.likers.filter(
-              (liker) => liker !== action.payload.userId
-            ),
-          };
-        }
-        return post;
-      });
+      return {
+        ...state,
+        collection: state.collections.map((post) => {
+          if (post._id == action.payload.postId) {
+            return {
+              ...post,
+              likers: post.likers.filter(
+                (liker) => liker !== action.payload.userId
+              ),
+            };
+          }
+          return post;
+        }),
+      };
       break;
 
     default:

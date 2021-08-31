@@ -18,7 +18,7 @@ const Social = () => {
   useEffect(() => {
     dispatch(get_all_post());
     dispatch(get_all_users());
-  }, [loading, user]);
+  }, [user]);
 
   return (
     <main className={styles.socialContainer}>
@@ -40,7 +40,7 @@ const Social = () => {
         <div className={styles.PostContainer}>
           <CreatePostCard userData={user} />
           <div className={styles.postList}>
-            {posts &&
+            {user &&
               posts.map((post, index) => (
                 <PostCard key={index} user={user} data={post} />
               ))}
@@ -51,7 +51,7 @@ const Social = () => {
       <div className={styles.rightSocialCol}>
         <TrendPost />
 
-        {posts && <Contact />}
+        {user && <Contact />}
       </div>
     </main>
   );

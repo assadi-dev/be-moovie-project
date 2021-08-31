@@ -56,7 +56,7 @@ const PostCard = ({ data, user }) => {
     } else {
       setToogleBtn({ ...toggLeBtn, like: false });
     }
-  }, [toggLeBtn.like, commentValue.text]);
+  }, [toggLeBtn.like, commentValue.text, posts]);
 
   const handleChangeValue = (e) => {
     let name = e.target.name;
@@ -138,7 +138,7 @@ const PostCard = ({ data, user }) => {
               )}
 
               <MDBBadge color="danger" notification pill>
-                {data.likers.length}
+                {data.likers.length > 0 && data.likers.length}
               </MDBBadge>
             </a>
           </div>
