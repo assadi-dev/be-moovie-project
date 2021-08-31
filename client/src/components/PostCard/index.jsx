@@ -2,30 +2,20 @@ import React, { useEffect, useState } from "react";
 import {
   MDBCard,
   MDBCardBody,
-  MDBCardTitle,
   MDBCardText,
-  MDBBtn,
   MDBCardImage,
-  MDBCardSubTitle,
   MDBCardHeader,
-  MDBRow,
-  MDBCardLink,
   MDBIcon,
-  MDBBadge,
 } from "mdb-react-ui-kit";
 import styles from "./style.module.css";
 import Comments from "./Comments";
 import { useDispatch, useSelector } from "react-redux";
 import { getFullDateWeek, getTimeMin } from "../../services/times.services";
 import { decode } from "ent";
-import {
-  add_comment,
-  get_all_post,
-  like_post,
-  unlike_post,
-} from "../../redux/actions/post.action";
+import { add_comment } from "../../redux/actions/post.action";
 import classNames from "classnames";
 import { isLiked } from "../../services/Posts.services";
+import LikeBtn from "./LikeBtn";
 
 const PostCard = ({ data, user }) => {
   const dispatch = useDispatch();
@@ -40,8 +30,7 @@ const PostCard = ({ data, user }) => {
     text: "",
   });
 
-  const [toggLeBtn, setToogleBtn] = useState({ like: false, comment: false });
-  const [totalikers, setTotalikers] = useState(0);
+  const [commentBtn, setCommentBtn] = useState(false);
 
   useEffect(() => {
     setCommentValue({
@@ -50,13 +39,7 @@ const PostCard = ({ data, user }) => {
       author: user.id,
       pseudo: user.pseudo,
     });
-
-    if (data.likers.includes(user.id)) {
-      setToogleBtn({ ...toggLeBtn, like: true });
-    } else {
-      setToogleBtn({ ...toggLeBtn, like: false });
-    }
-  }, [toggLeBtn.like, commentValue.text, posts]);
+  }, [commentValue.text]);
 
   const handleChangeValue = (e) => {
     let name = e.target.name;
@@ -74,16 +57,6 @@ const PostCard = ({ data, user }) => {
 
     dispatch(add_comment(commentValue.postId, data));
     setCommentValue({ ...commentValue, postId: "", text: "" });
-  };
-
-  const handleLike = () => {
-    dispatch(like_post(data._id));
-    setToogleBtn({ ...toggLeBtn, like: true });
-  };
-
-  const handleUnleLike = () => {
-    dispatch(unlike_post(data._id));
-    setToogleBtn({ ...toggLeBtn, like: false });
   };
 
   return (
@@ -127,20 +100,7 @@ const PostCard = ({ data, user }) => {
         }
         <div className={styles.postCardBottom}>
           <div className={styles.actionPostbtn}>
-            <a
-              className={classNames(styles.actionBtn, styles.likesBtn)}
-              href="#!"
-            >
-              {toggLeBtn.like ? (
-                <MDBIcon fas icon="heart" onClick={handleUnleLike} />
-              ) : (
-                <MDBIcon far icon="heart" onClick={handleLike} />
-              )}
-
-              <MDBBadge color="danger" notification pill>
-                {data.likers.length > 0 && data.likers.length}
-              </MDBBadge>
-            </a>
+            <LikeBtn postId={data._id} likers={data.likers} userId={user.id} />
           </div>
           <div className={styles.actionPostbtn}>
             <a href className={classNames(styles.actionBtn, styles.likesBtn)}>

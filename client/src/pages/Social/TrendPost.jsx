@@ -18,7 +18,7 @@ const TrendPost = () => {
   useEffect(() => {
     let posts = postMostLiked(allPosts.collections);
     setPosts(posts);
-  }, [posts]);
+  }, []);
 
   return (
     <>
