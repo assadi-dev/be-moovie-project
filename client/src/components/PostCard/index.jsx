@@ -42,22 +42,21 @@ const PostCard = ({ data, user }) => {
 
   const [toggLeBtn, setToogleBtn] = useState({ like: false, comment: false });
   const [totalikers, setTotalikers] = useState(0);
-  const getTotaLikes = () => {
-    const datalike = posts.filter((post) => post._id === data._id)[0].likers;
-    setTotalikers(datalike);
-  };
 
   useEffect(() => {
-    dispatch(get_all_post());
-    getTotaLikes();
-
     setCommentValue({
       ...commentValue,
       postId: data._id,
       author: user.id,
       pseudo: user.pseudo,
     });
-  }, [dispatch, toggLeBtn.like]);
+
+    if (data.likers.includes(user.id)) {
+      setToogleBtn({ ...toggLeBtn, like: true });
+    } else {
+      setToogleBtn({ ...toggLeBtn, like: false });
+    }
+  }, [toggLeBtn.like, commentValue.text]);
 
   const handleChangeValue = (e) => {
     let name = e.target.name;
@@ -67,26 +66,24 @@ const PostCard = ({ data, user }) => {
 
   const handleSubmitComment = (e) => {
     e.preventDefault();
-    let data = new FormData();
+    let data = {
+      author: commentValue.author,
+      pseudo: commentValue.pseudo,
+      text: commentValue.text,
+    };
 
-    data.set("author", commentValue.author);
-    data.set("pseudo", commentValue.pseudo);
-    data.set("text", commentValue.text);
-
-    dispatch(add_comment(data._id, data));
+    dispatch(add_comment(commentValue.postId, data));
     setCommentValue({ ...commentValue, postId: "", text: "" });
   };
 
-  const handleLikebtn = () => {
-    if (isLiked(user.postLikes, data._id)) {
-      dispatch(unlike_post(data._id));
-      let remove = totalikers.filter((likers) => !likers.includes(user.id));
-      setTotalikers(remove);
-    } else {
-      dispatch(like_post(data._id));
-      let add = [...totalikers, user.id];
-      setTotalikers(add);
-    }
+  const handleLike = () => {
+    dispatch(like_post(data._id));
+    setToogleBtn({ ...toggLeBtn, like: true });
+  };
+
+  const handleUnleLike = () => {
+    dispatch(unlike_post(data._id));
+    setToogleBtn({ ...toggLeBtn, like: false });
   };
 
   return (
@@ -133,16 +130,15 @@ const PostCard = ({ data, user }) => {
             <a
               className={classNames(styles.actionBtn, styles.likesBtn)}
               href="#!"
-              onClick={handleLikebtn}
             >
-              {isLiked(user.postLikes, data._id) ? (
-                <MDBIcon fas icon="heart" />
+              {toggLeBtn.like ? (
+                <MDBIcon fas icon="heart" onClick={handleUnleLike} />
               ) : (
-                <MDBIcon far icon="heart" />
+                <MDBIcon far icon="heart" onClick={handleLike} />
               )}
 
               <MDBBadge color="danger" notification pill>
-                {totalikers.length > 0 && totalikers.length}
+                {data.likers.length}
               </MDBBadge>
             </a>
           </div>

@@ -119,7 +119,10 @@ export const like_post = (id) => {
       await api
         .patch(`/user/postLike/add/${id}`)
         .then((res) => {
-          dispatch({ type: LIKE_POST, payload: res.data });
+          dispatch({
+            type: LIKE_POST,
+            payload: { postId: id, userId: res.data._id },
+          });
         })
         .catch((err) => {
           throw err;
@@ -141,7 +144,10 @@ export const unlike_post = (id) => {
       await api
         .patch(`/user/postLike/remove/${id}`)
         .then((res) => {
-          dispatch({ type: UNLIKE_POST, payload: res.data });
+          dispatch({
+            type: UNLIKE_POST,
+            payload: { postId: id, userId: res.data._id },
+          });
         })
         .catch((err) => {
           throw err;

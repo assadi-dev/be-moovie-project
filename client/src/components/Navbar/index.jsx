@@ -52,7 +52,7 @@ const Navbar = () => {
     return () => {
       window.removeEventListener("scroll", handleScroll);
     };
-  }, [userId, dispatchRed, dispatch, selector.isLoading]);
+  }, [userId, dispatchRed, dispatch, selector.pseudo]);
 
   return (
     <>

@@ -43,10 +43,29 @@ const PostReducers = (state = initialState, action) => {
       break;
 
     case LIKE_POST:
+      state.collections.map((post) => {
+        if (post._id === action.payload.postId) {
+          return {
+            ...post,
+            likers: [action.payload.userId, ...post.likers],
+          };
+        }
+        return post;
+      });
       return { ...state, isLoading: true };
       break;
     case UNLIKE_POST:
-      return { ...state, isLoading: true };
+      state.collections.map((post) => {
+        if (post._id == action.payload.postId) {
+          return {
+            ...post,
+            likers: post.likers.filter(
+              (liker) => liker !== action.payload.userId
+            ),
+          };
+        }
+        return post;
+      });
       break;
 
     default:

@@ -18,7 +18,7 @@ const Social = () => {
   useEffect(() => {
     dispatch(get_all_post());
     dispatch(get_all_users());
-  }, [dispatch]);
+  }, [loading, user]);
 
   return (
     <main className={styles.socialContainer}>

@@ -38,12 +38,16 @@ const checkIfTokenExpired = ({ token }) => {
 };
 
 const refreshAuthAsync = async ({ refreshToken }) => {
-  const result = await api.post("/auth/refreshToken", {
-    refresh_token: refreshToken,
-  });
-  console.log("token refresh");
-  setCookiesAuth(JSON.stringify(result.data));
-  return result.data;
+  try {
+    const result = await api.post("/auth/refreshToken", {
+      refresh_token: refreshToken,
+    });
+    console.log("token refresh");
+    setCookiesAuth(JSON.stringify(result.data));
+    return result.data;
+  } catch (error) {
+    await Cookies.remove(StorageKey);
+  }
 };
 
 export const checkToken = () => {

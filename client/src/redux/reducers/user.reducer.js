@@ -61,35 +61,31 @@ const UserReducers = (state = initialState, action) => {
         avatar: action.payload.avatar,
         email: action.payload.email,
         presentation: action.payload.presentation,
-        isLoading: true,
       };
       break;
     case LIKE_POST:
       return {
         ...state,
-        postLikes: action.payload.postLikes,
-        isLoading: true,
+        postLikes: [...state.postLikes, action.payload.postId],
       };
       break;
     case UNLIKE_POST:
       return {
         ...state,
-        postLikes: action.payload.postLikes,
-        isLoading: true,
+        postLikes: [
+          state.postLikes.filter((liker) => liker !== action.payload.postId),
+        ],
       };
     case FOLLOW_USER:
       return {
         ...state,
         following: action.payload.following,
-        isLoading: true,
       };
       break;
     case UNFOLLOW_USER:
       return {
         ...state,
         following: action.payload.following,
-
-        isLoading: true,
       };
       break;
     case CLEAR_USER:
