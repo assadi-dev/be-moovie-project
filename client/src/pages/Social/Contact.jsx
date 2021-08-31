@@ -17,11 +17,13 @@ const Contact = () => {
   const usersId = useSelector((state) => state.UserReducers.id);
   const [userUnfollow, setUserUnfollow] = useState([]);
   const [serchContact, setSearchContact] = useState("");
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
+    setLoading(users.isLoading);
     let getunFollowList = getUserUnFollow(usersId, users.collections);
     setUserUnfollow(getunFollowList);
-  }, [dispatch]);
+  }, [serchContact, loading]);
 
   const handleSearchContact = (e) => {
     let value = e.target.value;
@@ -43,15 +45,16 @@ const Contact = () => {
             />
           </div>
           <div>
-            {userUnfollow
-              .filter((contact) => {
-                return contact.pseudo
-                  .toLowerCase()
-                  .includes(serchContact.toLowerCase());
-              })
-              .map((user, index) => (
-                <CardContact key={index} userId={usersId} data={user} />
-              ))}
+            {!loading &&
+              userUnfollow
+                .filter((contact) => {
+                  return contact.pseudo
+                    .toLowerCase()
+                    .includes(serchContact.toLowerCase());
+                })
+                .map((user, index) => (
+                  <CardContact key={index} userId={usersId} data={user} />
+                ))}
           </div>
         </MDBCardBody>
       </MDBCard>

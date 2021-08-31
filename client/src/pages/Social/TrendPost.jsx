@@ -14,11 +14,13 @@ const TrendPost = () => {
   const dispatch = useDispatch();
   const allPosts = useSelector((state) => state.PostReducers);
   const [posts, setPosts] = useState([]);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
+    setLoading(false);
     let posts = postMostLiked(allPosts.collections);
     setPosts(posts);
-  }, []);
+  }, [loading]);
 
   return (
     <>
@@ -26,9 +28,10 @@ const TrendPost = () => {
         <MDBCardBody>
           <MDBCardTitle>Les + aimes</MDBCardTitle>
           <div className={styles.trendContainer}>
-            {posts.map((post, index) => (
-              <PostTrendingCard key={index} data={post} />
-            ))}
+            {!loading &&
+              posts.map((post, index) => (
+                <PostTrendingCard key={index} data={post} />
+              ))}
           </div>
         </MDBCardBody>
       </MDBCard>

@@ -10,16 +10,22 @@ const CardContact = ({ data }) => {
   const userData = useSelector((state) => state.UserReducers);
   const [followBtn, setFollowBtn] = useState(false);
 
-  useEffect(() => {}, [dispatch]);
+  useEffect(() => {
+    if (isFollow(userData.following, data._id)) {
+      setFollowBtn(true);
+    } else {
+      setFollowBtn(false);
+    }
+  }, []);
 
   const handleFollow = () => {
-    if (isFollow(userData.following, data._id)) {
-      setFollowBtn(false);
-      dispatch(unfollow_user(data._id));
-    } else {
-      setFollowBtn(true);
-      dispatch(follow_user(data._id));
-    }
+    setFollowBtn(true);
+    dispatch(follow_user(data._id));
+  };
+
+  const handleUnFollow = () => {
+    setFollowBtn(false);
+    dispatch(unfollow_user(data._id));
   };
 
   return (
@@ -33,7 +39,7 @@ const CardContact = ({ data }) => {
       </div>
       <div className={styles.bottom}>
         {followBtn ? (
-          <span className={styles.followBtn} onClick={handleFollow}>
+          <span className={styles.followBtn} onClick={handleUnFollow}>
             Abonné
           </span>
         ) : (

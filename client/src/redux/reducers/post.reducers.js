@@ -19,7 +19,7 @@ const initialState = {
 const PostReducers = (state = initialState, action) => {
   switch (action.type) {
     case GET_ALL_POST:
-      return { ...state, collections: action.payload };
+      return { ...state, collections: action.payload, isLoading: false };
       break;
     case CREATE_POST:
       return { ...state };
@@ -32,7 +32,17 @@ const PostReducers = (state = initialState, action) => {
       break;
 
     case ADD_COMMENT:
-      return { ...state };
+      return {
+        ...state,
+
+        collections: state.collections.map((post) => {
+          if (post._id === action.payload._id) {
+            return { ...post, comments: action.payload.comments };
+          }
+          return post;
+        }),
+        isLoading: true,
+      };
       break;
     case EDIT_COMMENT:
       return { ...state, current: action.payload };

@@ -1,4 +1,3 @@
-import React from "react";
 import styles from "./style.module.css";
 import { getFullDate, getTimeMin } from "../../services/times.services";
 import { decode } from "ent";

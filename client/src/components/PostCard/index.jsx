@@ -8,57 +8,13 @@ import {
   MDBIcon,
 } from "mdb-react-ui-kit";
 import styles from "./style.module.css";
-import Comments from "./Comments";
-import { useDispatch, useSelector } from "react-redux";
 import { getFullDateWeek, getTimeMin } from "../../services/times.services";
 import { decode } from "ent";
-import { add_comment } from "../../redux/actions/post.action";
 import classNames from "classnames";
-import { isLiked } from "../../services/Posts.services";
 import LikeBtn from "./LikeBtn";
+import CommentsLists from "./CommentsLists";
 
 const PostCard = ({ data, user }) => {
-  const dispatch = useDispatch();
-  const loadingPost = useSelector((state) => state.PostReducers.isLoading);
-  const posts = useSelector((state) => state.PostReducers.collections);
-  const comments = data.comments;
-
-  const [commentValue, setCommentValue] = useState({
-    postId: data._id,
-    author: user.id,
-    pseudo: user.pseudo,
-    text: "",
-  });
-
-  const [commentBtn, setCommentBtn] = useState(false);
-
-  useEffect(() => {
-    setCommentValue({
-      ...commentValue,
-      postId: data._id,
-      author: user.id,
-      pseudo: user.pseudo,
-    });
-  }, [commentValue.text]);
-
-  const handleChangeValue = (e) => {
-    let name = e.target.name;
-    let value = e.target.value;
-    setCommentValue({ ...commentValue, [name]: value });
-  };
-
-  const handleSubmitComment = (e) => {
-    e.preventDefault();
-    let data = {
-      author: commentValue.author,
-      pseudo: commentValue.pseudo,
-      text: commentValue.text,
-    };
-
-    dispatch(add_comment(commentValue.postId, data));
-    setCommentValue({ ...commentValue, postId: "", text: "" });
-  };
-
   return (
     <MDBCard className="w-100 my-2">
       <MDBCardHeader className="border-bottom-0">
@@ -109,29 +65,8 @@ const PostCard = ({ data, user }) => {
           </div>
         </div>
         <div className={styles.sendCommentZone}>
-          <form onSubmit={handleSubmitComment}>
-            <div className={styles.commentSend}>
-              <textarea
-                id="text"
-                name="text"
-                placeholder="Laisser un commentaire"
-                rows="1"
-                onChange={handleChangeValue}
-                value={commentValue.text}
-              ></textarea>
-              <button className={styles.commentBtn}>
-                <MDBIcon far icon="paper-plane" size="lg" />
-              </button>
-            </div>
-          </form>
+          <CommentsLists post={data} user={user} />
         </div>
-        {comments
-          .sort((a, b) => {
-            return b.createdAt > a.createdAt;
-          })
-          .map((comment, index) => (
-            <Comments key={index} data={comment} />
-          ))}
       </MDBCardBody>
     </MDBCard>
   );
