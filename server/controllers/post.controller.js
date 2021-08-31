@@ -31,6 +31,7 @@ exports.createPost = (req, res) => {
       .save()
       .then((post) => {
         res.status(201).json(post);
+        this.message = "new post created";
       })
       .catch((error) => {
         res.status(500).json(error);
@@ -102,3 +103,5 @@ exports.deletPost = async (req, res) => {
     )
     .catch((err) => res.status(500).json(err));
 };
+
+exports.message = "";

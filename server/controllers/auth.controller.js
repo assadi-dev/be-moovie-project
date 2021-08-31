@@ -67,6 +67,7 @@ exports.signup = (req, res) => {
             httpOnly: true,
             maxAge: 7 * 24 * 60 * 60 * 1000,
           }); */
+          this.message = "pk";
           setRefreshToken(refreshToken, user._id);
           res.status(200).json({ token: token, refreshToken: refreshToken });
         })
@@ -76,3 +77,5 @@ exports.signup = (req, res) => {
     })
     .catch((error) => res.status(500).json({ error }));
 };
+
+exports.message = "";

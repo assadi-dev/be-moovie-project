@@ -1,5 +1,6 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { io } from "socket.io-client";
 import PostCard from "../../components/PostCard";
 import { get_all_post } from "../../redux/actions/post.action";
 import { get_all_users } from "../../redux/actions/user.action";
@@ -18,7 +19,16 @@ const Social = () => {
   useEffect(() => {
     dispatch(get_all_post());
     dispatch(get_all_users());
-  }, [user]);
+    const socket = io(`http://${window.location.hostname}:6500`);
+
+    socket.on("post", (res) => {
+      if (res) {
+        dispatch(get_all_post());
+      }
+      alert(res);
+    });
+    return () => socket.close();
+  }, []);
 
   return (
     <main className={styles.socialContainer}>

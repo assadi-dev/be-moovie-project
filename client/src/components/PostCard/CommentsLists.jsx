@@ -4,6 +4,7 @@ import styles from "./style.module.css";
 import { add_comment, get_all_post } from "../../redux/actions/post.action";
 import Comments from "./Comments";
 import { MDBIcon } from "mdb-react-ui-kit";
+import { io } from "socket.io-client";
 
 const CommentsLists = ({ post, user }) => {
   const [showComments, setShowComment] = useState(false);

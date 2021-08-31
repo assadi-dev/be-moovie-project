@@ -14,6 +14,7 @@ import MediaInputBtn from "../../components/mediaIconInput";
 import PreviewPost from "./PreviewPost";
 import { useDispatch } from "react-redux";
 import { create_post, get_all_post } from "../../redux/actions/post.action";
+import { io } from "socket.io-client";
 
 const CreatePostCard = ({ userData }) => {
   const [postValue, setPostValue] = useState({
@@ -35,7 +36,12 @@ const CreatePostCard = ({ userData }) => {
       });
     };
     iniUser();
-  }, [postValue.message, postValue.image, dispatch]);
+
+    const socket = io(`http://${window.location.hostname}:6500`);
+    socket.emit("postCreated");
+
+    return () => socket.close();
+  }, []);
 
   const handleChangeValue = (e) => {
     let name = e.target.name;

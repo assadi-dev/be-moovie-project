@@ -14,18 +14,29 @@ import CarousselGroup from "../components/CarouselGroup";
 import { useDispatch } from "react-redux";
 import { get_all_users, get_user } from "../redux/actions/user.action";
 import { useAuthState } from "../utils/context/AuthContext";
-
+import { io } from "socket.io-client";
+import { useHistory } from "react-router";
 const Main = () => {
   const sectionList = [
     { name: "Films Populaires", data: [] },
     { name: "Films à venir", data: [] },
   ];
 
+  const history = useHistory();
   const userId = useAuthState().userId;
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(get_user(userId));
+    const socket = io(`http://${window.location.hostname}:6500`);
+    socket.on("logged", (res) => {
+      if (res) {
+        dispatch(get_user(userId));
+        console.log(res);
+      } else {
+        history.push("/login");
+      }
+    });
+    return () => socket.close();
     //dispatch(get_all_users());
   }, [userId, dispatch]);
 
