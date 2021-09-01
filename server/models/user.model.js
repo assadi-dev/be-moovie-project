@@ -52,12 +52,20 @@ const userSchema = mongoose.Schema(
       type: [String],
     },
     movies: {
-      favoris: { type: [String] },
-      likes: { type: [String] },
+      type: [String],
     },
     series: {
-      favoris: { type: [String] },
-      likes: { type: [String] },
+      type: [String],
+    },
+    notification: {
+      type: [
+        {
+          author: String,
+          nature: String,
+          read: { type: Boolean, default: false },
+          createdAt: Date,
+        },
+      ],
     },
   },
   {

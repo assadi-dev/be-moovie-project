@@ -31,7 +31,7 @@ const Main = () => {
     socket.on("logged", (res) => {
       if (res) {
         dispatch(get_user(userId));
-        console.log(res);
+        alert(res);
       } else {
         history.push("/login");
       }

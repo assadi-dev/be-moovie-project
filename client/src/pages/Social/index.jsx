@@ -20,12 +20,12 @@ const Social = () => {
     dispatch(get_all_post());
     dispatch(get_all_users());
     const socket = io(`http://${window.location.hostname}:6500`);
+    socket.emit("logged", user.pseudo);
 
     socket.on("post", (res) => {
       if (res) {
         dispatch(get_all_post());
       }
-      alert(res);
     });
     return () => socket.close();
   }, []);
