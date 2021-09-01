@@ -57,7 +57,7 @@ const userSchema = mongoose.Schema(
     series: {
       type: [String],
     },
-    notification: {
+    notifications: {
       type: [
         {
           author: String,

@@ -48,8 +48,12 @@
 }
 
 .navColRight span {
-    font-weight: bold;
+
     margin-right: 0.8rem;
+}
+
+.userPseudo {
+    font-weight: bold;
 }
 
 .navColLeft {
@@ -106,4 +110,83 @@
     -moz-transform: scale(1.2);
     -ms-transform: scale(1.2);
     -o-transform: scale(1.2);
+}
+
+.iconNotifContainer {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    margin-left: 0.8rem;
+    margin-right: 0.8rem;
+    width: 60px;
+}
+
+.iconNotif {
+    font-size: 1.2rem;
+    margin-top: auto;
+    margin-bottom: auto;
+    vertical-align: middle;
+    cursor: pointer;
+
+}
+
+.iconNotif:hover {
+    color: #F93154;
+}
+
+.DropDownNotif {
+    position: absolute;
+    width: 22rem;
+    background-color: #fff;
+    top: 100%;
+    border-radius: 12px;
+    -webkit-border-radius: 12px;
+    -moz-border-radius: 12px;
+    -ms-border-radius: 12px;
+    -o-border-radius: 12px;
+}
+
+.listContainer {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    width: 100%;
+    color: #262626;
+}
+
+.listItems {
+    padding: 12px 8px;
+    display: flex;
+    align-content: center;
+
+}
+
+.listItems:not(:last-child) {
+    border-bottom: 1px solid #262626;
+}
+
+.author {
+    font-weight: bold;
+}
+
+.message {
+
+    font-weight: 18rem;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+.avatar {
+    width: 40px;
+    height: 40px;
+    background-color: #393939;
+    border-radius: 12px;
+    -webkit-border-radius: 12px;
+    -moz-border-radius: 12px;
+    -ms-border-radius: 12px;
+    -o-border-radius: 12px;
+    margin-right: 0.8rem;
 }
