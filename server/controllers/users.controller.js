@@ -5,8 +5,6 @@ const { isValidObjectId } = require("mongoose");
 const userServices = require("../services/user.services");
 const dayjs = require("dayjs");
 
-//ent.decode(var)
-
 class UserController {
   getAllUser = (req, res) => {
     userModel
@@ -204,6 +202,7 @@ class UserController {
       console.log(error);
     }
   };
+
   deleteNotification = async (req, res) => {
     const { idNotification } = req.body;
     const { id } = req.params;
@@ -239,19 +238,16 @@ class UserController {
       if (!isValidObjectId(id)) {
         throw "ID invalid";
       }
-      userModel.findByIdAndUpdate(
-        id,
-        {
-          $pullAll: {
-            notification: [],
-          },
-        },
-        { new: true },
-        (err, doc) => {
-          if (err) throw err;
+      userModel.findById(id, (err, doc) => {
+        doc.notification = [];
+
+        return doc.save((err) => {
+          if (err) {
+            throw "Error :" + err;
+          }
           res.status(200).json(doc);
-        }
-      );
+        });
+      });
     } catch (error) {
       console.log(error);
     }
