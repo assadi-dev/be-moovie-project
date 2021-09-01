@@ -88,7 +88,6 @@ const CreatePostCard = ({ userData }) => {
     setPostValue({ ...postValue, message: "", picture: "" });
     setpreViewFile("");
     dispatch(create_post(data));
-    dispatch(get_all_post());
   };
 
   return (

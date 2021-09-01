@@ -22,7 +22,7 @@ const PostReducers = (state = initialState, action) => {
       return { ...state, collections: action.payload, isLoading: false };
       break;
     case CREATE_POST:
-      return { ...state };
+      return { ...state, collections: [action.payload, ...state.collections] };
       break;
     case EDIT_POST:
       return { ...state, current: action.payload };
@@ -41,7 +41,6 @@ const PostReducers = (state = initialState, action) => {
           }
           return post;
         }),
-        isLoading: true,
       };
       break;
     case EDIT_COMMENT:
@@ -68,13 +67,11 @@ const PostReducers = (state = initialState, action) => {
     case UNLIKE_POST:
       return {
         ...state,
-        collection: state.collections.map((post) => {
-          if (post._id == action.payload.postId) {
+        collections: state.collections.map((post) => {
+          if (post._id === action.payload.postId) {
             return {
               ...post,
-              likers: post.likers.filter(
-                (liker) => liker !== action.payload.userId
-              ),
+              likers: post.likers.filter((id) => id !== action.payload.userId),
             };
           }
           return post;

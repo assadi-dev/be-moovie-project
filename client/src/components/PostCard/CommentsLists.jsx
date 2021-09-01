@@ -10,6 +10,7 @@ const CommentsLists = ({ post, user }) => {
   const [showComments, setShowComment] = useState(false);
   const dispatch = useDispatch();
   const loadingPost = useSelector((state) => state.PostReducers.isLoading);
+  const posts = useSelector((state) => state.PostReducers.collections);
   const [comments, setComments] = useState([]);
 
   const [commentValue, setCommentValue] = useState({
@@ -20,14 +21,13 @@ const CommentsLists = ({ post, user }) => {
   });
 
   useEffect(() => {
-    setComments(post.comments);
     setCommentValue({
       ...commentValue,
       postId: post._id,
       author: user.id,
       pseudo: user.pseudo,
     });
-  }, [commentValue.text, loadingPost]);
+  }, [posts]);
 
   const handleChangeValue = (e) => {
     let name = e.target.name;
@@ -47,7 +47,6 @@ const CommentsLists = ({ post, user }) => {
     };
     setCommentValue({ ...commentValue, postId: "", text: "" });
     dispatch(add_comment(commentValue.postId, data));
-    dispatch(get_all_post());
   };
 
   return (
@@ -68,8 +67,9 @@ const CommentsLists = ({ post, user }) => {
           </button>
         </div>
       </form>
-      {comments
-        .sort((a, b) => {
+      {posts
+        .filter((postItem) => postItem._id === post._id)[0]
+        .comments.sort((a, b) => {
           return b.createdAt > a.createdAt;
         })
         .map((comment, index) => (
