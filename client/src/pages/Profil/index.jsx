@@ -40,7 +40,9 @@ const Profil = () => {
                 alt="user_avatar"
               />
 
-              <h5 className={styles.pseudo}>{decode(userData.pseudo)}</h5>
+              <h5 className={styles.pseudo}>
+                {userData.pseudo && decode(userData.pseudo)}
+              </h5>
               {userData.presentation && (
                 <p className={styles.userPresentation}>
                   {decode(userData.presentation)}

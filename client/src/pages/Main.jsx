@@ -27,17 +27,8 @@ const Main = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    const socket = io(`http://${window.location.hostname}:6500`);
-    socket.on("logged", (res) => {
-      if (res) {
-        dispatch(get_user(userId));
-        alert(res);
-      } else {
-        history.push("/login");
-      }
-    });
-    return () => socket.close();
-    //dispatch(get_all_users());
+    dispatch(get_user(userId));
+    dispatch(get_all_users());
   }, [userId, dispatch]);
 
   return (
