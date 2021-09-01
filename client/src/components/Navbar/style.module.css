@@ -156,10 +156,14 @@
 }
 
 .listItems {
-    padding: 12px 8px;
+    padding: 18px 8px;
     display: flex;
     align-content: center;
 
+}
+
+.listItems:hover {
+    background-color: rgba(0, 0, 0, 0.05);
 }
 
 .listItems:not(:last-child) {
@@ -189,4 +193,8 @@
     -ms-border-radius: 12px;
     -o-border-radius: 12px;
     margin-right: 0.8rem;
+}
+
+.read {
+    color: rgba(0, 0, 0, 0.5)
 }

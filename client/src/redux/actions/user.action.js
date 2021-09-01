@@ -6,6 +6,10 @@ export const EDIT_USER_PASSWORD = "EDIT_USER_PASSWORD";
 export const CLEAR_USER = "CLEAR_USER";
 export const FOLLOW_USER = "FOLLOW_USER ";
 export const UNFOLLOW_USER = "UNFOLLOW_USER ";
+export const GET_NOTIFICATION = "GET_NOTIFICATION";
+export const UPDATE_NOTIFICATION = "UPDATE_NOTIFICATION";
+export const DELETE_NOTIFICATION = "UPDATE_NOTIFICATION";
+export const DELETE_ALL_NOTIFICATION = "UPDATE_NOTIFICATION";
 
 export const get_all_users = () => {
   return async (dispatch) => {
@@ -116,6 +120,46 @@ export const unfollow_user = (id) => {
         .catch((err) => {
           throw err;
         });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+};
+
+/*** Notifications ***/
+
+export const get_notification = () => {
+  return async (dispatch) => {
+    let data = [
+      {
+        id: 5,
+        author: "salima@dd",
+        action: "create post",
+        source: "125459erz",
+        read: false,
+        createdAt: new Date(),
+      },
+      {
+        id: 12,
+        author: "bogossdu92",
+        action: "create post",
+        source: "125459erz",
+        read: false,
+        createdAt: new Date(),
+      },
+    ];
+    try {
+      dispatch({ type: GET_NOTIFICATION, payload: data });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+};
+
+export const update_notification = (idNotification) => {
+  return async (dispatch) => {
+    try {
+      dispatch({ type: UPDATE_NOTIFICATION, payload: idNotification });
     } catch (error) {
       console.log(error);
     }

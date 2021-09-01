@@ -61,7 +61,8 @@ const userSchema = mongoose.Schema(
       type: [
         {
           author: String,
-          nature: String,
+          action: String,
+          source: String,
           read: { type: Boolean, default: false },
           createdAt: Date,
         },
