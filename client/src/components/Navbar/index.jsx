@@ -104,20 +104,12 @@ const Navbar = () => {
                     </NavLink>
                   </li>
                   <li>
-                    <NavLink
-                      activeClassName="active"
-                      className={styles.navColLinkItem}
-                      to="/profil"
-                    >
+                    <NavLink className={styles.navColLinkItem} to="/profil">
                       Mon Profil
                     </NavLink>
                   </li>
                   <li>
-                    <NavLink
-                      activeClassName="active"
-                      className={styles.navColLinkItem}
-                      to="/list/"
-                    >
+                    <NavLink className={styles.navColLinkItem} to="/list/">
                       Mes Favoris
                     </NavLink>
                   </li>

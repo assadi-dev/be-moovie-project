@@ -4,13 +4,36 @@ import routes from "./config/routes";
 import { AuthProvider } from "./utils/context/AuthContext";
 import Navbar from "./components/Navbar";
 import ThemeColor from "./components/ThemColor";
+import TabBar from "./components/TabBar";
+import { useEffect, useState } from "react";
 
 const App = () => {
+  const [state, setState] = useState({
+    smallScreen: false,
+  });
+
+  const handleMediaQueryChange = (mediaQuery) => {
+    if (mediaQuery.matches) {
+      setState({ ...state, smallScreen: true });
+    } else {
+      setState({ ...state, smallScreen: false });
+    }
+  };
+
+  useEffect(() => {
+    const mediaQuery = window.matchMedia("(max-width:550px)");
+    mediaQuery.addListener(handleMediaQueryChange);
+    handleMediaQueryChange(mediaQuery);
+    return () => {
+      mediaQuery.removeListener(handleMediaQueryChange);
+    };
+  }, []);
+
   return (
     <AuthProvider>
       <ThemeColor>
         <Router>
-          <Navbar />
+          {!state.smallScreen && <Navbar />}
           <Switch>
             {routes.map((route) => (
               <AppRoutes
@@ -22,6 +45,7 @@ const App = () => {
               />
             ))}
           </Switch>
+          {state.smallScreen && <TabBar />}
         </Router>
       </ThemeColor>
     </AuthProvider>
