@@ -84,6 +84,7 @@ const Profil = () => {
             <MDBTabs fill className="mb-3">
               <MDBTabsItem>
                 <MDBTabsLink
+                  href="#!"
                   onClick={() => handleFillClick("tab1")}
                   active={fillActive === "tab1"}
                 >
@@ -92,6 +93,7 @@ const Profil = () => {
               </MDBTabsItem>
               <MDBTabsItem>
                 <MDBTabsLink
+                  href="#!"
                   onClick={() => handleFillClick("tab2")}
                   active={fillActive === "tab2"}
                 >

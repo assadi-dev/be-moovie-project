@@ -110,6 +110,7 @@
     -moz-border-radius: 10px;
     -ms-border-radius: 10px;
     -o-border-radius: 10px;
+    padding: 12px;
 }
 
 .postInputCreate textarea {
@@ -119,6 +120,8 @@
     color: #fff;
     border: none;
     resize: none;
+    padding-top: 8px;
+    padding-bottom: 8px;
 }
 
 
@@ -172,4 +175,81 @@
 
 .trendContainer {
     margin-top: 1rem;
+}
+
+
+/** Media Queries **/
+
+@media screen and (max-width:1200px) {
+    .avatarCol {
+        margin-right: 1.2rem;
+
+    }
+
+    .mainSocialCol {
+        padding-left: 0;
+        padding-right: 0;
+    }
+
+
+}
+
+
+@media screen and (max-width:780px) {
+
+    .leftSocialCol,
+    .rightSocialCol {
+        display: none;
+    }
+
+    .socialContainer {
+        display: block;
+        max-width: 560px;
+    }
+
+    .mainSocialCol {
+        padding-left: 1rem;
+        padding-right: 1rem;
+        margin-top: 5rem;
+
+    }
+
+}
+
+
+
+@media screen and (max-width:550px) {
+
+    .socialContainer {
+        max-width: 95%;
+    }
+
+    .leftSocialCol,
+    .rightSocialCol {
+        display: none;
+    }
+
+
+    .mainSocialCol {
+        margin-top: 1rem;
+    }
+
+    .rowPostInput {
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .avatarCol {
+        margin-bottom: 1rem;
+    }
+
+    .postInputCreate textarea {
+        padding-top: 10px;
+        padding-bottom: 10px;
+    }
+
+    .rowBtn button {
+        font-size: 0.6rem !important;
+    }
 }

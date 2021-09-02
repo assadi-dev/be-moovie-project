@@ -19,8 +19,7 @@
     padding: 6px;
     width: 180px;
     height: 250px;
-    margin-left: 0.6rem;
-    margin-right: 0.6rem;
+
 }
 
 .movieItem img {
@@ -45,4 +44,23 @@
     -moz-transform: scale(1.2);
     -ms-transform: scale(1.2);
     -o-transform: scale(1.2);
+}
+
+@media screen and (max-width:480px) {
+    .headerTabs a {
+        font-size: 0.4rem !important;
+    }
+
+    .movieLists {
+        top: 1.2rem;
+        width: 100%;
+        font-size: 0.6rem;
+    }
+
+    .movieItem {
+        width: 90px;
+        height: 120px;
+        margin-left: 0;
+        margin-right: 0;
+    }
 }

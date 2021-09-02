@@ -107,7 +107,6 @@ const CreatePostCard = ({ userData }) => {
                   <div className={styles.postInputCreate}>
                     <textarea
                       placeholder="Quoi de neuf ?"
-                      style={{ padding: "10px" }}
                       rows="1"
                       onChange={handleChangeValue}
                       name="message"

@@ -3,6 +3,7 @@ import React, { useRef, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { generate_slug } from "../../services/Movies.services";
 import styles from "./style.module.css";
+import "./movieLists.css";
 
 const movies = [
   { id: 1, title: "film1" },

@@ -25,7 +25,7 @@ const Movie = ({ state }) => {
         <div className={styles.mainCol}>
           <section className={styles.previewContainer}>
             <SeparatorTitleStyle title="Synopsis" />
-            <p>
+            <p className={styles.synopsis}>
               Un employé de banque, découvrant un jour qu’il n’est en fait qu’un
               personnage d’arrière-plan dans un jeu vidéo en ligne, décide de
               devenir le héros de sa propre histoire, quitte à la réécrire.

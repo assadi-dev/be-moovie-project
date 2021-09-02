@@ -83,3 +83,27 @@
             rgb(26, 26, 26));
     bottom: 0;
 }
+
+
+@media screen and (max-width:550px) {
+    .container {
+        left: 0;
+        right: 0;
+        font-size: 0.9rem;
+    }
+
+    .tagLine,
+    .genre {
+        font-size: 0.9rem;
+    }
+
+    .container button,
+    .container button:nth-child(2) {
+        font-size: 0.6rem !important;
+        display: block;
+        margin-left: 0;
+    }
+
+
+
+}

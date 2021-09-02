@@ -198,3 +198,44 @@
 .read {
     color: rgba(0, 0, 0, 0.5)
 }
+
+@media screen and (max-width:1200px) {
+    .navColRight {
+        width: 35%;
+    }
+
+    .navColCenter {
+        width: 80%;
+    }
+
+
+}
+
+@media screen and (max-width:780px) {
+    .navBg {
+        background-color: #262626 !important;
+    }
+
+    .navColCenter {
+        width: 70%;
+    }
+
+    .navColLink li {
+        font-size: 0.8rem !important;
+    }
+
+    .logoutContainer {
+        font-size: 0.8rem !important;
+    }
+
+    .userPseudo {
+        display: none;
+    }
+}
+
+@media screen and (max-width:550px) {
+    .navBg {
+        display: none !important;
+    }
+
+}
