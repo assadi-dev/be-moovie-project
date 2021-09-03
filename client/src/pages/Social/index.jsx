@@ -15,19 +15,11 @@ const Social = () => {
   const posts = useSelector((state) => state.PostReducers.collections);
   const loading = useSelector((state) => state.PostReducers.isLoading);
   const user = useSelector((state) => state.UserReducers);
+  const socket = io.connect(`http://${window.location.hostname}:6500`);
 
   useEffect(() => {
     dispatch(get_all_post());
     dispatch(get_all_users());
-    const socket = io(`http://${window.location.hostname}:6500`);
-    socket.emit("logged", user.pseudo);
-
-    socket.on("post", (res) => {
-      if (res) {
-        dispatch(get_all_post());
-      }
-    });
-    return () => socket.close();
   }, []);
 
   return (

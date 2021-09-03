@@ -3,14 +3,15 @@ import styles from "./style.module.css";
 import classNames from "classnames";
 import { useDispatch } from "react-redux";
 import { update_notification } from "../../redux/actions/user.action";
+import { getDateNumeric, getTimeMin } from "../../services/times.services";
 
 const NotificationItem = ({
   idNotification,
   author,
   action,
-  source,
+  sourceId,
   read,
-  date,
+  createdAt,
 }) => {
   const avatar = "";
   const pseudo = author;
@@ -20,7 +21,7 @@ const NotificationItem = ({
   useEffect(() => {}, [dispatch, readItem]);
 
   switch (action) {
-    case "create post":
+    case "post":
       message = `à publié une nouvel article`;
       break;
     default:
@@ -43,6 +44,10 @@ const NotificationItem = ({
             <span className={styles.author}>{author}</span>
             {message}
           </span>
+
+          <p className={styles.createAt}>{`le ${getDateNumeric(
+            createdAt
+          )} à ${getTimeMin(createdAt)}`}</p>
         </div>
       </li>
     </>

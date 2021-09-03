@@ -5,3 +5,9 @@
 
 
 }
+
+@media screen and (max-width:550px) {
+    .bgDark {
+        padding-bottom: 100px;
+    }
+}

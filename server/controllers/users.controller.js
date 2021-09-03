@@ -150,7 +150,7 @@ class UserController {
   /*** Notification ***/
 
   createNotification = async (req, res) => {
-    const { author, nature } = req.body;
+    const { author, action, sourceId } = req.body;
     const { id } = req.params;
     const createdAt = dayjs();
     try {
@@ -163,7 +163,8 @@ class UserController {
           $push: {
             notification: {
               author: author,
-              nature: nature,
+              action: action,
+              sourceId: sourceId,
               createdAt: createdAt,
             },
           },

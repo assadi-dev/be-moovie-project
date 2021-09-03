@@ -23,8 +23,6 @@ const Navbar = () => {
   const location = useHistory();
   const [state, setState] = useState({
     navbarScroll: false,
-    dropdownMenu: false,
-    toogleMenu: false,
   });
 
   const handleLogout = () => {
@@ -49,8 +47,19 @@ const Navbar = () => {
     }
   };
 
+  const handleMediaQueryChange = (mediaQuery) => {
+    if (mediaQuery.matches) {
+      setState({ ...state, smallScreen: true });
+    } else {
+      setState({ ...state, smallScreen: false });
+    }
+  };
+
   useEffect(() => {
     dispatchRed(get_user(userId));
+    const mediaQuery = window.matchMedia("(max-width:1200px)");
+    mediaQuery.addListener(handleMediaQueryChange);
+
     window.addEventListener("scroll", handleScroll);
     return () => {
       window.removeEventListener("scroll", handleScroll);

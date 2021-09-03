@@ -6,6 +6,7 @@ export const EDIT_USER_PASSWORD = "EDIT_USER_PASSWORD";
 export const CLEAR_USER = "CLEAR_USER";
 export const FOLLOW_USER = "FOLLOW_USER ";
 export const UNFOLLOW_USER = "UNFOLLOW_USER ";
+export const CREATE_NOTIFICATION = "CREATE_NOTIFICATION";
 export const GET_NOTIFICATION = "GET_NOTIFICATION";
 export const UPDATE_NOTIFICATION = "UPDATE_NOTIFICATION";
 export const DELETE_NOTIFICATION = "UPDATE_NOTIFICATION";
@@ -128,28 +129,17 @@ export const unfollow_user = (id) => {
 
 /*** Notifications ***/
 
-export const get_notification = () => {
+export const get_notification = (id) => {
   return async (dispatch) => {
-    let data = [
-      {
-        id: 5,
-        author: "salima@dd",
-        action: "create post",
-        source: "125459erz",
-        read: false,
-        createdAt: new Date(),
-      },
-      {
-        id: 12,
-        author: "bogossdu92",
-        action: "create post",
-        source: "125459erz",
-        read: false,
-        createdAt: new Date(),
-      },
-    ];
     try {
-      dispatch({ type: GET_NOTIFICATION, payload: data });
+      await api.get(`/user/${id}`).then((res) => {
+        let cleanData = res.data.notifications;
+        let data = cleanData.sort((a, b) => {
+          return b.createdAt > a.createdAt;
+        });
+
+        dispatch({ type: GET_NOTIFICATION, payload: data });
+      });
     } catch (error) {
       console.log(error);
     }

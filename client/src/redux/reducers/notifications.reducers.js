@@ -13,7 +13,7 @@ const NotificationReducers = (state = initialState, action) => {
       return action.payload;
     case UPDATE_NOTIFICATION:
       return state.map((item) => {
-        if (item.id === action.payload) {
+        if (item._id === action.payload) {
           return { ...item, read: true };
         }
         return item;

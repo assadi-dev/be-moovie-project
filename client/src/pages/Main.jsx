@@ -12,7 +12,11 @@ import styles from "./Main/style.module.css";
 import MovieTrendingPresentation from "../components/MovieTrendingPresentation";
 import CarousselGroup from "../components/CarouselGroup";
 import { useDispatch } from "react-redux";
-import { get_all_users, get_user } from "../redux/actions/user.action";
+import {
+  get_all_users,
+  get_notification,
+  get_user,
+} from "../redux/actions/user.action";
 import { useAuthState } from "../utils/context/AuthContext";
 import { io } from "socket.io-client";
 import { useHistory } from "react-router";
@@ -25,8 +29,16 @@ const Main = () => {
   const history = useHistory();
   const userId = useAuthState().userId;
   const dispatch = useDispatch();
+  const socket = io.connect(`http://${window.location.hostname}:6500`);
 
   useEffect(() => {
+    socket.emit("join_room", userId);
+    socket.on("news", (res) => {
+      if (res.author !== userId) {
+        dispatch(get_notification(userId));
+      }
+    });
+
     dispatch(get_user(userId));
     dispatch(get_all_users());
   }, [userId, dispatch]);

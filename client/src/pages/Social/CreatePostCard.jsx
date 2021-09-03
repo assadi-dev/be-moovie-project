@@ -26,6 +26,7 @@ const CreatePostCard = ({ userData }) => {
   const [preViewFile, setpreViewFile] = useState("");
 
   const dispatch = useDispatch();
+  const socket = io.connect(`http://${window.location.hostname}:6500`);
 
   useEffect(() => {
     const iniUser = () => {
@@ -37,11 +38,8 @@ const CreatePostCard = ({ userData }) => {
     };
     iniUser();
 
-    const socket = io(`http://${window.location.hostname}:6500`);
-    socket.emit("postCreated");
-
     return () => socket.close();
-  }, []);
+  }, [postValue.message]);
 
   const handleChangeValue = (e) => {
     let name = e.target.name;
@@ -87,7 +85,14 @@ const CreatePostCard = ({ userData }) => {
     }
     setPostValue({ ...postValue, message: "", picture: "" });
     setpreViewFile("");
-    dispatch(create_post(data));
+    // dispatch(create_post(data));
+    let socketData = {
+      author: postValue.author,
+      action: "post",
+      sourceId: "",
+      followers: userData.followers,
+    };
+    socket.emit("createdPost", socketData);
   };
 
   return (
