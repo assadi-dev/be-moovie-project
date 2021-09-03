@@ -9,7 +9,7 @@ export const UNFOLLOW_USER = "UNFOLLOW_USER ";
 export const CREATE_NOTIFICATION = "CREATE_NOTIFICATION";
 export const GET_NOTIFICATION = "GET_NOTIFICATION";
 export const UPDATE_NOTIFICATION = "UPDATE_NOTIFICATION";
-export const DELETE_NOTIFICATION = "UPDATE_NOTIFICATION";
+export const DELETE_NOTIFICATION = "DELETE_NOTIFICATION";
 export const DELETE_ALL_NOTIFICATION = "UPDATE_NOTIFICATION";
 
 export const get_all_users = () => {
@@ -144,10 +144,31 @@ export const get_notification = (id) => {
   };
 };
 
-export const update_notification = (idNotification) => {
+/**
+ *
+ * @param {*} userId Id de l'utilisateur
+ * @param {*} idNotification id de la notification
+ * @returns
+ * mise à jour de la notification dans read
+ */
+export const update_notification = (userId, data) => {
   return async (dispatch) => {
     try {
-      dispatch({ type: UPDATE_NOTIFICATION, payload: idNotification });
+      api.patch(`/user/notification/update/${userId}`, data).then(() => {
+        dispatch({ type: UPDATE_NOTIFICATION, payload: data.idNotification });
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+};
+
+export const delete_notification = (userId, data) => {
+  return async (dispatch) => {
+    try {
+      api.patch(`/user/notification/delete/${userId}`, data).then(() => {
+        dispatch({ type: DELETE_NOTIFICATION, payload: data.idNotification });
+      });
     } catch (error) {
       console.log(error);
     }

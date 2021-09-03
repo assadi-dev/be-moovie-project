@@ -56,6 +56,7 @@ const Notification = () => {
                 notifications.map((notification, index) => (
                   <NotificationItem
                     key={index}
+                    userId={userId}
                     idNotification={notification._id}
                     author={notification.author}
                     action={notification.action}

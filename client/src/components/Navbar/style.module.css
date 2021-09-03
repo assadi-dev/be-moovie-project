@@ -153,6 +153,7 @@
 }
 
 .listItems {
+    position: relative;
     padding: 18px 12px;
     display: flex;
     align-content: center;
@@ -201,7 +202,24 @@
 }
 
 .read {
-    color: rgba(0, 0, 0, 0.5)
+    color: rgba(0, 0, 0, 0.5);
+}
+
+.deletebtn {
+    position: absolute;
+    width: 25px;
+    height: 25px;
+    background: transparent;
+    right: -1rem;
+    top: 0.5rem;
+    color: rgba(0, 0, 0, 0.5);
+    cursor: pointer;
+
+}
+
+.deletebtn:hover {
+    color: rgba(0, 0, 0, 1);
+    font-weight: bold;
 }
 
 @media screen and (max-width:1200px) {

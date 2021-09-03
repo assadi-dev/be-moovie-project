@@ -161,7 +161,7 @@ class UserController {
         id,
         {
           $push: {
-            notification: {
+            notifications: {
               author: author,
               action: action,
               sourceId: sourceId,
@@ -186,7 +186,7 @@ class UserController {
 
     try {
       userModel.findById(id, (err, doc) => {
-        let notification = doc.notification.filter((notification) =>
+        let notification = doc.notifications.filter((notification) =>
           notification._id.equals(idNotification)
         );
         if (err) throw "Noitification no found";
@@ -216,7 +216,7 @@ class UserController {
         id,
         {
           $pull: {
-            notification: {
+            notifications: {
               _id: idNotification,
             },
           },
@@ -240,7 +240,7 @@ class UserController {
         throw "ID invalid";
       }
       userModel.findById(id, (err, doc) => {
-        doc.notification = [];
+        doc.notifications = [];
 
         return doc.save((err) => {
           if (err) {

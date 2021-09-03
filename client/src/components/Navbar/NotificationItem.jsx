@@ -2,10 +2,15 @@ import React, { useEffect, useState } from "react";
 import styles from "./style.module.css";
 import classNames from "classnames";
 import { useDispatch } from "react-redux";
-import { update_notification } from "../../redux/actions/user.action";
+import {
+  delete_notification,
+  update_notification,
+} from "../../redux/actions/user.action";
 import { getDateNumeric, getTimeMin } from "../../services/times.services";
+import { MDBIcon } from "mdb-react-ui-kit";
 
 const NotificationItem = ({
+  userId,
   idNotification,
   author,
   action,
@@ -18,7 +23,7 @@ const NotificationItem = ({
   var message = "";
   const [readItem, setReadItem] = useState(read);
   const dispatch = useDispatch();
-  useEffect(() => {}, [dispatch, readItem]);
+  useEffect(() => {}, [dispatch]);
 
   switch (action) {
     case "post":
@@ -27,16 +32,24 @@ const NotificationItem = ({
     default:
       message = "";
   }
-  const handleReadItem = (e) => {
-    dispatch(update_notification(idNotification));
-    setReadItem(true);
+  const handleReadItem = () => {
+    if (read === false) {
+      let data = { idNotification: idNotification, read: true };
+      dispatch(update_notification(userId, data));
+      setReadItem(true);
+    }
+  };
+
+  const handleDeleteItem = () => {
+    let data = { idNotification: idNotification };
+    dispatch(delete_notification(userId, data));
   };
 
   return (
     <>
       <li
         className={classNames(styles.listItems, readItem ? styles.read : "")}
-        onMouseOver={handleReadItem}
+        onClick={handleReadItem}
       >
         {<img className={styles.avatar} src={avatar} alt="author_picture" />}
         <div className={styles.blocMessage}>
@@ -49,6 +62,10 @@ const NotificationItem = ({
             createdAt
           )} à ${getTimeMin(createdAt)}`}</p>
         </div>
+        <span className={styles.deletebtn} onClick={handleDeleteItem}>
+          {" "}
+          <MDBIcon fas icon="times" />{" "}
+        </span>
       </li>
     </>
   );
