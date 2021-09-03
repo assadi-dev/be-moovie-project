@@ -134,9 +134,7 @@ export const get_notification = (id) => {
     try {
       await api.get(`/user/${id}`).then((res) => {
         let cleanData = res.data.notifications;
-        let data = cleanData.sort((a, b) => {
-          return b.createdAt > a.createdAt;
-        });
+        let data = cleanData.sort((a, b) => b.createdAt - a.createdAt);
 
         dispatch({ type: GET_NOTIFICATION, payload: data });
       });
