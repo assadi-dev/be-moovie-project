@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1630712842343" clover="3.2.0">
-  <project timestamp="1630712842344" name="All files">
-    <metrics statements="525" coveredstatements="199" conditionals="116" coveredconditionals="2" methods="108" coveredmethods="3" elements="749" coveredelements="204" complexity="0" loc="525" ncloc="525" packages="6" files="22" classes="22"/>
+<coverage generated="1630769861088" clover="3.2.0">
+  <project timestamp="1630769861088" name="All files">
+    <metrics statements="537" coveredstatements="229" conditionals="116" coveredconditionals="7" methods="109" coveredmethods="11" elements="762" coveredelements="247" complexity="0" loc="537" ncloc="537" packages="7" files="23" classes="23"/>
     <package name="server">
       <metrics statements="28" coveredstatements="28" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
       <file name="app.js" path="C:\laragon\www\ProjetGithub\be-moovie-project\server\app.js">
@@ -37,45 +37,46 @@
       </file>
     </package>
     <package name="server.controllers">
-      <metrics statements="365" coveredstatements="73" conditionals="102" coveredconditionals="2" methods="96" coveredmethods="3"/>
+      <metrics statements="366" coveredstatements="86" conditionals="102" coveredconditionals="6" methods="96" coveredmethods="6"/>
       <file name="auth.controller.js" path="C:\laragon\www\ProjetGithub\be-moovie-project\server\controllers\auth.controller.js">
-        <metrics statements="36" coveredstatements="18" conditionals="8" coveredconditionals="2" methods="10" coveredmethods="3"/>
+        <metrics statements="37" coveredstatements="31" conditionals="8" coveredconditionals="6" methods="10" coveredmethods="6"/>
         <line num="1" count="1" type="stmt"/>
         <line num="2" count="1" type="stmt"/>
         <line num="3" count="1" type="stmt"/>
         <line num="8" count="1" type="stmt"/>
-        <line num="10" count="1" type="stmt"/>
         <line num="11" count="1" type="stmt"/>
         <line num="12" count="1" type="stmt"/>
         <line num="13" count="1" type="stmt"/>
         <line num="14" count="1" type="stmt"/>
         <line num="15" count="1" type="stmt"/>
-        <line num="17" count="1" type="cond" truecount="1" falsecount="1"/>
-        <line num="19" count="1" type="stmt"/>
-        <line num="20" count="1" type="cond" truecount="1" falsecount="1"/>
-        <line num="21" count="0" type="stmt"/>
-        <line num="23" count="1" type="stmt"/>
-        <line num="26" count="1" type="stmt"/>
-        <line num="33" count="1" type="stmt"/>
-        <line num="36" count="0" type="stmt"/>
-        <line num="39" count="1" type="stmt"/>
-        <line num="43" count="0" type="stmt"/>
-        <line num="46" count="0" type="stmt"/>
-        <line num="50" count="1" type="stmt"/>
-        <line num="51" count="0" type="stmt"/>
-        <line num="52" count="0" type="stmt"/>
-        <line num="54" count="0" type="stmt"/>
-        <line num="56" count="0" type="cond" truecount="0" falsecount="2"/>
-        <line num="57" count="0" type="stmt"/>
-        <line num="59" count="0" type="stmt"/>
-        <line num="62" count="0" type="cond" truecount="0" falsecount="2"/>
-        <line num="63" count="0" type="stmt"/>
-        <line num="65" count="0" type="stmt"/>
-        <line num="66" count="0" type="stmt"/>
-        <line num="72" count="0" type="stmt"/>
-        <line num="73" count="0" type="stmt"/>
-        <line num="76" count="0" type="stmt"/>
-        <line num="79" count="0" type="stmt"/>
+        <line num="16" count="1" type="stmt"/>
+        <line num="18" count="1" type="cond" truecount="1" falsecount="1"/>
+        <line num="20" count="1" type="stmt"/>
+        <line num="21" count="1" type="cond" truecount="1" falsecount="1"/>
+        <line num="22" count="0" type="stmt"/>
+        <line num="24" count="1" type="stmt"/>
+        <line num="27" count="1" type="stmt"/>
+        <line num="34" count="1" type="stmt"/>
+        <line num="37" count="1" type="stmt"/>
+        <line num="40" count="0" type="stmt"/>
+        <line num="44" count="0" type="stmt"/>
+        <line num="47" count="0" type="stmt"/>
+        <line num="51" count="1" type="stmt"/>
+        <line num="52" count="3" type="stmt"/>
+        <line num="53" count="3" type="stmt"/>
+        <line num="55" count="3" type="stmt"/>
+        <line num="57" count="3" type="cond" truecount="2" falsecount="0"/>
+        <line num="58" count="1" type="stmt"/>
+        <line num="60" count="2" type="stmt"/>
+        <line num="63" count="2" type="cond" truecount="2" falsecount="0"/>
+        <line num="64" count="1" type="stmt"/>
+        <line num="66" count="1" type="stmt"/>
+        <line num="67" count="1" type="stmt"/>
+        <line num="73" count="1" type="stmt"/>
+        <line num="74" count="1" type="stmt"/>
+        <line num="77" count="0" type="stmt"/>
+        <line num="80" count="0" type="stmt"/>
+        <line num="84" count="1" type="stmt"/>
       </file>
       <file name="favoris.contoller.js" path="C:\laragon\www\ProjetGithub\be-moovie-project\server\controllers\favoris.contoller.js">
         <metrics statements="60" coveredstatements="6" conditionals="16" coveredconditionals="0" methods="18" coveredmethods="0"/>
@@ -425,6 +426,23 @@
         <line num="258" count="1" type="stmt"/>
       </file>
     </package>
+    <package name="server.db">
+      <metrics statements="11" coveredstatements="10" conditionals="0" coveredconditionals="0" methods="2" coveredmethods="2"/>
+      <file name="db_handler.js" path="C:\laragon\www\ProjetGithub\be-moovie-project\server\db\db_handler.js">
+        <metrics statements="11" coveredstatements="10" conditionals="0" coveredconditionals="0" methods="2" coveredmethods="2"/>
+        <line num="1" count="1" type="stmt"/>
+        <line num="3" count="1" type="stmt"/>
+        <line num="5" count="1" type="stmt"/>
+        <line num="7" count="1" type="stmt"/>
+        <line num="9" count="1" type="stmt"/>
+        <line num="11" count="1" type="stmt"/>
+        <line num="13" count="1" type="stmt"/>
+        <line num="19" count="1" type="stmt"/>
+        <line num="22" count="1" type="stmt"/>
+        <line num="23" count="1" type="stmt"/>
+        <line num="24" count="0" type="stmt"/>
+      </file>
+    </package>
     <package name="server.middlewares">
       <metrics statements="30" coveredstatements="8" conditionals="12" coveredconditionals="0" methods="6" coveredmethods="0"/>
       <file name="auth.middleware.js" path="C:\laragon\www\ProjetGithub\be-moovie-project\server\middlewares\auth.middleware.js">
@@ -489,9 +507,9 @@
       </file>
     </package>
     <package name="server.routes">
-      <metrics statements="67" coveredstatements="67" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+      <metrics statements="68" coveredstatements="68" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
       <file name="auth.route.js" path="C:\laragon\www\ProjetGithub\be-moovie-project\server\routes\auth.route.js">
-        <metrics statements="10" coveredstatements="10" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+        <metrics statements="11" coveredstatements="11" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
         <line num="1" count="1" type="stmt"/>
         <line num="2" count="1" type="stmt"/>
         <line num="3" count="1" type="stmt"/>
@@ -501,7 +519,8 @@
         <line num="8" count="1" type="stmt"/>
         <line num="9" count="1" type="stmt"/>
         <line num="10" count="1" type="stmt"/>
-        <line num="12" count="1" type="stmt"/>
+        <line num="11" count="1" type="stmt"/>
+        <line num="13" count="1" type="stmt"/>
       </file>
       <file name="movies.route.js" path="C:\laragon\www\ProjetGithub\be-moovie-project\server\routes\movies.route.js">
         <metrics statements="7" coveredstatements="7" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
@@ -580,26 +599,25 @@
       </file>
     </package>
     <package name="server.services">
-      <metrics statements="23" coveredstatements="11" conditionals="2" coveredconditionals="0" methods="6" coveredmethods="0"/>
+      <metrics statements="22" coveredstatements="17" conditionals="2" coveredconditionals="1" methods="5" coveredmethods="3"/>
       <file name="auth.services.js" path="C:\laragon\www\ProjetGithub\be-moovie-project\server\services\auth.services.js">
-        <metrics statements="17" coveredstatements="7" conditionals="2" coveredconditionals="0" methods="5" coveredmethods="0"/>
+        <metrics statements="16" coveredstatements="13" conditionals="2" coveredconditionals="1" methods="4" coveredmethods="3"/>
         <line num="1" count="1" type="stmt"/>
         <line num="2" count="1" type="stmt"/>
         <line num="3" count="1" type="stmt"/>
         <line num="4" count="1" type="stmt"/>
         <line num="6" count="1" type="stmt"/>
-        <line num="7" count="0" type="stmt"/>
+        <line num="7" count="1" type="stmt"/>
         <line num="10" count="1" type="stmt"/>
-        <line num="11" count="0" type="stmt"/>
+        <line num="11" count="1" type="stmt"/>
         <line num="16" count="1" type="stmt"/>
-        <line num="17" count="0" type="stmt"/>
-        <line num="21" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="17" count="1" type="stmt"/>
+        <line num="21" count="1" type="cond" truecount="1" falsecount="1"/>
         <line num="22" count="0" type="stmt"/>
         <line num="33" count="0" type="stmt"/>
         <line num="36" count="0" type="stmt"/>
-        <line num="38" count="0" type="stmt"/>
-        <line num="42" count="0" type="stmt"/>
-        <line num="43" count="0" type="stmt"/>
+        <line num="38" count="1" type="stmt"/>
+        <line num="42" count="1" type="stmt"/>
       </file>
       <file name="user.services.js" path="C:\laragon\www\ProjetGithub\be-moovie-project\server\services\user.services.js">
         <metrics statements="6" coveredstatements="4" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="0"/>

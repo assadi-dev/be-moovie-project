@@ -7,7 +7,7 @@
     "install-client": "cd client && npm install",
     "client": "cd client && npm start",
     "server": "nodemon index",
-    "test": "npx jest",
+    "test": "npx jest --detectOpenHandles",
     "test-coverage": "npx jest --coverage",
     "watch": "concurrently --kill-others  \"npm run server\"  \"npm run client\"  ",
     "build": "cd client && npm run build",
@@ -29,6 +29,7 @@
     "express-jwt": "^6.1.0",
     "helmet": "^4.6.0",
     "jsonwebtoken": "^8.5.1",
+    "mongodb-memory-server": "^7.4.0",
     "mongoose": "^5.13.7",
     "mongoose-unique-validator": "^2.0.3",
     "multer": "^1.4.3",
@@ -36,7 +37,8 @@
     "validator": "^13.6.0"
   },
   "jest": {
-    "verbose": true
+    "verbose": true,
+    "testEnvironment": "node"
   },
   "devDependencies": {
     "dotenv": "^10.0.0",

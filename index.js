@@ -1,7 +1,7 @@
 const http = require("http");
 const app = require("./server/app");
 require("dotenv").config();
-require("./server/models/connectDB");
+require("./server/db/connectDB");
 const socketIo = require("socket.io");
 const notifyAction = require("./server/controllers/notification.controller");
 

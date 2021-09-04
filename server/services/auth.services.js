@@ -39,7 +39,5 @@ exports.setRefreshToken = async (refresh_token, userId) => {
     refresh_token,
     userId,
   });
-  token.save().then(() => {
-    console.log("refresh create");
-  });
+  token.save();
 };

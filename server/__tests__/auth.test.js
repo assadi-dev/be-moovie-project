@@ -1,6 +1,8 @@
 const request = require("supertest");
 const app = require("../app");
 const UserModel = require("../models/user.model");
+const { dbConnect, dbDisconnect } = require("../db/db_handler");
+require("dotenv").config();
 
 const userData = {
   pseudo: "testPseudo",
@@ -11,34 +13,64 @@ const userData = {
   presentation: "",
 };
 
-beforeEach(async () => {
-  UserModel.deleteMany({});
+beforeAll(async () => {
+  dbConnect();
 });
+afterAll(async () => {
+  dbDisconnect();
+});
+
 describe("Test Auth path", () => {
+  beforeEach(() => {
+    jest.setTimeout(60000);
+  });
   describe("When add user", () => {
-    jest.setTimeout(30000);
-    test("should respond with 201 status code", async () => {
-      const res = await request(app).post("/api/auth/signin").send({
-        pseudo: "bibi23",
-        password: "Password123",
-        confirmPassword: "Password123",
-        email: "425azer@email.com",
-        birthday: new Date(),
-        presentation: "",
-      });
-      expect(res.status);
+    it("should respond with 201 status code", async () => {
+      const res = await request(app).post("/api/auth/signin").send(userData);
+      expect(res.status).toBe(201);
     });
   });
   describe("When Username and password are ok", () => {
-    jest.setTimeout(30000);
-    test("should respond with 200 status code", async () => {
-      const res = await request(app).post("/api/auth/login").send({
-        email: "425azer@email.com",
-        password: "Password123",
-      });
-      expect(res.status);
-      console.log(res.body);
+    it("should to have status code 200 , token & refreshToken property", async () => {
+      try {
+        const res = await request(app).post("/api/auth/login").send({
+          email: userData.email,
+          password: userData.password,
+        });
+        expect(res.status).toBe(200);
+        expect(res.body).toHaveProperty("token");
+        expect(res.body).toHaveProperty("refreshToken");
+        expect(res.body.token).toBeDefined();
+        expect(res.body.refreshToken).toBeDefined();
+      } catch (err) {
+        console.log(err);
+      }
     });
   });
-  //describe("When Username and password are wrong", () => {});
+  describe("When email or password are wrong", () => {
+    it("should have message : Utilisateur non trouvé", async () => {
+      try {
+        const res = await request(app).post("/api/auth/login").send({
+          email: "wrong@email.com",
+          password: userData.password,
+        });
+        expect(res.status).toBe(404);
+        expect(res.body).toMatch("Utilisateur non trouvé !");
+      } catch (error) {
+        console.log(error);
+      }
+    });
+    it("should have message : Mot de passe incorrect !", async () => {
+      try {
+        const res = await request(app).post("/api/auth/login").send({
+          email: userData.email,
+          password: "wrongPassword",
+        });
+        expect(res.status).toBe(404);
+        expect(res.body).toMatch("Mot de passe incorrect !");
+      } catch (error) {
+        console.log(error);
+      }
+    });
+  });
 });
