@@ -23,30 +23,30 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">16.67% </span>
+                <span class="strong">21.05% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>6/36</span>
+                <span class='fraction'>8/38</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
                 <span class="strong">0% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>0/6</span>
+                <span class='fraction'>0/8</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">10% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>0/10</span>
+                <span class='fraction'>1/10</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">16.67% </span>
+                <span class="strong">21.05% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>6/36</span>
+                <span class='fraction'>8/38</span>
             </div>
         
             
@@ -135,7 +135,11 @@
 <a name='L76'></a><a href='#L76'>76</a>
 <a name='L77'></a><a href='#L77'>77</a>
 <a name='L78'></a><a href='#L78'>78</a>
-<a name='L79'></a><a href='#L79'>79</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
+<a name='L79'></a><a href='#L79'>79</a>
+<a name='L80'></a><a href='#L80'>80</a>
+<a name='L81'></a><a href='#L81'>81</a>
+<a name='L82'></a><a href='#L82'>82</a>
+<a name='L83'></a><a href='#L83'>83</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -145,11 +149,12 @@
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
@@ -206,13 +211,16 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">const bcrypt = require("bcrypt");
 const UserModel = require("../models/user.model");
 const ent = require("ent");
@@ -222,13 +230,14 @@ const {
   setRefreshToken,
 } = require("../services/auth.services");
 &nbsp;
-exports.signin = <span class="fstat-no" title="function not covered" >(r</span>eq, res) =&gt; {
-  const pseudo = <span class="cstat-no" title="statement not covered" >ent.encode(req.body.pseudo);</span>
+exports.signin = (req, res) =&gt; {
+  const pseudo = ent.encode(req.body.pseudo);
   const password = <span class="cstat-no" title="statement not covered" >ent.encode(req.body.password);</span>
   const confirmPassword = <span class="cstat-no" title="statement not covered" >ent.encode(req.body.confirmPassword);</span>
   const email = <span class="cstat-no" title="statement not covered" >ent.encode(req.body.email);</span>
   const birthday = <span class="cstat-no" title="statement not covered" >ent.encode(req.body.birthday);</span>
-  const presentation = <span class="cstat-no" title="statement not covered" >ent.encode(req.body.presentation);</span>
+  const presentation =
+<span class="cstat-no" title="statement not covered" >    req.body.presentation !== "" ? ent.encode(req.body.presentation) : "";</span>
 &nbsp;
 <span class="cstat-no" title="statement not covered" >  try {</span>
 <span class="cstat-no" title="statement not covered" >    if (password !== confirmPassword) {</span>
@@ -268,13 +277,13 @@ exports.signup = <span class="fstat-no" title="function not covered" >(r</span>e
 <span class="cstat-no" title="statement not covered" >  UserModel.findOne({ email: email })</span>
     .then(<span class="fstat-no" title="function not covered" >(u</span>ser) =&gt; {
 <span class="cstat-no" title="statement not covered" >      if (!user) {</span>
-<span class="cstat-no" title="statement not covered" >        return res.status(401).json({ error: "Utilisateur non trouvé !" });</span>
+<span class="cstat-no" title="statement not covered" >        return res.status(404).json("Utilisateur non trouvé !");</span>
       }
 <span class="cstat-no" title="statement not covered" >      bcrypt</span>
         .compare(password, user.password)
         .then(<span class="fstat-no" title="function not covered" >(v</span>alid) =&gt; {
 <span class="cstat-no" title="statement not covered" >          if (!valid) {</span>
-<span class="cstat-no" title="statement not covered" >            return res.status(401).json({ error: "Mot de passe incorrect !" });</span>
+<span class="cstat-no" title="statement not covered" >            return res.status(404).json("Mot de passe incorrect !");</span>
           }
           const token = <span class="cstat-no" title="statement not covered" >accessToken(user._id);</span>
           const refreshToken = <span class="cstat-no" title="statement not covered" >refreshTokenGenerate();</span>
@@ -282,6 +291,7 @@ exports.signup = <span class="fstat-no" title="function not covered" >(r</span>e
             httpOnly: true,
             maxAge: 7 * 24 * 60 * 60 * 1000,
           }); */
+<span class="cstat-no" title="statement not covered" >          this.message = "pk";</span>
 <span class="cstat-no" title="statement not covered" >          setRefreshToken(refreshToken, user._id);</span>
 <span class="cstat-no" title="statement not covered" >          res.status(200).json({ token: token, refreshToken: refreshToken });</span>
         })
@@ -291,6 +301,8 @@ exports.signup = <span class="fstat-no" title="function not covered" >(r</span>e
     })
     .catch(<span class="fstat-no" title="function not covered" >(e</span>rror) =&gt; <span class="cstat-no" title="statement not covered" >res.status(500).json({ error }))</span>;
 };
+&nbsp;
+exports.message = "";
 &nbsp;</pre></td></tr></table></pre>
 
                 <div class='push'></div><!-- for sticky footer -->
@@ -298,7 +310,7 @@ exports.signup = <span class="fstat-no" title="function not covered" >(r</span>e
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank">istanbul</a>
-                at Mon Aug 23 2021 14:53:24 GMT+0200 (heure d’été d’Europe centrale)
+                at Fri Sep 03 2021 22:07:45 GMT+0200 (heure d’été d’Europe centrale)
             </div>
         </div>
         <script src="../prettify.js"></script>

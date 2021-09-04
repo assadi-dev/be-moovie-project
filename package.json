@@ -35,6 +35,9 @@
     "socket.io": "^4.1.3",
     "validator": "^13.6.0"
   },
+  "jest": {
+    "verbose": true
+  },
   "devDependencies": {
     "dotenv": "^10.0.0",
     "Faker": "^0.7.2",

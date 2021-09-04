@@ -4,7 +4,7 @@ const authController = require("../controllers/auth.controller");
 const tokenController = require("../controllers/token.controller");
 const auth = require("../middlewares/auth.middleware");
 
-router.post("/sigin", authController.signin);
+router.post("/signin", authController.signin);
 router.post("/login", authController.signup);
 router.post("/refreshToken", tokenController.newToken);
 router.post("/revokeToken", tokenController.revokeToken);
