@@ -18,7 +18,7 @@ class FavorieController {
        *@type {string}
        *@constant  verif contient l'id trouvé dans le tableau movies
        */
-      const verif = user.movies.favoris.find((movie) => movie == id);
+      const verif = user.movies.find((movie) => movie == id);
 
       try {
         if (verif == id) {
@@ -26,7 +26,7 @@ class FavorieController {
         }
         await userModel.findByIdAndUpdate(
           userId,
-          { movies: { favoris: [...user.movies.favoris, id] } },
+          { $addToSet: { movies: id } },
           { new: true },
           (err, doc) => {
             if (err) {
@@ -56,18 +56,16 @@ class FavorieController {
        *@type {string}
        *@constant  verif contient l'id trouvé dans le tableau movies
        */
-      const verif = user.movies.favoris.find((movie) => movie == id);
+      const verif = user.movies.find((movie) => movie == id);
       try {
         if (verif != id) {
           throw "movie not found !";
         }
-        const favorieRemoved = user.movies.favoris.filter(
-          (movie) => movie != id
-        );
+
         await userModel.findByIdAndUpdate(
           userId,
           {
-            movies: { favoris: favorieRemoved },
+            $pull: { movies: id },
           },
           { new: true },
           (err, doc) => {

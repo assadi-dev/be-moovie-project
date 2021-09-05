@@ -17,6 +17,7 @@ const userData = {
 };
 
 const idTofollow = "611fa816763c265534dc52db";
+const movieId = "550988";
 
 beforeAll(async () => {
   dbConnect();
@@ -113,8 +114,26 @@ describe("Test User PATH", () => {
           .set("Authorization", "Bearer " + token);
 
         expect(res.status).toBe(200);
-        expect.not.arrayContaining(res.body.following);
+        expect(res.body.movie).toContain(idTofollow);
         console.table(`user has been removed !`);
+      } catch (error) {
+        console.log(error);
+      }
+    });
+  });
+
+  describe("When add Movie on favorie", () => {
+    it("Should have the movie's id  to movie table", async () => {
+      const id = getUserId(token);
+
+      try {
+        const res = await request(app)
+          .patch(`/api/user/movies/add/${movieId}`)
+          .set("Authorization", "Bearer " + token);
+
+        expect(res.status).toBe(200);
+        expect(res.body.movies).toContain(movieId);
+        console.table(`movie added: ${movieId}`);
       } catch (error) {
         console.log(error);
       }
