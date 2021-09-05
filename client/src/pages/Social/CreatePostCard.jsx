@@ -85,7 +85,7 @@ const CreatePostCard = ({ userData }) => {
     }
     setPostValue({ ...postValue, message: "", picture: "" });
     setpreViewFile("");
-    // dispatch(create_post(data));
+    dispatch(create_post(data));
     let socketData = {
       author: postValue.author,
       action: "post",

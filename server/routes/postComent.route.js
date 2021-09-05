@@ -1,7 +1,9 @@
 const express = require("express");
 const router = express.Router();
 const auth = require("../middlewares/auth.middleware");
-const commentController = require("../controllers/postComment.controller");
+const PostComment = require("../controllers/postComment.controller");
+
+const commentController = new PostComment();
 
 router.patch("/add/:id", auth, commentController.addComment);
 router.patch("/edit/:id", auth, commentController.editComment);

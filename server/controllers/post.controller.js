@@ -6,6 +6,7 @@ class PostController {
   createPost = (req, res) => {
     let pathFile = "";
     let nameFile = "";
+    let size = 0;
     const thingObject = req.body;
     let data = {
       author: ent.encode(thingObject.author),
@@ -16,6 +17,8 @@ class PostController {
     if (req.file) {
       pathFile = `../uploads/${req.body.author}/${req.file.filename}`;
       nameFile = req.file.filename;
+      size = file.size;
+
       data = {
         ...data,
         media: {
@@ -35,7 +38,7 @@ class PostController {
           this.message = "new post created";
         })
         .catch((error) => {
-          res.status(500).json(error);
+          throw "erreur: " + error;
         });
     } catch (error) {
       res.status(500).json(error);

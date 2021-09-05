@@ -2,7 +2,9 @@ const express = require("express");
 const router = express.Router();
 const UserController = require("../controllers/users.controller");
 const auth = require("../middlewares/auth.middleware");
+
 const userController = new UserController();
+
 router.get("/", auth, userController.getAllUser);
 router.get("/:id", auth, userController.getOneUser);
 router.put("/:id", auth, userController.editUser);
