@@ -1,6 +1,5 @@
 const request = require("supertest");
 const app = require("../app");
-const UserModel = require("../models/user.model");
 const { dbConnect, dbDisconnect } = require("../db/db_handler");
 require("dotenv").config();
 

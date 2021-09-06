@@ -22,7 +22,7 @@ const movieId = "550988";
 beforeAll(async () => {
   dbConnect();
 
-  user = await createUser();
+  user = await createUser(userData);
   await new userModel(user).save();
 });
 afterAll(async () => {
