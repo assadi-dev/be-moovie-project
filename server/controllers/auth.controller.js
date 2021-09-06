@@ -36,13 +36,13 @@ class AuthController {
             .save()
             .then((data) => {
               const dir = `client/public/uploads/${data._id}`;
-              /* fs.exists(dir, (doc) => {
+              fs.exists(dir, (doc) => {
                 if (!doc) {
                   return fs.mkdir(dir, { recursive: true }, (error) => {
                     if (error) throw new Error(error);
                   });
                 }
-              });*/
+              });
               res.status(201).json(data);
             })
             .catch((error) => {
