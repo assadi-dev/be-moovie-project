@@ -10,6 +10,7 @@ require("dotenv").config();
 
 var token = "";
 var postId = "";
+var postIdFile = "";
 var userId = "";
 const fileTestPath = path.join(__dirname, "testFile.jpg");
 
@@ -69,7 +70,7 @@ describe("Test Post PATH", () => {
     });
   });
 
-  describe.skip("When create Post with file", () => {
+  describe("When create Post with file", () => {
     it("Should be have 201 status code ", async () => {
       const res = await request(app)
         .post("/api/post/add")
@@ -80,7 +81,8 @@ describe("Test Post PATH", () => {
         .field("message", "New post with file")
         .attach("picture", fileTestPath);
       expect(res.status).toEqual(201);
-      console.log(res.body);
+      console.table(res.body.media);
+      postIdFile = res.body._id;
     });
   });
 
@@ -124,6 +126,18 @@ describe("Test Post PATH", () => {
       const expected = `le poste ${postId} à été supprimé`;
       const res = await request(app)
         .delete(`/api/post/delete/${postId}`)
+        .set("Authorization", "Bearer " + token);
+
+      expect(res.status).toEqual(200);
+      expect(res.body.message).toMatch(expected);
+      console.log("post message : " + res.body.message);
+    });
+  });
+  describe("when delete post with file", () => {
+    it("Should have delete & return 200 status code", async () => {
+      const expected = `le poste ${postIdFile} à été supprimé`;
+      const res = await request(app)
+        .delete(`/api/post/delete/${postIdFile}`)
         .set("Authorization", "Bearer " + token);
 
       expect(res.status).toEqual(200);

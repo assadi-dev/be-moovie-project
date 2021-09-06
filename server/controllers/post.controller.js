@@ -1,6 +1,8 @@
 const postModel = require("../models/post.model");
 const ent = require("ent");
 const ObjectID = require("mongoose").Types.ObjectId;
+const fs = require("fs");
+const path = require("path");
 
 class PostController {
   createPost = (req, res) => {
@@ -17,7 +19,7 @@ class PostController {
     if (req.file) {
       pathFile = `../uploads/${req.body.author}/${req.file.filename}`;
       nameFile = req.file.filename;
-      size = file.size;
+      size = req.file.size;
 
       data = {
         ...data,
@@ -97,15 +99,42 @@ class PostController {
         .status(404)
         .json({ message: `poste ${req.params.id} not found` });
     }
-
-    await postModel
-      .deleteOne({ _id: req.params.id })
-      .then(() =>
-        res
-          .status(200)
-          .json({ message: `le poste ${req.params.id} à été supprimé` })
-      )
-      .catch((err) => res.status(500).json(err));
+    try {
+      await postModel.findOne({ _id: req.params.id }).then(async (post) => {
+        let fileName = "";
+        if (post.media.length) {
+          fileName = post.media[0].fileName;
+          fs.unlink(
+            "client/public/uploads/" + post.author + "/" + fileName,
+            () => {
+              postModel
+                .deleteOne({ _id: req.params.id })
+                .then(() => {
+                  res.status(200).json({
+                    message: `le poste ${req.params.id} à été supprimé`,
+                  });
+                })
+                .catch((error) => {
+                  throw error;
+                });
+            }
+          );
+        } else {
+          postModel
+            .deleteOne({ _id: req.params.id })
+            .then((docs) => {
+              res.status(200).json({
+                message: `le poste ${req.params.id} à été supprimé`,
+              });
+            })
+            .catch((error) => {
+              throw err;
+            });
+        }
+      });
+    } catch (error) {
+      console.log(error);
+    }
   };
 }
 

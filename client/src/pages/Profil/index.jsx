@@ -35,10 +35,9 @@ const Profil = () => {
         <aside className={styles.leftSide}>
           <div className={styles.leftwrapper}>
             <div className={styles.avatarSection}>
-              <img
-                src="uploads/61222b3678db65415007b7ea/1630342811028_6tcaxeexz.png"
-                alt="user_avatar"
-              />
+              {userData.avatar && (
+                <img src={userData.avatar} alt="user_avatar" />
+              )}
 
               <h5 className={styles.pseudo}>
                 {userData.pseudo && decode(userData.pseudo)}

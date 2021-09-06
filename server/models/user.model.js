@@ -36,7 +36,7 @@ const userSchema = mongoose.Schema(
     },
     avatar: {
       type: String,
-      default: "../uploads/avatar/random-user.png",
+      default: "../random-user.png",
     },
     presentation: {
       type: String,

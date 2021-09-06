@@ -26,23 +26,30 @@ class UserController {
 
   editUser = (req, res) => {
     const { id } = req.params;
-    const pseudo = ent.encode(req.body.pseudo);
-    const email = ent.encode(req.body.email);
-    const presentation = ent.encode(req.body.presentation);
 
-    userModel.findByIdAndUpdate(
-      id,
-      {
-        pseudo: pseudo,
-        email: email,
-        presentation: presentation,
-      },
-      { new: true },
-      (err, doc) => {
-        if (err) res.status(500).json(error);
-        res.status(200).json(doc);
-      }
-    );
+    let data = {
+      pseudo: ent.encode(req.body.pseudo),
+      email: ent.encode(req.body.email),
+      presentation: ent.encode(req.body.presentation),
+    };
+
+    let pathFile = "";
+    let nameFile = "";
+    if (req.file) {
+      pathFile = `../uploads/${req.body.author}/${req.file.filename}`;
+      nameFile = req.file.filename;
+      size = req.file.size;
+
+      data = {
+        ...data,
+        avatar: pathFile,
+      };
+    }
+
+    userModel.findByIdAndUpdate(id, data, { new: true }, (err, doc) => {
+      if (err) res.status(500).json(error);
+      res.status(200).json(doc);
+    });
   };
 
   editPassUser = (req, res) => {
@@ -196,7 +203,7 @@ class UserController {
           if (err) {
             throw "Error :" + err;
           }
-          res.status(200).json(doc);
+          res.status(200).json(notification);
         });
       });
     } catch (error) {
@@ -205,8 +212,8 @@ class UserController {
   };
 
   deleteNotification = async (req, res) => {
-    const { idNotification } = req.body;
-    const { id } = req.params;
+    const { idNotification } = await req.body;
+    const { id } = await req.params;
 
     try {
       if (!isValidObjectId(id)) {
