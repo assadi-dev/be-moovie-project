@@ -6,6 +6,7 @@ const {
   accessToken,
   setRefreshToken,
 } = require("../services/auth.services");
+const fs = require("fs");
 
 class AuthController {
   signin = (req, res) => {
@@ -34,17 +35,25 @@ class AuthController {
           user
             .save()
             .then((data) => {
+              const dir = `client/public/uploads/${data._id}`;
+              /* fs.exists(dir, (doc) => {
+                if (!doc) {
+                  return fs.mkdir(dir, { recursive: true }, (error) => {
+                    if (error) throw new Error(error);
+                  });
+                }
+              });*/
               res.status(201).json(data);
             })
             .catch((error) => {
-              res.status(400).json(error);
+              throw new Error(error);
             });
         })
         .catch((error) => {
-          res.status(500).json(error);
+          throw new Error(error);
         });
     } catch (error) {
-      res.status(500).json(error);
+      res.status(400).json(error);
     }
   };
 

@@ -15,7 +15,7 @@ const storage = multer.diskStorage({
 
     fs.exists(dir, (doc) => {
       if (!doc) {
-        return fs.mkdir(dir, (error) => {
+        return fs.mkdir(dir, { recursive: true }, (error) => {
           callback(error, dir);
         });
       }
@@ -24,8 +24,8 @@ const storage = multer.diskStorage({
   },
   filename: (req, file, callback) => {
     const name = file.originalname.toLowerCase().split(" ").join("_");
-    const extension = MIME_TYPES[file.mimetype];
-    callback(null, `${Date.now()}_${name}`);
+    const extension = name.split(".")[1];
+    callback(null, `${Date.now()}_${name}.${extension}`);
   },
 });
 

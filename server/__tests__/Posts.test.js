@@ -24,11 +24,11 @@ const userData = {
 
 beforeAll(async () => {
   dbConnect();
-  /*let user = await createUser(userData);
-  await userModel(user).save();*/
+  let user = await createUser(userData);
+  await userModel(user).save();
 });
 afterAll(async () => {
-  //dbDisconnect();
+  dbDisconnect();
 });
 
 describe("Test Post PATH", () => {
