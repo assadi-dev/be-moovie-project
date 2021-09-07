@@ -2,9 +2,9 @@ const request = require("supertest");
 const app = require("../app");
 const { dbConnect, dbDisconnect } = require("../db/db_handler");
 const userModel = require("../models/user.model");
-const { createUser } = require("../services/test.service");
+const { createUser, createDir } = require("../services/test.service");
 const { getUserId } = require("../services/user.services");
-const fs = require("fs");
+
 const path = require("path");
 require("dotenv").config();
 
@@ -48,6 +48,8 @@ describe("Test Post PATH", () => {
         const id = getUserId(token);
         userId = id;
         console.log(`userId : ${userId}`);
+        const dir = "client/public/uploads/" + userId;
+        createDir(userId, dir);
       } catch (error) {
         console.log(error);
       }
@@ -106,7 +108,7 @@ describe("Test Post PATH", () => {
     });
   });
 
-  describe("when edit post", () => {
+  describe("When edit post", () => {
     it("Should have edit post message & return 200 status code", async () => {
       const expected = "message post has been edited";
       const res = await request(app)
@@ -121,7 +123,7 @@ describe("Test Post PATH", () => {
     });
   });
 
-  describe("when delete post", () => {
+  describe("When delete post", () => {
     it("Should have delete & return 200 status code", async () => {
       const expected = `le poste ${postId} à été supprimé`;
       const res = await request(app)
@@ -133,7 +135,7 @@ describe("Test Post PATH", () => {
       console.log("post message : " + res.body.message);
     });
   });
-  describe("when delete post with file", () => {
+  describe("When delete post with file", () => {
     it("Should have delete & return 200 status code", async () => {
       const expected = `le poste ${postIdFile} à été supprimé`;
       const res = await request(app)

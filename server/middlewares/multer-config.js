@@ -11,15 +11,16 @@ const maxSize = 5 * 1024 * 1024;
 const storage = multer.diskStorage({
   destination: (req, file, callback) => {
     const { author } = req.body;
-    const dir = `client/public/uploads/${author}`;
-
+    const dir = `client/public/uploads/${author}/`;
     fs.exists(dir, (doc) => {
       if (!doc) {
         return fs.mkdir(dir, { recursive: true }, (error) => {
-          callback(error, dir);
+          if (error) callback(error, dir);
+          callback(null, dir);
         });
       }
     });
+
     callback(null, dir);
   },
   filename: (req, file, callback) => {
@@ -43,7 +44,7 @@ const fileFilter = (req, file, callback) => {
   }
 };
 
-module.exports = multer({
+exports.upload = multer({
   storage: storage,
   fileFilter: fileFilter,
-}).single("picture");
+});

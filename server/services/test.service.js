@@ -1,4 +1,5 @@
 const bcrypt = require("bcrypt");
+const fs = require("fs");
 
 /**
  *
@@ -9,4 +10,20 @@ exports.createUser = async (user) => {
   user = { ...user, password: passwordCrypt };
 
   return user;
+};
+
+/**
+ *
+ * @param {string} name  nom du dossier
+ * @param {string} dir  emplacement du dossier
+ * création du dossier
+ */
+exports.createDir = async (name, dir) => {
+  fs.exists(dir, (doc) => {
+    if (!doc) {
+      return fs.mkdir(dir, { recursive: true }, (error) => {
+        if (error) console.log(error);
+      });
+    }
+  });
 };
