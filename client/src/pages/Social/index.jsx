@@ -3,7 +3,10 @@ import { useDispatch, useSelector } from "react-redux";
 import { io } from "socket.io-client";
 import PostCard from "../../components/PostCard";
 import { get_all_post } from "../../redux/actions/post.action";
-import { get_all_users } from "../../redux/actions/user.action";
+import {
+  get_all_users,
+  get_notification,
+} from "../../redux/actions/user.action";
 import Contact from "./Contact";
 import CreatePostCard from "./CreatePostCard";
 import MovieNow from "./MovieNow";
@@ -18,6 +21,13 @@ const Social = () => {
   const socket = io.connect(`http://${window.location.hostname}:6500`);
 
   useEffect(() => {
+    socket.emit("join_room", user.id);
+    socket.on("news", (res) => {
+      if (res.author !== user.id) {
+        dispatch(get_notification(user.id));
+      }
+    });
+
     dispatch(get_all_post());
     dispatch(get_all_users());
   }, []);

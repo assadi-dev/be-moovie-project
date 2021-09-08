@@ -12,7 +12,6 @@ const Notification = () => {
   const userId = useAuthState().userId;
   const notifications = useSelector((state) => state.NotificationReducers);
   const [show, setShow] = useState(false);
-  const socket = io.connect(`http://${window.location.hostname}:6500`);
 
   const Empty = () => {
     return (
@@ -38,7 +37,6 @@ const Notification = () => {
 
   useEffect(() => {
     dispatch(get_notification(userId));
-    return () => socket.close();
   }, []);
 
   return (

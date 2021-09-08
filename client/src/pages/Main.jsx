@@ -29,16 +29,8 @@ const Main = () => {
   const history = useHistory();
   const userId = useAuthState().userId;
   const dispatch = useDispatch();
-  const socket = io.connect(`http://${window.location.hostname}:6500`);
 
   useEffect(() => {
-    socket.emit("join_room", userId);
-    socket.on("news", (res) => {
-      if (res.author !== userId) {
-        dispatch(get_notification(userId));
-      }
-    });
-
     dispatch(get_user(userId));
     dispatch(get_all_users());
   }, [userId, dispatch]);

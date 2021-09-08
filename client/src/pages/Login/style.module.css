@@ -1,0 +1,150 @@
+.container {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    height: 100vh;
+    max-width: 1600px;
+    align-items: center;
+    padding-left: 12px;
+    padding-right: 12px;
+}
+
+.wrapper {
+    padding: 1.2rem;
+    background-color: rgba(11, 11, 11, 0.3);
+    min-height: 50vh;
+    position: relative;
+    z-index: 10;
+    width: 400px;
+    text-align: center;
+    padding: 12px;
+
+}
+
+
+.inputWrapper {
+    background-color: #111;
+    display: flex;
+    margin-top: 1rem;
+    padding: 12px;
+    align-items: center;
+    border-radius: 5px;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    -ms-border-radius: 5px;
+    -o-border-radius: 5px;
+}
+
+.inputWrapper input {
+    border: none;
+    background-color: inherit;
+    color: #fff;
+    outline: none;
+    margin: 0 1rem;
+    padding: 0;
+
+    width: 100%;
+
+}
+
+.showBtn {
+    color: rgba(255, 255, 255, 0.3);
+    cursor: pointer;
+}
+
+.showBtn:hover {
+    color: rgba(255, 255, 255, 0.8);
+}
+
+.signInBtn {
+    margin-top: 2rem;
+    margin-bottom: 1rem;
+}
+
+.formSignInContainer {
+    margin-top: 2.2rem;
+}
+
+.spinning {
+    margin-left: 1rem;
+    margin-right: 1rem;
+    vertical-align: middle;
+}
+
+.optionText {
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+}
+
+.alertMessage {
+    margin-top: 1rem;
+    min-height: 50px;
+    vertical-align: middle;
+    overflow: hidden;
+    width: 100%;
+}
+
+.error {
+    color: #f80c35;
+    opacity: 0;
+    transform: translateY(100px);
+
+
+}
+
+.slideUp {
+    animation: slideUp ease-in forwards 0.5s;
+    -webkit-animation: slideUp ease-in forwards 0.5s;
+}
+
+.switchBtn {
+    cursor: pointer;
+    color: rgba(255, 255, 255, 0.3);
+    margin-left: 0.8rem;
+    right: 0.8rem;
+
+}
+
+.switchBtn:hover {
+    color: rgba(255, 255, 255, 0.8);
+}
+
+
+
+@keyframes slideUp {
+    0% {
+        opacity: 0;
+        transform: translateY(100px);
+        -webkit-transform: translateY(100px);
+        -moz-transform: translateY(100px);
+        -ms-transform: translateY(100px);
+        -o-transform: translateY(100px);
+    }
+
+    50% {
+        opacity: 0.3;
+    }
+
+    100% {
+
+        opacity: 1;
+        transform: translateY(0);
+        -webkit-transform: translateY(0);
+        -moz-transform: translateY(0);
+        -ms-transform: translateY(0);
+        -o-transform: translateY(0);
+    }
+}
+
+@media screen and (max-width:550px) {
+    .wrapper {
+        width: 90%;
+        padding-left: 15px;
+        padding-right: 15px;
+    }
+
+    .optionText,
+    .alertMessage {
+        font-size: 0.8rem;
+    }
+}
