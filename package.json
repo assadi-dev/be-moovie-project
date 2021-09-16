@@ -14,7 +14,7 @@
     "heroku-postbuild": "npm run install-client && npm run build"
   },
   "engines": {
-    "node": "15.x"
+    "node": "14.x"
   },
   "author": "Assadi",
   "license": "ISC",
