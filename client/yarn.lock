@@ -5427,7 +5427,7 @@
     "locate-path" "^5.0.0"
     "path-exists" "^4.0.0"
 
-"fizzy-ui-utils@^2.0.7":
+"fizzy-ui-utils@^2.0.0", "fizzy-ui-utils@^2.0.7":
   "integrity" "sha512-CZXDVXQ1If3/r8s0T+v+qVeMshhfcuq0rqIFgJnrtd+Bu8GmDmqMjntjUePypVtjHXKJ6V4sw9zeyox34n9aCg=="
   "resolved" "https://registry.npmjs.org/fizzy-ui-utils/-/fizzy-ui-utils-2.0.7.tgz"
   "version" "2.0.7"
@@ -5452,7 +5452,15 @@
   "resolved" "https://registry.yarnpkg.com/flatten/-/flatten-1.0.3.tgz"
   "version" "1.0.3"
 
-"flickity@^2.2.2":
+"flickity-fade@^1.0.0":
+  "integrity" "sha512-5iXHN+nqjQcph6fqOw+/wAr0FHxIrcVQyKfwyVoI325CYrl9sVsx7cr6cyAih9sDYiUCGzrM6OykG7mSb5LPMg=="
+  "resolved" "https://registry.npmjs.org/flickity-fade/-/flickity-fade-1.0.0.tgz"
+  "version" "1.0.0"
+  dependencies:
+    "fizzy-ui-utils" "^2.0.0"
+    "flickity" "^2.2.0"
+
+"flickity@^2.2.0", "flickity@^2.2.2":
   "integrity" "sha512-yiPMuP8tw/zN7ARgeSLZNvzK11GkzI2mp/zlYBsyttguSCROAqxj6wiN2sSfPfW3xMG3hcUHxWUXNQMlk/wYcg=="
   "resolved" "https://registry.npmjs.org/flickity/-/flickity-2.2.2.tgz"
   "version" "2.2.2"

@@ -6,11 +6,13 @@ const StorageKey = "@MyAppOAuthKey";
 const auth = Cookies.get(StorageKey) ? Cookies.get(StorageKey) : "";
 const token = auth !== "" ? JSON.parse(auth).token : "";
 
-console.log(process.env.REACT_APP__URL);
-
 export const api = axios.create({
-  baseURL: "http://localhost:6500/api",
+  baseURL: process.env.REACT_APP_URL,
   headers: {
     Authorization: `Bearer ${token}`,
   },
+});
+
+export const apiMovie = axios.create({
+  baseURL: "https://api.themoviedb.org/3",
 });

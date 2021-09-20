@@ -11,29 +11,56 @@ import {
 } from "mdb-react-ui-kit";
 import styles from "./style.module.css";
 
-const MovieTrendingPresentation = ({ itemId, classname }) => {
+const MovieTrendingPresentation = ({
+  id,
+  classname,
+  backdrop_path,
+  title,
+  release_date,
+}) => {
+  const urlImg = `https://image.tmdb.org/t/p/w1920_and_h1080_multi_faces`;
+
   return (
-    <div className={styles.parentItem}>
-      <MDBCarouselElement
+    <div
+      className={styles.parentItem}
+      style={{
+        backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.4), #161616) ,url(${
+          urlImg + backdrop_path
+        })`,
+      }}
+    >
+      {/*<MDBCarouselElement
         className={styles.picture}
-        src="https://mdbcdn.b-cdn.net/img/new/slides/041.jpg"
-        alt="..."
-      />
-      <MDBContainer st>
+        src={urlImg + backdrop_path}
+        alt={`${title}`}
+     />*/}
+      <MDBContainer>
         <div className={styles.presentation}>
-          <h5 className={styles.titleMovie}>Title</h5>
-          <p>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Temporibus,
-            quos? Lorem ipsum dolor sit amet consectetur adipisicing elit.
-            Temporibus, quos?
-          </p>
-          <div>
-            <MDBBtn className="mx-2" color="danger">
-              Afficher
-            </MDBBtn>
-            <MDBBtn floating className="mx-2" outline color="white">
-              <MDBIcon className="me-2" far icon="heart" />
-            </MDBBtn>
+          <div style={styles.info}>
+            <h5 className={styles.titleMovie}>{title}</h5>
+            <p className={styles.genre}>
+              <MDBIcon className="me-2" far icon="calendar-alt" />{" "}
+              {release_date}
+            </p>
+            <p className={styles.genre}>
+              <MDBIcon className="me-2" fas icon="list" />
+              Action, Aventure, Fantastique, Comédie
+            </p>
+            <p className={styles.tagLine}>
+              Le monde a besoin d'un héros. C'est tombé sur lui.
+            </p>
+            <div className={styles.btnZone}>
+              <MDBBtn color="danger"> Créer un post </MDBBtn>{" "}
+              <MDBBtn outline color="white">
+                {" "}
+                <MDBIcon className="me-2" far icon="heart" />
+                Ajouter à mes favoris
+              </MDBBtn>{" "}
+              <MDBBtn outline color="white">
+                <MDBIcon className="me-2" fas icon="play" />
+                Details
+              </MDBBtn>
+            </div>
           </div>
         </div>
       </MDBContainer>

@@ -7,19 +7,25 @@ import {
   MDBTabsLink,
   MDBTabsContent,
   MDBTabsPane,
+  MDBBtn,
 } from "mdb-react-ui-kit";
 import EditProfile from "./EditProfile";
 import { useSelector, useDispatch } from "react-redux";
 import { getFullDate } from "../../services/times.services";
 import { decode } from "ent";
-import { get_user } from "../../redux/actions/user.action";
+import { edit_user_data, get_user } from "../../redux/actions/user.action";
 
 const Profil = () => {
   const [fillActive, setFillActive] = useState("tab1");
   const dispatch = useDispatch();
   const userData = useSelector((state) => state.UserReducers);
+  const [avatar, setAvatar] = useState("");
+  const [preView, setPreView] = useState(false);
+  const [file, setFile] = useState("");
 
-  useEffect(() => {}, [userData.isLoading, dispatch]);
+  useEffect(() => {
+    setAvatar(userData.avatar);
+  }, [userData.isLoading, dispatch]);
 
   const handleFillClick = (value) => {
     if (value === fillActive) {
@@ -29,6 +35,28 @@ const Profil = () => {
     setFillActive(value);
   };
 
+  const handleChangeAvatar = (e) => {
+    e.preventDefault();
+    let file = URL.createObjectURL(e.target.files[0]);
+    setAvatar(file);
+    setPreView(true);
+    setFile(e.target.files[0]);
+  };
+
+  const handleSubmitAvatar = (e) => {
+    e.preventDefault();
+    let data = new FormData();
+
+    data.append("author", userData.id);
+    data.append("pseudo", decode(userData.pseudo));
+    data.append("email", decode(userData.email));
+    data.append("presentation", decode(userData.presentation));
+    data.append("avatar", file);
+
+    dispatch(edit_user_data(userData.id, data));
+    setPreView(false);
+  };
+
   return (
     <main className={styles.mainContainer}>
       <div className={styles.mainProfil}>
@@ -36,7 +64,29 @@ const Profil = () => {
           <div className={styles.leftwrapper}>
             <div className={styles.avatarSection}>
               {userData.avatar && (
-                <img src={userData.avatar} alt="user_avatar" />
+                <div className={styles.avatarContainer}>
+                  <img src={avatar} alt="user_avatar" />
+                  <form
+                    onSubmit={handleSubmitAvatar}
+                    className={styles.editAvatarBtn}
+                  >
+                    <label htmlFor="avatar" className={styles.editAvatarIcon}>
+                      <MDBIcon fas icon="pencil-alt" /> Changer ma photo de
+                      profil
+                      <input
+                        type="file"
+                        id="avatar"
+                        name="avatar"
+                        onChange={handleChangeAvatar}
+                        style={{ display: "none" }}
+                      />
+                    </label>
+
+                    {preView && (
+                      <MDBBtn color={"info"}>Valider la modification</MDBBtn>
+                    )}
+                  </form>
+                </div>
               )}
 
               <h5 className={styles.pseudo}>

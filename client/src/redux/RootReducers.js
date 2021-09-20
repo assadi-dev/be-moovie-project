@@ -4,6 +4,7 @@ import AllUsersReducers from "./reducers/allUsers.reducer";
 import PostReducers from "./reducers/post.reducers";
 import AllPostReducers from "./reducers/allPosts.reducers";
 import NotificationReducers from "./reducers/notifications.reducers";
+import TrendingMoviesReducers from "./reducers/trendingMovieReducer";
 
 const RootReducer = combineReducers({
   UserReducers,
@@ -11,6 +12,7 @@ const RootReducer = combineReducers({
   PostReducers,
   AllPostReducers,
   NotificationReducers,
+  TrendingMoviesReducers,
 });
 
 export default RootReducer;

@@ -1,17 +1,8 @@
-import { useContext, useEffect } from "react";
-import {
-  MDBCarousel,
-  MDBCarouselInner,
-  MDBCarouselItem,
-  MDBCarouselElement,
-  MDBCarouselCaption,
-  MDBContainer,
-  MDBBtn,
-} from "mdb-react-ui-kit";
+import { useContext, useEffect, useRef } from "react";
 import styles from "./Main/style.module.css";
 import MovieTrendingPresentation from "../components/MovieTrendingPresentation";
 import CarousselGroup from "../components/CarouselGroup";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import {
   get_all_users,
   get_notification,
@@ -20,37 +11,51 @@ import {
 import { useAuthState } from "../utils/context/AuthContext";
 import { io } from "socket.io-client";
 import { useHistory } from "react-router";
+import Flickity from "flickity-fade";
+import { getTrendingMovies } from "../redux/actions/movies.action";
+
 const Main = () => {
   const sectionList = [
     { name: "Films Populaires", data: [] },
     { name: "Films à venir", data: [] },
   ];
 
-  const history = useHistory();
+  const refCarousel = useRef();
   const userId = useAuthState().userId;
   const dispatch = useDispatch();
 
+  const trendingMovie = useSelector(
+    (state) => state.TrendingMoviesReducers.collections
+  );
+
   useEffect(() => {
+    dispatch(getTrendingMovies());
     dispatch(get_user(userId));
     dispatch(get_all_users());
+    let flkty = new Flickity(refCarousel.current, {
+      cellAlign: "center",
+      contain: true,
+      pageDots: false,
+      prevNextButtons: false,
+      autoPlay: 3500,
+      fade: true,
+      wrapAround: true,
+    });
   }, [userId, dispatch]);
 
   return (
     <>
       <header id={styles.header}>
-        <MDBCarousel showIndicators fade className={styles.TrendMovieCaroussel}>
-          <MDBCarouselInner>
-            <MDBCarouselItem itemId={0}>
-              <MovieTrendingPresentation />
-            </MDBCarouselItem>
-            <MDBCarouselItem itemId={1}>
-              <MovieTrendingPresentation />
-            </MDBCarouselItem>
-            <MDBCarouselItem itemId={2}>
-              <MovieTrendingPresentation />
-            </MDBCarouselItem>
-          </MDBCarouselInner>
-        </MDBCarousel>
+        <div ref={refCarousel} className={styles.trendingCarousel}>
+          {trendingMovie.map((movie) => (
+            <MovieTrendingPresentation
+              key={movie.id}
+              id={movie.id}
+              backdrop_path={movie.backdrop_path}
+              title={movie.title}
+            />
+          ))}
+        </div>
       </header>
       <main id={styles.main}>
         {sectionList.map((section, index) => (

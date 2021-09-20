@@ -35,6 +35,7 @@ class UserController {
 
     let pathFile = "";
     let nameFile = "";
+    let size = 0;
     if (req.file) {
       pathFile = `../uploads/${req.body.author}/${req.file.filename}`;
       nameFile = req.file.filename;
@@ -82,6 +83,21 @@ class UserController {
     } catch (error) {
       res.status(400).json(error);
     }
+  };
+
+  editAvatar = async (req, res) => {
+    let pathFile = "";
+    let nameFile = "";
+    if (req.file) {
+      pathFile = `../uploads/${req.body.author}/${req.file.filename}`;
+      nameFile = req.file.filename;
+      size = req.file.size;
+
+      data = {
+        avatar: pathFile,
+      };
+    }
+    res.status(200);
   };
 
   userFollow = async (req, res) => {

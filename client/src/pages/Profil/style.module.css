@@ -248,6 +248,35 @@
     height: 2.5rem;
 }
 
+.avatarContainer {
+
+    margin-bottom: 1rem;
+
+}
+
+.editAvatarBtn {
+    display: flex;
+    margin-top: 1rem;
+    cursor: pointer;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+}
+
+.editAvatarIcon {
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+}
+
+
+.editAvatarIcon:hover {
+    color: #F93154;
+}
+
 @media screen and (max-width: 1200px) {
     .mainProfil {
         margin-top: 7%;

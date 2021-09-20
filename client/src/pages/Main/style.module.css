@@ -1,11 +1,12 @@
 #header {
-    height: 400px;
-    background-attachment: fixed;
+    height: 550px;
+
 }
 
-.TrendMovieCaroussel {
+.trendingCarousel {
     height: 100%;
 }
+
 
 .movieSection {
     max-width: 1600px;

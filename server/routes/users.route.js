@@ -8,7 +8,7 @@ const userController = new UserController();
 
 router.get("/", auth, userController.getAllUser);
 router.get("/:id", auth, userController.getOneUser);
-router.put("/:id", auth, userController.editUser);
+router.put("/:id", upload.single("avatar"), auth, userController.editUser);
 router.patch("/password/:id", auth, userController.editPassUser);
 router.patch("/follow/:id", auth, userController.userFollow);
 router.patch("/unfollow/:id", auth, userController.userUnFollow);
