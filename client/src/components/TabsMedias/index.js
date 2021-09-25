@@ -9,7 +9,7 @@ import {
 import styles from "./style.module.css";
 import { MovieSimilar } from "./MovieSimilar";
 
-export default function App() {
+export default function TabsMedias({ movieId }) {
   const [basicActive, setBasicActive] = useState("tab1");
 
   const handleBasicClick = (value) => {
@@ -55,7 +55,7 @@ export default function App() {
       <MDBTabsContent>
         <MDBTabsPane show={basicActive === "tab1"}>
           {" "}
-          <MovieSimilar />
+          <MovieSimilar movieId={movieId} />
         </MDBTabsPane>
         <MDBTabsPane show={basicActive === "tab2"}>Tab 2 content</MDBTabsPane>
         <MDBTabsPane show={basicActive === "tab3"}>Tab 3 content</MDBTabsPane>

@@ -1,14 +1,4 @@
-import {
-  MDBCarousel,
-  MDBCarouselInner,
-  MDBCarouselItem,
-  MDBCarouselElement,
-  MDBCarouselCaption,
-  MDBContainer,
-  MDBRow,
-  MDBBtn,
-  MDBIcon,
-} from "mdb-react-ui-kit";
+import { MDBContainer, MDBBtn, MDBIcon } from "mdb-react-ui-kit";
 import styles from "./style.module.css";
 
 const MovieTrendingPresentation = ({

@@ -4,6 +4,7 @@
     position: relative;
     padding-bottom: 12px;
     min-height: 250px;
+
 }
 
 .movieLists {
@@ -11,20 +12,23 @@
     padding-bottom: 18px;
     height: 100%;
     overflow: hidden;
+    margin-top: 2.5rem;
 
 
 }
 
 .movieItem {
     padding: 6px;
-    width: 180px;
-    height: 250px;
+    width: 120px;
+    height: 180px;
+
 
 }
 
 .movieItem img {
-    height: 100%;
+
     width: 100%;
+    object-fit: contain;
     border-radius: 5px;
     -webkit-border-radius: 5px;
     -moz-border-radius: 5px;

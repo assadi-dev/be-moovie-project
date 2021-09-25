@@ -1,5 +1,7 @@
 import { apiMovie } from "../../components/Api";
 export const GET_TRENDING_MOVIES = "GET_TRENDING_MOVIES";
+export const GET_POPULAR_MOVIES = "GET_POPULAR_MOVIES";
+export const GET_UPCOMMING_MOVIES = "GET_UPCOMMING_MOVIES";
 
 /**Action Post ***/
 
@@ -31,7 +33,7 @@ export const getPopularMovie = () => {
           `movie/popular?api_key=${process.env.REACT_APP_KEY}&language=fr-FR&region=FR`
         )
         .then((res) => {
-          dispatch({ type: GET_TRENDING_MOVIES, payload: res.data });
+          dispatch({ type: GET_POPULAR_MOVIES, payload: res.data.results });
         })
         .catch((err) => {
           throw err;
@@ -45,9 +47,16 @@ export const getPopularMovie = () => {
 export const getUpcomingmovie = () => {
   return async (dispatch) => {
     try {
-      await apiMovie.get(
-        `https://api.themoviedb.org/3/movie/upcoming?api_key=${process.env.REACT_APP_KEY}&language=fr-FR&page=1&region=FR`
-      );
+      await apiMovie
+        .get(
+          `https://api.themoviedb.org/3/movie/upcoming?api_key=${process.env.REACT_APP_KEY}&language=fr-FR&page=1&region=FR`
+        )
+        .then((res) => {
+          dispatch({ type: GET_UPCOMMING_MOVIES, payload: res.data.results });
+        })
+        .catch((err) => {
+          console.log(err);
+        });
     } catch (error) {
       console.log(error);
     }
