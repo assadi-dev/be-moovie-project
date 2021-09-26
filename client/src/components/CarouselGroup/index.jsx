@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import Flickity from "flickity";
 import "./styleCarousel.css";
 import { Link } from "react-router-dom";
@@ -16,9 +16,13 @@ const CarousselGroup = ({ movies }) => {
         selectedAttraction: 0.01,
         friction: 0.15,
       });
+
+      return () => {
+        flkty.destroy();
+      };
     });
-  }, []);
-  console.log(movies);
+  }, [movies]);
+
   return (
     <div className="main-carousel">
       {movies.map((item, index) => (

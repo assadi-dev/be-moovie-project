@@ -6,6 +6,13 @@ import Navbar from "./components/Navbar";
 import ThemeColor from "./components/ThemColor";
 import TabBar from "./components/TabBar";
 import { useEffect, useState } from "react";
+import {
+  getPopularMovie,
+  getTrendingMovies,
+  getUpcomingmovie,
+} from "./redux/actions/movies.action";
+import { useDispatch } from "react-redux";
+import { get_all_users } from "./redux/actions/user.action";
 
 const App = () => {
   const [state, setState] = useState({
@@ -20,7 +27,15 @@ const App = () => {
     }
   };
 
+  const dispatch = useDispatch();
+
   useEffect(() => {
+    dispatch(getTrendingMovies());
+
+    dispatch(get_all_users());
+    dispatch(getPopularMovie());
+    dispatch(getUpcomingmovie());
+
     const mediaQuery = window.matchMedia("(max-width:550px)");
     mediaQuery.addListener(handleMediaQueryChange);
     handleMediaQueryChange(mediaQuery);

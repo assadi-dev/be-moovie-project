@@ -1,21 +1,37 @@
 import { MDBContainer, MDBBtn, MDBIcon } from "mdb-react-ui-kit";
+import { useEffect, useState } from "react";
 import styles from "./style.module.css";
+import axios from "axios";
 
-const MovieTrendingPresentation = ({
-  id,
-  classname,
-  backdrop_path,
-  title,
-  release_date,
-}) => {
+const MovieTrendingPresentation = ({ id }) => {
   const urlImg = `https://image.tmdb.org/t/p/w1920_and_h1080_multi_faces`;
+  const [isLoading, setIsLoading] = useState(false);
+  const [dataMovie, setDataMovie] = useState([]);
+  const [genre, setGenre] = useState([]);
+
+  useEffect(() => {
+    axios
+      .get(
+        `https://api.themoviedb.org/3/movie/${id}?api_key=af3bb285b6a9f371e3eee1507dba9d06&language=fr-FR&region=FR`
+      )
+      .then((res) => {
+        setDataMovie(res.data);
+        const genreList = [];
+
+        res.data.genres.forEach((e) => {
+          genreList.push(e.name);
+        });
+        setGenre(genreList.join(", "));
+        setIsLoading(true);
+      });
+  }, [id, isLoading]);
 
   return (
     <div
       className={styles.parentItem}
       style={{
         backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.4), #161616) ,url(${
-          urlImg + backdrop_path
+          urlImg + dataMovie.backdrop_path
         })`,
       }}
     >
@@ -27,18 +43,16 @@ const MovieTrendingPresentation = ({
       <MDBContainer>
         <div className={styles.presentation}>
           <div style={styles.info}>
-            <h5 className={styles.titleMovie}>{title}</h5>
+            <h5 className={styles.titleMovie}>{dataMovie.title}</h5>
             <p className={styles.genre}>
               <MDBIcon className="me-2" far icon="calendar-alt" />{" "}
-              {release_date}
+              {dataMovie.release_date}
             </p>
             <p className={styles.genre}>
               <MDBIcon className="me-2" fas icon="list" />
-              Action, Aventure, Fantastique, Comédie
+              {genre}
             </p>
-            <p className={styles.tagLine}>
-              Le monde a besoin d'un héros. C'est tombé sur lui.
-            </p>
+            <p className={styles.tagLine}>{dataMovie.tagline}</p>
             <div className={styles.btnZone}>
               <MDBBtn color="danger"> Créer un post </MDBBtn>{" "}
               <MDBBtn outline color="white">

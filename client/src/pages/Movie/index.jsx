@@ -26,7 +26,7 @@ const Movie = () => {
         });
         setGenre(genreList.join(", "));
       });
-  }, []);
+  }, [id]);
 
   return (
     <>

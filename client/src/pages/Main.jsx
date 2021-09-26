@@ -3,14 +3,9 @@ import styles from "./Main/style.module.css";
 import MovieTrendingPresentation from "../components/MovieTrendingPresentation";
 import CarousselGroup from "../components/CarouselGroup";
 import { useDispatch, useSelector } from "react-redux";
-import { get_all_users, get_user } from "../redux/actions/user.action";
 import { useAuthState } from "../utils/context/AuthContext";
 import Flickity from "flickity-fade";
-import {
-  getPopularMovie,
-  getTrendingMovies,
-  getUpcomingmovie,
-} from "../redux/actions/movies.action";
+import { get_user } from "../redux/actions/user.action";
 
 const Main = () => {
   const refCarousel = useRef();
@@ -27,17 +22,9 @@ const Main = () => {
     (state) => state.UpcomingMoviesReducers.collections
   );
 
-  const [sectionList, setSectionList] = useState([
-    { name: "Films Populaires", data: pouplarMovies },
-    { name: "Films à venir", data: upcomingMovies },
-  ]);
-
   useEffect(() => {
-    dispatch(getTrendingMovies());
     dispatch(get_user(userId));
-    dispatch(get_all_users());
-    dispatch(getPopularMovie());
-    dispatch(getUpcomingmovie());
+
     const flkty = new Flickity(refCarousel.current, {
       cellAlign: "center",
       contain: true,
@@ -47,19 +34,23 @@ const Main = () => {
       fade: true,
       wrapAround: true,
     });
-  }, [dispatch, userId]);
+
+    return () => {
+      flkty.destroy();
+    };
+  }, [dispatch, userId, trendingMovie, pouplarMovies, upcomingMovies]);
+
+  const [sectionList, setSectionList] = useState([
+    { name: "Films Populaires", data: pouplarMovies },
+    { name: "Films à venir", data: upcomingMovies },
+  ]);
 
   return (
     <>
       <header id={styles.header}>
         <div ref={refCarousel} className={styles.trendingCarousel}>
           {trendingMovie.map((movie) => (
-            <MovieTrendingPresentation
-              key={movie.id}
-              id={movie.id}
-              backdrop_path={movie.backdrop_path}
-              title={movie.title}
-            />
+            <MovieTrendingPresentation key={movie.id} id={movie.id} />
           ))}
         </div>
       </header>
