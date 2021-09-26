@@ -41,7 +41,7 @@ export const MovieSimilar = ({ movieId }) => {
   return (
     <div ref={elem} className={styles.movieLists}>
       {movies.map((movie, index) => (
-        <div className={styles.movieItem}>
+        <div key={index} className={styles.movieItem}>
           <Link key={index} to={`/movie/${movie.id}`}>
             <img
               src={`https://www.themoviedb.org/t/p/w1280${movie.poster_path}`}

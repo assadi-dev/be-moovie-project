@@ -2,9 +2,15 @@ import React from "react";
 import styles from "./style.module.css";
 import classNames from "classnames";
 import { MDBBtn, MDBIcon } from "mdb-react-ui-kit";
-import PropTypes from "prop-types";
 
-const HeaderMedia = ({ title, release, tagline, genres, backdrop }) => {
+const HeaderMedia = ({
+  title,
+  release,
+  tagline,
+  genres,
+  backdrop,
+  toggleShow,
+}) => {
   const imgUrl = `https://image.tmdb.org/t/p/w1920_and_h800_multi_faces${backdrop}`;
 
   return (
@@ -32,7 +38,7 @@ const HeaderMedia = ({ title, release, tagline, genres, backdrop }) => {
                 <MDBIcon className="me-2" far icon="heart" />
                 Ajouter à mes favoris
               </MDBBtn>
-              <MDBBtn outline color="white">
+              <MDBBtn outline color="white" onClick={toggleShow}>
                 <MDBIcon className="me-2" fas icon="play" />
                 Voir la bande annonce
               </MDBBtn>

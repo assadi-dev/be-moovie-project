@@ -62,6 +62,12 @@
     flex-direction: column
 }
 
+.vdeiCardContent {
+    background-color: transparent !important;
+    width: 640px;
+
+}
+
 @media screen and (max-width:480px) {
 
     .sectionContent {
@@ -71,6 +77,10 @@
 
     .synopsis {
         font-size: 0.8rem;
+    }
+
+    .vdeiCardContent {
+        width: 100%;
     }
 
 
