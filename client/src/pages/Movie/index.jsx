@@ -66,6 +66,7 @@ const Movie = () => {
   return (
     <>
       <HeaderMedia
+        idMovie={movieDetail.id}
         title={movieDetail.title}
         genres={genres}
         tagline={movieDetail.tagline}
@@ -106,7 +107,7 @@ const Movie = () => {
         <MDBModalDialog centered>
           <MDBModalContent className={styles.vdeiCardContent}>
             <MDBModalBody className={styles.vdeiCardContent}>
-              {trailers ? (
+              {trailers !== "" ? (
                 <YouTube videoId={trailers} opts={opts} />
               ) : (
                 <YouTube videoId="" opts={opts} />

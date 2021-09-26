@@ -1,9 +1,11 @@
-import React from "react";
+import React, { useEffect } from "react";
 import styles from "./style.module.css";
 import classNames from "classnames";
 import { MDBBtn, MDBIcon } from "mdb-react-ui-kit";
+import FavorisButton from "./FavorisButton";
 
 const HeaderMedia = ({
+  idMovie,
   title,
   release,
   tagline,
@@ -33,11 +35,8 @@ const HeaderMedia = ({
             </p>
             <p className={styles.tagLine}>{tagline}</p>
             <div>
-              <MDBBtn color="danger"> Créer un post </MDBBtn>{" "}
-              <MDBBtn outline color="white">
-                <MDBIcon className="me-2" far icon="heart" />
-                Ajouter à mes favoris
-              </MDBBtn>
+              <MDBBtn color="danger"> Créer un post </MDBBtn>
+              <FavorisButton id={idMovie} />
               <MDBBtn outline color="white" onClick={toggleShow}>
                 <MDBIcon className="me-2" fas icon="play" />
                 Voir la bande annonce

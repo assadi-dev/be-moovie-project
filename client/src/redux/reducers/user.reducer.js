@@ -1,3 +1,7 @@
+import {
+  ADD_MOVIE_FAVORIE,
+  REMOVE_MOVIE_FAVORIE,
+} from "../actions/movies.action";
 import { LIKE_POST, UNLIKE_POST } from "../actions/post.action";
 import {
   CLEAR_USER,
@@ -16,8 +20,8 @@ const initialState = {
   postLikes: [],
   followers: [],
   following: [],
-  movies: { favories: [], likes: [] },
-  series: { favories: [], likes: [] },
+  movies: [],
+  series: [],
   createdAt: "",
   presentation: "",
   birthday: "",
@@ -35,6 +39,8 @@ const UserReducers = (state = initialState, action) => {
         avatar: action.payload.avatar,
         email: action.payload.email,
         postLikes: action.payload.postLikes,
+        movies: action.payload.movies,
+        series: action.payload.series,
         createdAt: action.payload.createdAt,
         presentation: action.payload.presentation,
         birthday: action.payload.birthday,
@@ -88,6 +94,17 @@ const UserReducers = (state = initialState, action) => {
         following: action.payload.following,
       };
       break;
+
+    case ADD_MOVIE_FAVORIE:
+      return { ...state, movies: [action.payload, ...state.movies] };
+      break;
+    case REMOVE_MOVIE_FAVORIE:
+      return {
+        ...state,
+        movies: [state.movies.filter((movie) => movie !== action.payload)],
+      };
+      break;
+
     case CLEAR_USER:
       return {
         id: "",
@@ -97,8 +114,8 @@ const UserReducers = (state = initialState, action) => {
         postLikes: [],
         followers: [],
         following: [],
-        movies: { favories: [], likes: [] },
-        series: { favories: [], likes: [] },
+        movies: [],
+        series: [],
         createdAt: "",
         presentation: "",
         birthday: "",

@@ -14,11 +14,13 @@ import { useSelector, useDispatch } from "react-redux";
 import { getFullDate } from "../../services/times.services";
 import { decode } from "ent";
 import { edit_user_data, get_user } from "../../redux/actions/user.action";
+import PosterFavoris from "./PosterFavoris";
 
 const Profil = () => {
   const [fillActive, setFillActive] = useState("tab1");
   const dispatch = useDispatch();
   const userData = useSelector((state) => state.UserReducers);
+
   const [avatar, setAvatar] = useState("");
   const [preView, setPreView] = useState(false);
   const [file, setFile] = useState("");
@@ -155,20 +157,9 @@ const Profil = () => {
               {fillActive === "tab1" && (
                 <div className={styles.tabPaneWrapper}>
                   <div className={styles.showFavoris}>
-                    <div className={styles.posterFavorisWrapper}>
-                      <img
-                        className={styles.posterFavoris}
-                        src=""
-                        alt="poster"
-                        srcset=""
-                      />
-
-                      <MDBIcon
-                        className={styles.favorisBtn}
-                        fas
-                        icon="times-circle"
-                      />
-                    </div>
+                    {userData.movies.map((favorie) => (
+                      <PosterFavoris id={favorie} />
+                    ))}
                   </div>
                 </div>
               )}

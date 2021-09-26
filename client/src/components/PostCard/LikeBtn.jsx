@@ -28,7 +28,7 @@ const LikeBtn = ({ postId, likers, userId }) => {
 
   return (
     <>
-      <a className={classNames(styles.actionBtn, styles.likesBtn)} href="#!">
+      <span className={classNames(styles.actionBtn, styles.likesBtn)}>
         {toggleBtn ? (
           <MDBIcon fas icon="heart" onClick={handleUnleLike} />
         ) : (
@@ -38,7 +38,7 @@ const LikeBtn = ({ postId, likers, userId }) => {
         <MDBBadge color="danger" notification pill>
           {likers.length > 0 && likers.length}
         </MDBBadge>
-      </a>
+      </span>
     </>
   );
 };
