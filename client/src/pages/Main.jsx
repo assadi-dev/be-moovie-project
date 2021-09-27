@@ -22,6 +22,11 @@ const Main = () => {
     (state) => state.UpcomingMoviesReducers.collections
   );
 
+  const sectionList = [
+    { name: "Films Populaires", data: pouplarMovies },
+    { name: "Films à venir", data: upcomingMovies },
+  ];
+
   useEffect(() => {
     dispatch(get_user(userId));
 
@@ -39,11 +44,6 @@ const Main = () => {
       flkty.destroy();
     };
   }, [dispatch, userId, trendingMovie, pouplarMovies, upcomingMovies]);
-
-  const [sectionList, setSectionList] = useState([
-    { name: "Films Populaires", data: pouplarMovies },
-    { name: "Films à venir", data: upcomingMovies },
-  ]);
 
   return (
     <>

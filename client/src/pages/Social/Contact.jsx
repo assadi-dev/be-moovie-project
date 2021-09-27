@@ -20,10 +20,10 @@ const Contact = () => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    setLoading(users.isLoading);
     let getunFollowList = getUserUnFollow(usersId, users.collections);
     setUserUnfollow(getunFollowList);
-  }, [serchContact, loading]);
+    setLoading(false);
+  }, [serchContact, loading, dispatch, usersId, users.collections]);
 
   const handleSearchContact = (e) => {
     let value = e.target.value;

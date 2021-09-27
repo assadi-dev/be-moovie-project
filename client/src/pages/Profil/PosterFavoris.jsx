@@ -3,12 +3,20 @@ import React, { useEffect, useState } from "react";
 import styles from "./style.module.css";
 import axios from "axios";
 import { Link } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { removeFavoris } from "../../redux/actions/movies.action";
 
 const PosterFavoris = ({ id }) => {
   const [movieDetail, setMovieDetail] = useState({
     poster_path: "",
     title: "",
   });
+
+  const dispatch = useDispatch();
+
+  const removeToFavorie = () => {
+    dispatch(removeFavoris(id));
+  };
 
   useEffect(() => {
     axios
@@ -37,7 +45,12 @@ const PosterFavoris = ({ id }) => {
             srcset=""
           />
         </Link>
-        <MDBIcon className={styles.favorisBtn} fas icon="times-circle" />
+        <MDBIcon
+          className={styles.favorisBtn}
+          fas
+          icon="times-circle"
+          onClick={removeToFavorie}
+        />
       </div>
     </>
   );

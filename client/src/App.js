@@ -42,7 +42,7 @@ const App = () => {
     return () => {
       mediaQuery.removeListener(handleMediaQueryChange);
     };
-  }, []);
+  }, [dispatch]);
 
   return (
     <AuthProvider>

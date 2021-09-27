@@ -18,7 +18,9 @@ export const get_all_post = () => {
       await api
         .get("/post")
         .then((res) => {
-          dispatch({ type: GET_ALL_POST, payload: res.data });
+          let data = res.data.sort((a, b) => a.createdAt < b.createdAt);
+
+          dispatch({ type: GET_ALL_POST, payload: data });
         })
         .catch((err) => {
           throw err;

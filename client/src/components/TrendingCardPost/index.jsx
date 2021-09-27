@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import styles from "./style.module.css";
 
 const PostTrendingCard = ({ data }) => {
-  useEffect(() => {}, []);
+  useEffect(() => {}, [data]);
 
   return (
     <div className={styles.trendingCardContainer}>

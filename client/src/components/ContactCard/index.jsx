@@ -16,7 +16,7 @@ const CardContact = ({ data }) => {
     } else {
       setFollowBtn(false);
     }
-  }, []);
+  }, [data]);
 
   const handleFollow = () => {
     setFollowBtn(true);

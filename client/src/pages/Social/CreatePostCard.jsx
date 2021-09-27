@@ -103,10 +103,7 @@ const CreatePostCard = ({ userData }) => {
             <div className={styles.post}>
               <div className={styles.rowPostInput}>
                 <div className={styles.avatarCol}>
-                  <img
-                    src="https://imgresizer.eurosport.com/unsafe/1200x0/filters:format(webp):focal(1421x431:1423x429)/origin-imgresizer.eurosport.com/2020/12/22/2959891-60753748-2560-1440.jpg"
-                    alt="user_avatar"
-                  />
+                  <img src={userData.avatar} alt="user_avatar" />
                 </div>
                 <div className={styles.inputCol}>
                   <div className={styles.postInputCreate}>

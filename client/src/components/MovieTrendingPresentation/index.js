@@ -2,6 +2,8 @@ import { MDBContainer, MDBBtn, MDBIcon } from "mdb-react-ui-kit";
 import { useEffect, useState } from "react";
 import styles from "./style.module.css";
 import axios from "axios";
+import FavorisButton from "../HeaderMedia/FavorisButton";
+import { Link } from "react-router-dom";
 
 const MovieTrendingPresentation = ({ id }) => {
   const urlImg = `https://image.tmdb.org/t/p/w1920_and_h1080_multi_faces`;
@@ -55,14 +57,10 @@ const MovieTrendingPresentation = ({ id }) => {
             <p className={styles.tagLine}>{dataMovie.tagline}</p>
             <div className={styles.btnZone}>
               <MDBBtn color="danger"> Créer un post </MDBBtn>{" "}
-              <MDBBtn outline color="white">
-                {" "}
-                <MDBIcon className="me-2" far icon="heart" />
-                Ajouter à mes favoris
-              </MDBBtn>{" "}
+              <FavorisButton id={id} />
               <MDBBtn outline color="white">
                 <MDBIcon className="me-2" fas icon="play" />
-                Details
+                <Link to={`/movie/${id}`}>Details</Link>
               </MDBBtn>
             </div>
           </div>

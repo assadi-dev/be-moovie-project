@@ -27,7 +27,7 @@ const Profil = () => {
 
   useEffect(() => {
     setAvatar(userData.avatar);
-  }, [userData.isLoading, dispatch]);
+  }, [userData]);
 
   const handleFillClick = (value) => {
     if (value === fillActive) {

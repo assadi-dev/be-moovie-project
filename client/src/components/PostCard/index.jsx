@@ -13,18 +13,29 @@ import { decode } from "ent";
 import classNames from "classnames";
 import LikeBtn from "./LikeBtn";
 import CommentsLists from "./CommentsLists";
+import { useSelector } from "react-redux";
 
 const PostCard = ({ data, user }) => {
+  const allUser = useSelector((state) => state.AllUsersReducers.collections);
+
+  const [avatar, setAvatar] = useState();
+
+  const getAvatar = (id) => {
+    let user = allUser.filter((user) => user._id === id);
+    return user[0].avatar;
+  };
+
+  useEffect(() => {
+    let imgAvatar = getAvatar(data.author);
+    setAvatar(imgAvatar);
+  }, [data, user, allUser]);
+
   return (
     <MDBCard className="w-100 my-2">
       <MDBCardHeader className="border-bottom-0">
         <div className={styles.postHeader}>
           <div className={styles.avatarPost}>
-            <img
-              className={styles.avatarImg}
-              src="https://mdbcdn.b-cdn.net/img/new/standard/city/041.jpg"
-              alt="avatar"
-            />
+            <img className={styles.avatarImg} src={avatar} alt="avatar" />
           </div>
           <div className={styles.titlePost}>
             <h5>{decode(data.pseudo)}</h5>

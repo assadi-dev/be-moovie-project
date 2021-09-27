@@ -20,7 +20,7 @@ const TrendPost = () => {
     setLoading(false);
     let posts = postMostLiked(allPosts.collections);
     setPosts(posts);
-  }, [loading]);
+  }, [allPosts.collections]);
 
   return (
     <>

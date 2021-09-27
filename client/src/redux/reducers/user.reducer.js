@@ -96,12 +96,14 @@ const UserReducers = (state = initialState, action) => {
       break;
 
     case ADD_MOVIE_FAVORIE:
-      return { ...state, movies: [action.payload, ...state.movies] };
+      return { ...state, movies: [action.payload.toString(), ...state.movies] };
       break;
     case REMOVE_MOVIE_FAVORIE:
       return {
         ...state,
-        movies: [state.movies.filter((movie) => movie !== action.payload)],
+        movies: state.movies.filter(
+          (movie) => movie !== action.payload.toString()
+        ),
       };
       break;
 
