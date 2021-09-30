@@ -88,6 +88,16 @@ describe("Test Post PATH", () => {
     });
   });
 
+  describe("When get posts", () => {
+    it("Should be have 200 status code ", async () => {
+      const res = await request(app)
+        .get("/api/post/")
+        .set("Authorization", "Bearer " + token);
+      expect(res.status).toEqual(200);
+      console.table(res.body);
+    });
+  });
+
   describe("When Like Post", () => {
     it("Should have postId on postLike of user & status code 200", async () => {
       const res = await request(app)
