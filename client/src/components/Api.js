@@ -1,7 +1,7 @@
 import axios from "axios";
 import Cookies from "js-cookie";
 
-const StorageKey = "@MyAppOAuthKey";
+const StorageKey = "ssid";
 
 const auth = Cookies.get(StorageKey) ? Cookies.get(StorageKey) : "";
 const token = auth !== "" ? JSON.parse(auth).token : "";
